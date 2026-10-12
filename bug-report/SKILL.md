@@ -67,9 +67,9 @@ These apply in every mode and override everything else in this file.
    write in, in a polite, neutral tone. Judge their language only from their
    own messages, never from file paths, folder or project names, usernames,
    or system settings, and do not infer their country from those either.
-   Write the report in the language set by the team conventions, otherwise
-   the one in the personal preferences, otherwise the user's language; do
-   not ask about it during the interview. Quote error messages, UI labels,
+   Use the report language explicitly requested for this report; otherwise
+   follow team conventions, personal preferences, then the user's language.
+   Do not ask about it during the interview. Quote error messages, UI labels,
    log text, and anything the user entered (search terms, input values,
    product names) exactly as supplied, with the same spelling and case:
    do not translate, pluralize, or correct them, except for masking
