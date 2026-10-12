@@ -46,8 +46,7 @@ behavior. Include failures and partial runs so readers can judge the result.
 
 ## Before publishing
 
-Check that the README's status matches the recorded results, local settings
-and credentials are excluded, and no private conventions or real customer
-examples have entered the skill folders. Keep the root MIT license and its
-copies in each skill folder consistent. Share an experimental release while
-behavioral validation remains incomplete.
+Check that the README doesn't claim more than has been tested, local
+settings and credentials are excluded, and no private conventions or real
+customer examples have entered the skill folders. Keep the root MIT license
+and its copies in each skill folder consistent.

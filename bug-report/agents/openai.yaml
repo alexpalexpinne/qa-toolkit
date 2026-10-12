@@ -1,5 +1,5 @@
 interface:
   display_name: "Bug Report"
-  short_description: "Draft or review clear, actionable defect reports"
+  short_description: "Configure defaults, draft, or review defect reports"
 policy:
   allow_implicit_invocation: false

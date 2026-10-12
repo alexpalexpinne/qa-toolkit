@@ -8,6 +8,11 @@ Sections marked *(optional)* are left out when they do not apply.
 Headings are shown in English. Translate them into the report language,
 keeping the same structure.
 
+The Markdown headings below define the report's sections. Format the
+finished report for its destination and delivery method as described in
+Step 4 of `../SKILL.md`; for Jira, that means bold section headings such as
+**Steps to reproduce** instead of `##` headings.
+
 ---
 
 ```markdown
@@ -45,7 +50,8 @@ Always / Intermittent (about X of Y attempts) / Happened once / Not tried again
 Critical / High / Medium / Low – with one sentence explaining why.
 
 ## Evidence (optional)
-Screenshots, recordings, log excerpts, stack traces. Sensitive data masked.
+Screenshots, recordings, log excerpts, stack traces. Sensitive data masked
+as described in core rule 6.
 Refer to attached files by name, e.g. `checkout-error.png`.
 
 ## Workaround (optional)

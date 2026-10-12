@@ -23,10 +23,12 @@ A report missing any of these is not ready to submit.
       attachment, or evidence that was actually collected. Unknowns are marked
       `Unknown`. Nothing is inferred and stated as fact (prices from totals,
       frequency from wording, language or country from file paths).
-- [ ] **No sensitive data anywhere in the reply.** Passwords, tokens, keys,
-      personal data, and customer data are removed or masked in the report
-      *and* in everything else you write, including the note about what was
-      masked. That note names types and locations, never values.
+- [ ] **Sensitive data is protected.** Passwords, tokens, keys, and other
+      credentials are masked everywhere in the reply, always. Personal and
+      customer data are masked too, unless Preserve was explicitly chosen
+      for this destination; then only data the report needs appears, and
+      only in the report. The note about masking names types and locations,
+      never values.
 - [ ] **No false claims about actions.** The reply does not say you checked,
       looked at, or found anything you did not actually check in this
       session.
@@ -44,7 +46,9 @@ A report missing any of these is not ready to submit.
       excerpt, recording). Files that must be attached by hand are named.
 - [ ] **Original text preserved.** Error messages and UI labels are quoted
       exactly as shown, except for required masking of sensitive values.
-      Any translation is separate from the original quote.
+      Search terms, entered values, and product names keep their supplied
+      spelling and case, untranslated and unpluralized. Any translation is
+      separate from the original quote.
 - [ ] **Unambiguous dates and times.** `YYYY-MM-DD`, with time zone for times.
 
 ## Nice to have

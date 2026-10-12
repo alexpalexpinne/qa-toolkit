@@ -3,9 +3,9 @@ name: bug-report
 description: >
   Guides testers and end users through writing clear, actionable defect
   reports: drafting a new report through a short interview, turning the
-  current conversation into a report, or reviewing and improving an existing
-  report. Use only when the user explicitly invokes this skill or asks for it
-  by name.
+  current conversation into a report, reviewing an existing report, or
+  configuring persistent report defaults. Use only when the user explicitly
+  invokes this skill or asks for it by name.
 license: MIT (see LICENSE)
 disable-model-invocation: true
 ---
@@ -32,24 +32,34 @@ These apply in every mode and override everything else in this file.
 2. **Keep observation and interpretation apart.** Record what the user saw and
    did. If the user (or you) has a theory about the cause, put it under
    *Additional notes*, clearly labeled as a hypothesis.
-3. **One defect per report.** If the user describes several problems, say so
-   and offer to write separate reports.
+3. **One defect per report.** If the user describes several problems, list
+   them with short labels and write a separate report for each, one at a
+   time (see *Several bugs* in Step 3). Never silently drop one.
 4. **Draft early, ask little.** Ask at most three questions at a time, and only
-   about gaps that matter for reproducing or prioritizing the defect. Three
-   is a maximum, not a target: when the input already covers the essentials,
+   about gaps that matter for reproducing or prioritizing the defect. Count
+   each question separately, even when several share one number. Three is a
+   maximum, not a target: when the input already covers the essentials,
    write the report right away and ask only about what would change
    reproduction or severity, which is often nothing. The limit applies to
    questions asking for an immediate reply; the draft's *Open questions*
    may list all unresolved items. Prefer showing a draft with gaps marked
-   over a long interview.
+   over a long interview. Ask numbered questions in the normal chat reply,
+   after the draft if there is one, and wait for the user's next message.
+   Do not use separate input panels or forms for them.
 5. **Use plain language.** Avoid jargon when talking to the user. When you ask
    for something technical (a version number, a log), tell them where to find
    it and why it helps.
-6. **Protect sensitive data.** Before including logs, screenshot descriptions,
-   URLs, or pasted text, remove or mask passwords, tokens, API keys, personal
-   data, and customer data. Tell the user what you masked by type and
+6. **Protect sensitive data.** Always remove or mask passwords, tokens, API
+   keys, session cookies, and other credentials, everywhere in your reply.
+   Mask personal data and customer data too, unless the user's personal
+   preferences or their message explicitly choose **Preserve** for this
+   report's destination. Preserve keeps only the personal or customer data
+   the report needs, such as the account email or order ID that reproduces
+   the problem, and only in the report itself. It never covers credentials,
+   and team conventions can forbid it. A Preserve choice for one destination
+   does not apply to another. Tell the user what you masked by type and
    location only (for example "the email address on line 1, the token in the
-   Authorization header"). Never repeat an original value anywhere in your
+   Authorization header"). Never repeat a masked value anywhere in your
    reply, including commentary, and even if it looks fake or like test data.
 7. **Never submit anything without confirmation.** Filing an issue publishes
    it. Always show the final report and get an explicit "yes" first.
@@ -57,26 +67,50 @@ These apply in every mode and override everything else in this file.
    write in, in a polite, neutral tone. Judge their language only from their
    own messages, never from file paths, folder or project names, usernames,
    or system settings, and do not infer their country from those either.
-   Write the report in the language the team or tracker uses; if
-   that is unknown, ask once, and default to the user's language. Quote error
-   messages, UI labels, and log text exactly as they appear, untranslated,
-   except for masking required by rule 6; if the report is in a different
-   language, add a translation in parentheses.
+   Write the report in the language set by the team conventions, otherwise
+   the one in the personal preferences, otherwise the user's language; do
+   not ask about it during the interview. Quote error messages, UI labels,
+   log text, and anything the user entered (search terms, input values,
+   product names) exactly as supplied, with the same spelling and case:
+   do not translate, pluralize, or correct them, except for masking
+   required by rule 6. Improve the surrounding prose instead, for example
+   "results for the search `Tröja`" rather than a translated or plural form.
+   If the report is in a different language, add a translation in
+   parentheses after quoted messages and labels.
    Translate the template's headings and labels into the report language,
    keeping the structure, unless the team's tracker expects them in a
    specific language. Write dates as `YYYY-MM-DD` and include the time zone
    with any time.
 
-## Before you start: team conventions
+## Before you start: settings
 
-Read `references/team-conventions.md`. Ignore its *Example* section; it is
-never applied. If the placeholder line is still in the file, there are no
-team conventions. Otherwise its conventions take precedence over the
-defaults in this skill wherever they conflict: for example the report
-language, severity scale, required fields, or which tracker and project to
-use. Conventions the user
-states in the conversation take precedence over the file. The core rules
-above always apply.
+Two optional files change this skill's defaults. Read them if they exist;
+do not search elsewhere for settings.
+
+- **Team conventions:** `references/team-conventions.md` in this skill.
+  Ignore its *Example* section; it is never applied. If the placeholder line
+  is still in the file, there are no team conventions. They decide what the
+  report must contain: for example the report language, severity scale,
+  required fields, template, or which tracker and project to use.
+- **Personal preferences:** `.config/bug-report/preferences.md` in the
+  user's home folder. They record how this user works: destination,
+  delivery method, report language when the team sets none, and
+  sensitive-information handling.
+
+Precedence, highest first: what the user says in the conversation (for that
+report only, without changing saved settings), team conventions, personal
+preferences, this skill's defaults. The core rules above always apply.
+
+If you need to check the project for an issue template or other
+instructions, look only in the current directory and its parent
+directories, not in neighboring projects.
+
+If the user asks to set up or change their defaults (for example by
+invoking the skill with `setup`), follow `references/setup.md`. Otherwise
+never hold up a report for setup: when no personal preferences exist, start
+the report straight away, and after delivering it, offer in one sentence to
+save the choices used as defaults. Make that offer at most once per
+conversation.
 
 ## Step 1: Choose the mode
 
@@ -141,11 +175,41 @@ Turn vague words into concrete questions:
 If the user does not know an answer, accept that, mark it `Unknown`, and move
 on. Do not push more than once on the same item.
 
+### Several bugs
+
+1. List the problems with short labels. Ask which to start with, or say
+   which one you will start with and why, based on what is known.
+2. Work on one bug at a time. Put a heading naming the bug above its
+   questions, ask only about that bug, and keep each answer with the bug it
+   concerns. If it is unclear which bug an answer belongs to, ask.
+3. When the current report is drafted, name the next bug and continue until
+   every bug has its own report, unless the user stops or skips one. Keep
+   track of which are drafted and which remain.
+
+Moving on to the next draft needs no approval; filing each report does
+(rule 7).
+
 ## Step 4: Write the report
 
 - Choose the template in this order: one the user provides; one named in the
   team conventions; one that exists in the project (for example an issue
   template in the repository); otherwise `references/template.md`.
+- Use the destination named for this report, otherwise the one in the team
+  conventions or personal preferences, otherwise general Markdown.
+- Format for how the report will be delivered, unless the user or team
+  conventions specify a format:
+  - **Copy-paste where your reply is shown rendered** (formatting survives
+    copying): show the report rendered, not inside a code block.
+  - **Copy-paste from a plain-text display**, such as a terminal, where
+    copying loses formatting: put the report in one code block so the user
+    copies the raw Markdown. Tracker editors such as GitHub's and Jira's
+    accept pasted Markdown.
+  - **Filing through an integration:** use the format it expects. For
+    example, Jira's REST API v3 takes Atlassian Document Format, not
+    Markdown.
+- For Jira, use bold section headings such as **Steps to reproduce** instead
+  of Markdown headings (`#`, `##`). For any tracker, keep the title or
+  Summary field plain text.
 - Write a specific title: *where* + *what goes wrong* + *under what condition*.
 - Write reproduction steps as numbered, minimal actions, starting from a known
   state.
@@ -161,7 +225,9 @@ important, ask the user once more before finishing.
 ## Step 6: Deliver
 
 Show the finished report to the user. Then offer the destinations available in
-the current environment:
+the current environment, starting with the preferred delivery method. If a
+preferred integration is unavailable, provide copy-paste output and explain
+that limitation; do not claim the report was filed.
 
 - **Issue tracker** (GitHub, Jira, Azure DevOps, or similar): only if you have
   a working integration or command-line tool for it. Confirm the project or
@@ -169,8 +235,8 @@ the current environment:
   what will be submitted, and wait for explicit
   approval. After filing, give the user the link.
 - **File:** save as a markdown file if you can write files.
-- **Copy-paste:** always available. Output the report in a single block,
-  formatted for the target tracker if the user named one.
+- **Copy-paste:** always available. Output one continuous report, formatted
+  as described in Step 4.
 
 **Attachments:** many integrations and command-line tools cannot upload
 images or files. Refer to attachments by file name in the report. If you
