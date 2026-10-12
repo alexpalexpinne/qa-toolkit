@@ -28,13 +28,14 @@ user the team's setting applies.
    Markdown? A default project may be included if the user supplies one.
 3. How should reports be delivered: copy-paste text, a local file, or an
    offer to submit through an available tracker integration?
-4. How should personal and customer data be handled: **Redact** (default),
-   or **Preserve** in reports for the chosen destination? Preserve keeps
-   only the data a report needs, such as an account email or order ID.
-   Passwords, tokens, API keys, and other credentials are always masked.
-   Enable Preserve only if the user chooses it; a remark that the tracker
-   is internal is not a choice. Skip this question if the team conventions
-   forbid Preserve.
+4. How should sensitive data be handled in reports for the chosen
+   destination? **Redact** (default) masks it all. **Preserve** keeps the
+   personal or customer data a report needs, such as an account email or
+   order ID, and masks credentials. **Include all** keeps everything the
+   user supplies, including passwords and tokens; each report then lists
+   what it contains. Enable Preserve or Include all only if the user
+   chooses it; a remark that the tracker is internal is not a choice. Leave
+   out the modes the team conventions forbid.
 
 If the user says "use defaults" or "don't ask again", save reports in the
 user's language, general Markdown, copy-paste delivery, and Redact, so the
@@ -67,9 +68,9 @@ Copy-paste into the Jira description.
 Redact.
 ```
 
-For Preserve, name the destination it applies to, for example "Preserve
-personal and customer data needed in Jira reports. Credentials are always
-masked." Save only the mode and its destination, never example values
+For Preserve or Include all, name the destination it applies to, for
+example "Include all supplied values in Jira reports. Redact for other
+destinations." Save only the mode and its destination, never example values
 mentioned while discussing setup.
 
 Read the file back to check it, then tell the user what was saved and the

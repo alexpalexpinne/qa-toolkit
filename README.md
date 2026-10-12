@@ -2,9 +2,10 @@
 
 Three agent skills for everyday testing work: reviewing requirements,
 designing test cases, and writing bug reports a developer can act on. They
-are written for testers and end users, work in any language, and follow the
-open [Agent Skills](https://agentskills.io) format, so they run in Claude
-Code and Codex and can be adapted to other assistants.
+are written for testers, and `bug-report` also for anyone who needs to
+report a problem. They follow the open [Agent Skills](https://agentskills.io)
+format, so they run in Claude Code and Codex and can be adapted to other
+assistants.
 
 ## The skills
 
@@ -61,10 +62,10 @@ These rules apply whatever your settings say:
 
 - **No invented facts.** Anything missing is marked `Unknown` or turned
   into a question, never guessed.
-- **Sensitive data is masked.** Passwords, tokens, and personal data are
-  removed from what the skill writes. `bug-report` can keep personal or
-  customer data a report needs if you explicitly choose that (see below);
-  credentials are always masked.
+- **Sensitive data is masked by default.** Passwords, tokens, and personal
+  data are removed from what the skill writes. `bug-report` keeps them only
+  if you explicitly choose that (see below), and tells you what each report
+  contains.
 - **Nothing is published without your yes.** Before filing an issue or
   posting a comment, the skill shows exactly what will be sent and waits
   for explicit approval.
@@ -102,11 +103,17 @@ skill folder, so updating the skill keeps them. Team conventions win over
 personal defaults, and anything you say for a single report wins over both
 without changing what is saved.
 
-By default, personal and customer data are masked. If your tracker is
-allowed to hold such data, you can choose **Preserve** for that destination:
-reports then keep the details needed to reproduce a problem, such as an
-account email or order ID. Credentials are always masked, and a team can
-turn Preserve off in its conventions file.
+By default, sensitive data is masked (**Redact**). For a destination that
+is allowed to hold it, you can choose:
+
+- **Preserve:** keeps the personal or customer details needed to reproduce
+  a problem, such as an account email or order ID. Credentials stay masked.
+- **Include all:** keeps everything you supply, including credentials such
+  as a test account's password, so developers can log in and reproduce.
+
+Choose a mode in setup, or for a single report by saying so. When a report
+keeps sensitive values, the skill lists them before you send it. A team can
+turn either mode off in its conventions file.
 
 ## Compatibility
 

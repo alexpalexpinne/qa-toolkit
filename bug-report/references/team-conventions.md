@@ -42,8 +42,7 @@ In addition to the default template:
 - Build number, from the footer of the test environment.
 
 ## Sensitive information
-Always redact personal and customer data. Personal Preserve preferences do
-not apply.
+Always redact. Personal Preserve and Include all preferences do not apply.
 
 ## Where to find things
 - App version: Settings → About.

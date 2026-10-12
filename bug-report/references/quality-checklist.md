@@ -23,12 +23,13 @@ A report missing any of these is not ready to submit.
       attachment, or evidence that was actually collected. Unknowns are marked
       `Unknown`. Nothing is inferred and stated as fact (prices from totals,
       frequency from wording, language or country from file paths).
-- [ ] **Sensitive data is protected.** Passwords, tokens, keys, and other
-      credentials are masked everywhere in the reply, always. Personal and
-      customer data are masked too, unless Preserve was explicitly chosen
-      for this destination; then only data the report needs appears, and
-      only in the report. The note about masking names types and locations,
-      never values.
+- [ ] **Sensitive data matches the chosen mode.** With Redact (the
+      default), credentials, personal data, and customer data are masked
+      everywhere. With an explicit Preserve choice, only personal or customer
+      data the report needs is kept; credentials are masked. With an
+      explicit Include all choice, supplied values are kept. Kept values
+      appear only in the report, and the reply lists them by type and
+      location. Notes about masking name types and locations, never values.
 - [ ] **No false claims about actions.** The reply does not say you checked,
       looked at, or found anything you did not actually check in this
       session.
