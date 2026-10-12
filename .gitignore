@@ -1,0 +1,23 @@
+# Local evaluation scenarios and recorded results
+/tests/
+
+# Local credentials and assistant settings
+.env
+.env.*
+!.env.example
+.claude/settings.local.json
+.claude/worktrees/
+.codex/config.toml
+
+# Local exports, environments, and caches
+dist/
+.venv/
+__pycache__/
+*.pyc
+
+# Editor and operating system files
+.idea/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db

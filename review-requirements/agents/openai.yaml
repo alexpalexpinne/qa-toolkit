@@ -1,0 +1,5 @@
+interface:
+  display_name: "Review Requirements"
+  short_description: "Review requirements for clarity and testability"
+policy:
+  allow_implicit_invocation: false

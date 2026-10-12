@@ -1,0 +1,5 @@
+interface:
+  display_name: "Test Cases"
+  short_description: "Design, review, or restructure manual test cases"
+policy:
+  allow_implicit_invocation: false
