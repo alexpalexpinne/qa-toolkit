@@ -65,6 +65,8 @@ and why they fail independently.
   *Enter*, *Run*, *Upload*, *Check*.
 - Use the exact label of a button or field when the source gives it, in
   quotes: `Select 'Confirm'.`
+- Describe the interaction itself: `Select 'Confirm'.`, not `Confirm that
+  the order should be cancelled.`
 - A short sequence may stay in one step when the intermediate actions have
   no result of their own, for example entering a search term and selecting
   `'Search'`. Otherwise give each action its own step and result.
@@ -82,6 +84,8 @@ and why they fail independently.
   that is already explicit in the action.
 - Keep stable starting state (environment, access, configuration) in
   preconditions, not in every step.
+- State the scenario once, in the title, purpose, preconditions, or first
+  step. Do not repeat the same scenario label in every step's data.
 - Never write vague filler such as "valid test data" or "applicable
   environment". If a concrete value is missing, use `[TO CLARIFY: …]`.
 
@@ -120,7 +124,11 @@ configuration block, request or response example, or file content:
 
 - Keep it exactly as it is: no reformatting, correcting, shortening, or
   generalizing.
-- Place it in step data, or refer to it as an attachment if it is long.
+- Place it in step data. If it is too long to review there, you may
+  suggest moving it to an attachment: label it as a *suggested
+  attachment*, include only the exact content, keep it on the step that
+  uses it, and say that it is not a real attachment in the team's tool
+  until a person approves it.
 - You may summarize *what it does* in the action, but the exact content must
   stay intact.
 - Sensitive values are an exception: mask them as required by core rule 5,
@@ -136,9 +144,15 @@ Attachments are evidence or execution context.
 - Keep test-level attachments at test level and step-level attachments on
   their step.
 - Never delete, rename, or move attachments.
+- An attachment named in the source (for example `[Attachment:
+  invoice-reference.pdf]`) exists in the team's tool. Keep the reference;
+  do not ask the user to supply the file, and do not block the test because
+  you cannot see it.
 - Never split, merge, reorder, or delete a step that has attachments
-  automatically. If such a step needs restructuring, leave it as it is and
-  add an open question explaining what a person must decide.
+  automatically. If such a step contains several actions or checks that
+  you would otherwise split, leave it as it is and add an open question
+  saying that splitting it is a decision for a person, because of the
+  attachment.
 - One exception: a step that contains only an expected result may be
   merged into the step with the attachment that it belongs to. The
   attachment stays on that step, the step's action is not changed, and the

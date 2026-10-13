@@ -12,7 +12,7 @@ assistants.
 | Skill | What it does |
 |-------|--------------|
 | [`review-requirements`](review-requirements/) | Reviews user stories, use cases, requirements, and acceptance criteria for testability. Finds ambiguous wording, missing cases, contradictions, and gaps against parent requirements such as an epic or high-level requirement, and turns them into concrete questions for the product owner. |
-| [`test-cases`](test-cases/) | Designs test cases from requirements, covering the main flow, errors, and boundaries, each traced to the criterion it covers. Can also review existing test cases, or restructure them into a consistent format without changing what they test. |
+| [`test-cases`](test-cases/) | Designs test cases from user stories, use cases, and requirements, covering the main flow, errors, and boundaries, each traced to the criterion or flow it covers. Can use supporting material such as a design or a requirements review, and can also review existing test cases or restructure them into a consistent format without changing what they test. |
 | [`bug-report`](bug-report/) | Helps write defect reports a developer can act on: drafts a new report through a short interview, turns a conversation into a report, or reviews an existing one. |
 
 The skills are instructions only: no scripts, dependencies, or API keys.
@@ -43,8 +43,8 @@ Start a new session and call a skill by name, with or without a first
 message. In Claude Code:
 
 ```text
-/review-requirements <paste a user story or requirement>
-/test-cases <paste a requirement, or test cases to review or restructure>
+/review-requirements <paste a story, use case, or requirement, and its parent if you have one>
+/test-cases <paste a requirement or use case, or test cases to review or restructure>
 /bug-report <describe the problem, or paste a report to review>
 /bug-report setup
 ```
@@ -55,6 +55,10 @@ In Codex, use `$` instead of `/`. Write in any language: the skills answer
 in your language. Reports, reviews, and test cases are written in the
 language your team has set, otherwise in the language of your message or
 the requirement.
+
+After a requirements review, give `test-cases` the requirement together
+with the answers to the review's questions. Proposed acceptance criteria
+from the review are treated as proposals until you say they were accepted.
 
 ## What the skills always do
 

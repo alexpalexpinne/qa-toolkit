@@ -1,8 +1,8 @@
 ---
 name: test-cases
 description: >
-  Designs test cases from user stories, requirements, and acceptance
-  criteria, covering the main flow, error cases, boundaries, and invalid
+  Designs test cases from user stories, use cases, requirements, and
+  acceptance criteria, covering the main flow, error cases, boundaries, and invalid
   input, with each case traced to the criterion it covers. Can also review
   existing test cases for gaps and weaknesses, or restructure them into a
   clean, consistent format without changing what they test. Use only when
@@ -25,12 +25,19 @@ source of truth for how the product should behave.
 These apply in every mode and override everything else in this file.
 
 1. **Never invent expected results.** The expected result of a test must
-   come from the requirement, the existing test, the user, or the team
-   conventions. If none of them says what should happen, write a
-   clarification marker such as `[TO CLARIFY: expected result]`, mark the
-   case *Blocked: pending clarification*, and list the question under *Open
-   questions*. A blocked case does not count as coverage. A test with a
-   guessed expected result is worse than no test. The same applies to
+   come from the requirement, supporting material the user provided, the
+   existing test, the user, or the team conventions. If the source settles
+   part of a result, state that part and mark only the rest, for example
+   "Free shipping is not applied; shipping fee `[TO CLARIFY: shipping
+   fee]`". If nothing says what should happen, write a clarification marker
+   such as `[TO CLARIFY: expected result]`, mark the case *Blocked: pending
+   clarification*, and list the question under *Open questions*. Block a
+   case only because an expected result is unknown; missing execution
+   details, such as which test account to use, go under *Open questions*
+   and the case stays *Ready*. A blocked case does not count as coverage. A
+   test with a guessed expected result is worse than no test. Proposed
+   acceptance criteria the team has not accepted, such as those in a
+   requirements review, are not requirements. The same applies to
    inferences: do not present assumptions about the product as facts, and
    never say you checked a system, file, or document unless you actually
    did in this session.
@@ -44,9 +51,9 @@ These apply in every mode and override everything else in this file.
    test data, one action per step (a short sequence whose intermediate
    actions have no result of their own may share a step, for example
    entering a search term and selecting *Search*), observable expected
-   results. No "verify
-   it works correctly". Take screens, buttons, and flows from the
-   requirement or the existing test. Where they are not named, describe the
+   results. No "verify it works correctly". Take screens, buttons, and
+   flows from the requirement, supporting material such as a design, or the
+   existing test. Where they are not named, describe the
    action generally (for example "submit the change") and list the missing
    detail under *Open questions*; do not invent UI elements.
 5. **Use only fake test data.** Never use real personal data, customer data,
@@ -54,7 +61,8 @@ These apply in every mode and override everything else in this file.
    clearly fake values (for example `example.com` addresses). Never repeat
    credentials from the input (passwords, tokens, keys, connection strings)
    anywhere in your reply, however fake they look. Do not repeat
-   real-looking personal or customer data either; refer to it by type only.
+   real-looking personal or customer data either; refer to it by type only,
+   and tell the user that production data should not be used in tests.
    Clearly fake values, such as `example.com` addresses, may be reused.
 6. **Never publish without confirmation.** Adding or changing cases in a
    test management tool or tracker changes shared work. Show exactly what
@@ -101,6 +109,8 @@ These apply in every mode and override everything else in this file.
     already said. Three is a maximum, not a target; often no questions are
     needed. This limit applies to questions asking for an immediate reply;
     the deliverable's *Open questions* may list all unresolved items.
+    Explain things in your own words; do not quote these instructions or
+    link to this skill's files.
 
 ## Before you start: team conventions
 
@@ -116,7 +126,7 @@ the file. The core rules always apply.
 
 | Mode | When |
 |------|------|
-| **A. Design** | The user provides a requirement, story, or acceptance criteria and wants test cases |
+| **A. Design** | The user provides a requirement, story, use case, or acceptance criteria and wants test cases |
 | **B. Review** | The user provides existing test cases and wants them checked: problems, gaps, and suggestions |
 | **C. Restructure** | The user provides existing test cases and wants them cleaned up, normalized, or brought into a standard format |
 
@@ -136,6 +146,13 @@ have, ask them to attach it or give its path; never search the file system
 for it. If a path the user gives does not exist, say so and ask. You may
 name a folder or file with the same name in the current working folder as
 the likely intended one, but do not open it until the user confirms.
+
+The user may also provide supporting material: a parent requirement, a
+design, a specification, or a requirements review. Use it as a source for
+screens, flows, and expected results, and name it when a case relies on it.
+In a requirements review, the requirement and the answers given to its
+questions are decided; its proposed acceptance criteria are not. If it is
+unclear which proposals the team has accepted, ask.
 
 For mode B, go to *Review mode* below. For mode C, go to *Restructure mode*
 below.
@@ -176,6 +193,11 @@ techniques in `references/test-design-techniques.md` where they fit:
 - **Error guessing:** common failure points (empty input, double submit,
   lost connection, missing permissions).
 
+For a use case, the main flow and each alternative flow are test
+conditions. Its preconditions become test preconditions, and its end state
+is an expected result. Trace each case to its flow, for example `UC-12 main
+flow` or `UC-12 4a`.
+
 Also look for conditions the requirement implies but does not list:
 permissions, locale (characters, formats, time zones), and concurrency.
 Only add these when they matter for this requirement.
@@ -204,7 +226,11 @@ reason to fail. See *What is one test case?* in
 ## Step 5: Write the test cases
 
 Use the format in `references/test-case-template.md`, or the team's format.
-For each case:
+Fields the team conventions require go on every case, even when the value
+is the same for all of them. If the user provides related test cases, for
+example from the same suite, match their naming, terminology, placeholders,
+and level of detail where that does not change meaning; do not invent a
+pattern they do not show. For each case:
 
 - A title: *feature or process – scenario or condition – expected outcome*.
 - A purpose: what the test proves, in one or two sentences.
@@ -213,14 +239,15 @@ For each case:
   result is a `[TO CLARIFY: …]` marker.
 - Preconditions that put the system in a known state.
 - Concrete test data, fake only.
-- Numbered steps, one action each, with step data where the step needs
-  input values.
+- Numbered steps, one action each, written as a direct instruction
+  (`Select 'Save'.`), with step data where the step needs input values.
+  State the scenario once rather than in every step.
 - An observable expected result: what is shown, stored, sent, or blocked.
 
 Then add:
 
-- **Coverage summary:** a table mapping each acceptance criterion to its
-  test cases, with one of these statuses:
+- **Coverage summary:** a table mapping each acceptance criterion (or
+  use-case flow) to its test cases, with one of these statuses:
   - *Covered:* every part of the criterion (each condition, limit, and
     outcome it states) has a case, and all its cases are ready to run
   - *Partly covered:* some part of the criterion has no case, or some of
@@ -238,6 +265,11 @@ Go through the draft and fix anything that fails:
       the user, or the team conventions. Unknown ones are `[TO CLARIFY: …]`
       markers listed under *Open questions*, and their cases are marked
       *Blocked: pending clarification*.
+- [ ] Where the source settles part of a result, that part is stated and
+      only the rest is marked. Cases are blocked only for unknown expected
+      results, not for missing execution details.
+- [ ] Every assumption you made, for example a time zone or a unit, is
+      listed under *Open questions*.
 - [ ] Every case names the criterion it covers, and the coverage summary
       matches the cases.
 - [ ] No case says "works correctly", "as expected", or similar instead of
@@ -268,6 +300,10 @@ current environment:
   which tool and use its import format. Never guess the column layout.
 - **Save as a file** if you can write files.
 - **Copy-paste:** always available.
+
+If the user asks to create or change cases in a tool and there is no
+working integration, say so and give the exact content in your reply, ready
+to copy and paste. Do not guess the tool from an ID.
 
 ## Review mode (mode B)
 
