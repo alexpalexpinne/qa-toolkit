@@ -21,3 +21,6 @@ __pycache__/
 *.swp
 .DS_Store
 Thumbs.db
+
+# Original AI-generated images and their prompts (kept locally for re-export)
+/assets/originals/

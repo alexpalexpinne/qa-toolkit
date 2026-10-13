@@ -1,18 +1,12 @@
 # Test Skills
 
-**Five AI skills for software testers that take a test round from
-requirement to release report, built to ask instead of making things up.**
+<img src="assets/readme-hero.jpg" width="100%" alt="Test Skills: five AI skills for software testers, from requirement to release report. Built to ask instead of making things up. Five documents in a row, for requirements, test cases, test data, defects, and a summary; the requirements document carries a [TO CLARIFY] marker.">
 
 ![License: MIT](https://img.shields.io/badge/license-MIT-blue)
 ![Format: Agent Skills](https://img.shields.io/badge/format-Agent%20Skills-6f42c1)
 ![Claude Code](https://img.shields.io/badge/Claude%20Code-supported-d97757)
 ![Codex](https://img.shields.io/badge/Codex-supported-333333)
 ![Any language](https://img.shields.io/badge/language-any-2ea44f)
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/workflow-dark.svg">
-  <img src="assets/workflow-light.svg" width="100%" alt="From requirement to release report: five skills in a row. Review requirements, design test cases, and create test data; then run the tests, report defects, and summarize results. Each card shows an excerpt of real output, such as a [TO CLARIFY] marker for an undecided value.">
-</picture>
 
 AI assistants are eager to please, and in testing that is the wrong
 instinct. Ask one for test cases and it can invent the expected results.
@@ -55,6 +49,11 @@ More real outputs, one per skill:
 | [Bug report](examples/bug-report.md) | Two short questions, then a report a developer can act on |
 
 ## One skill for each step
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/workflow-dark.svg">
+  <img src="assets/workflow-light.svg" width="100%" alt="From requirement to release report: five skills in a row. Review requirements, design test cases, and create test data; then run the tests, report defects, and summarize results. Each card shows an excerpt of real output, such as a [TO CLARIFY] marker for an undecided value.">
+</picture>
 
 | Skill | Gives you |
 |-------|-----------|
