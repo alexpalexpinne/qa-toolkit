@@ -1,0 +1,5 @@
+interface:
+  display_name: "Test Summary"
+  short_description: "Write honest test status and completion reports, or review an existing one"
+policy:
+  allow_implicit_invocation: false
