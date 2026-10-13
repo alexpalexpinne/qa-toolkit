@@ -1,23 +1,104 @@
-# Test skills
+# Test Skills
 
-Four agent skills for everyday testing work: reviewing requirements,
-designing test cases, writing bug reports a developer can act on, and
-reporting test results honestly. They are written for testers, and `bug-report` also for anyone who needs to
-report a problem. They follow the open [Agent Skills](https://agentskills.io)
-format, so they run in Claude Code and Codex and can be adapted to other
-assistants.
+**Five AI skills for software testers that take a test round from
+requirement to release report, built to ask instead of making things up.**
 
-## The skills
+![License: MIT](https://img.shields.io/badge/license-MIT-blue)
+![Format: Agent Skills](https://img.shields.io/badge/format-Agent%20Skills-6f42c1)
+![Claude Code](https://img.shields.io/badge/Claude%20Code-supported-d97757)
+![Codex](https://img.shields.io/badge/Codex-supported-333333)
+![Any language](https://img.shields.io/badge/language-any-2ea44f)
 
-| Skill | What it does |
-|-------|--------------|
-| [`review-requirements`](review-requirements/) | Reviews user stories, use cases, requirements, and acceptance criteria for testability. Finds ambiguous wording, missing cases, contradictions, and gaps against parent requirements such as an epic or high-level requirement, and turns them into concrete questions for the product owner. |
-| [`test-cases`](test-cases/) | Designs test cases from user stories, use cases, and requirements, covering the main flow, errors, and boundaries, each traced to the criterion or flow it covers. Can use supporting material such as a design or a requirements review, and can also review existing test cases or restructure them into a consistent format without changing what they test. |
-| [`test-summary`](test-summary/) | Turns test results and defect lists into an honest status or completion report: passed, failed, blocked, and not-run tests shown separately, open defects by severity, what was not tested, and an assessment against exit criteria. Can also review an existing report for misleading figures. |
-| [`bug-report`](bug-report/) | Helps write defect reports a developer can act on: drafts a new report through a short interview, turns a conversation into a report, or reviews an existing one. |
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/workflow-dark.svg">
+  <img src="assets/workflow-light.svg" width="100%" alt="From requirement to release report: five skills in a row. Review requirements, design test cases, and create test data; then run the tests, report defects, and summarize results. Each card shows an excerpt of real output, such as a [TO CLARIFY] marker for an undecided value.">
+</picture>
 
-The skills are instructions only: no scripts, dependencies, or API keys.
-They run only when you call them by name.
+AI assistants are eager to please, and in testing that is the wrong
+instinct. Ask one for test cases and it can invent the expected results.
+Ask for a status report and it can round 89.6 % up to 90 %. Ask for test
+data and it can produce identity numbers that belong to someone real.
+
+These skills turn that around. What the assistant does not know becomes a
+question, marked `[TO CLARIFY: …]`, instead of a guess. Bad news stays as
+visible as good news. Test data comes from ranges reserved for testing.
+And nothing is filed, posted, or written anywhere without your yes.
+
+## See it in action
+
+Asked to put a flattering number in front of management:
+
+```text
+/test-summary Write a completion report for sprint 14. We ran 50 of our 80
+tests, 47 passed and 3 failed. Put "94% pass rate" in the summary, that's
+what management wants to see.
+```
+
+The skill keeps the number, and the context that makes it honest:
+
+> Sprint 14 covered 50 of 80 planned tests: 47 passed and 3 failed, giving a
+> **94% pass rate** among the 50 tests run. The remaining 30 planned tests
+> were not run; blocked-test status, reasons for non-execution, open
+> defects, and exit criteria were not provided, so release readiness cannot
+> be established from these results alone.
+
+<sub>Excerpt from a real run (Codex, gpt-5.6-luna, 2026-10-13).
+[Full output](examples/test-summary.md)</sub>
+
+More real outputs, one per skill:
+
+| Example | What it shows |
+|---------|---------------|
+| [Requirements review](examples/review-requirements.md) | Four vague acceptance criteria turned into questions a product owner can answer |
+| [Restructured test case](examples/test-cases.md) | A messy legacy test cleaned up, with its missing expected results marked instead of guessed |
+| [Test data](examples/test-data.md) | Sign-up data for three countries, with emails and phone numbers that cannot reach real people |
+| [Bug report](examples/bug-report.md) | Two short questions, then a report a developer can act on |
+
+## One skill for each step
+
+| Skill | Gives you |
+|-------|-----------|
+| [`review-requirements`](review-requirements/) | A testability review of stories, use cases, and acceptance criteria: ambiguous wording, missing cases, contradictions, and gaps against the parent requirement, as concrete questions for the product owner. |
+| [`test-cases`](test-cases/) | Test cases covering the main flow, errors, and boundaries, each traced to the criterion it covers. Also reviews existing test cases, or restructures them into a consistent format without changing what they test. |
+| [`test-data`](test-data/) | Valid values, boundaries, invalid input, and international cases, using reserved and documented test values so no value can belong to a real person. Also reviews existing data sets. |
+| [`bug-report`](bug-report/) | A defect report a developer can act on, from a short interview, from the conversation so far, or by reviewing a draft. Also for non-testers who need to report a problem. |
+| [`test-summary`](test-summary/) | A status or completion report with passed, failed, blocked, and not-run tests shown separately, open defects by severity, what was not tested, and an assessment against exit criteria. Also reviews existing reports for misleading figures. |
+
+Use them as a chain or one at a time; each skill works on its own.
+
+## Built to be trusted
+
+- **No invented facts.** Missing information becomes a question or a
+  `[TO CLARIFY: …]` marker, never a plausible guess. Assumptions are
+  labeled as assumptions.
+- **The whole picture.** Untested areas, blocked tests, and open defects
+  are reported as plainly as passes. Numbers keep their base, and figures
+  that do not add up are pointed out, not quietly fixed.
+- **Safe by default.** Passwords, tokens, and personal data are masked.
+  Test data uses reserved email domains, fictional phone ranges, and
+  documented test values.
+- **Your yes first.** Nothing is filed, posted, or written to a system
+  until you have seen exactly what will be sent and said yes.
+- **Any language.** Write in your language; reports follow your team's
+  language. Error messages and UI texts are quoted exactly, never
+  translated away.
+- **Any tool.** Paste text or attach an export from Jira, Xray, TestRail,
+  Azure DevOps, or a spreadsheet. Describe your exports once and the skills
+  read them the same way every time.
+- **Your team's rules.** Severity scales, exit criteria, templates,
+  terminology, and test data markers go in one conventions file per skill.
+- **Nothing to install but text.** The skills are instructions only: no
+  scripts, dependencies, or API keys. MIT licensed.
+
+These are instructions to the assistant, not technical guarantees. Review
+drafts before you share them.
+
+## Status
+
+Early release. Every skill has a suite of test scenarios, run in fresh
+sessions and checked against the skill's rules: all five in Codex, and
+`bug-report` also in Claude Code. Other assistants are untested. If a skill
+does something it shouldn't, please [report it](CONTRIBUTING.md).
 
 ## Getting started
 
@@ -27,11 +108,11 @@ assistant's skills folder (macOS, Linux, or a compatible shell):
 ```bash
 # Claude Code
 mkdir -p ~/.claude/skills
-cp -r bug-report review-requirements test-cases test-summary ~/.claude/skills/
+cp -r bug-report review-requirements test-cases test-data test-summary ~/.claude/skills/
 
 # Codex
 mkdir -p ~/.agents/skills
-cp -r bug-report review-requirements test-cases test-summary ~/.agents/skills/
+cp -r bug-report review-requirements test-cases test-data test-summary ~/.agents/skills/
 ```
 
 To install for a single project, copy them into that project's
@@ -46,9 +127,10 @@ message. In Claude Code:
 ```text
 /review-requirements <paste a story, use case, or requirement, and its parent if you have one>
 /test-cases <paste a requirement or use case, or test cases to review or restructure>
-/test-summary <paste test results and open defects, or a report to review>
+/test-data <describe fields or a schema, or paste test cases with {{placeholders}}>
 /bug-report <describe the problem, or paste a report to review>
 /bug-report setup
+/test-summary <paste test results and open defects, or a report to review>
 ```
 
 `/bug-report setup` saves your own defaults, such as report language and
@@ -64,23 +146,6 @@ from the review are treated as proposals until you say they were accepted.
 
 At the end of a test round, give `test-summary` the results from your test
 tool and the open defects, for example reports written with `bug-report`.
-
-## What the skills always do
-
-These rules apply whatever your settings say:
-
-- **No invented facts.** Anything missing is marked `Unknown` or turned
-  into a question, never guessed.
-- **Sensitive data is masked by default.** Passwords, tokens, and personal
-  data are removed from what the skill writes. `bug-report` keeps them only
-  if you explicitly choose that (see below), and tells you what each report
-  contains.
-- **Nothing is published without your yes.** Before filing an issue or
-  posting a comment, the skill shows exactly what will be sent and waits
-  for explicit approval.
-
-These are instructions to the assistant, not technical guarantees. Review
-drafts before you share them.
 
 ## Your data
 
@@ -102,6 +167,7 @@ CSV, and attach the file:
 |-------|---------------|
 | `review-requirements` | Stories or requirements, pasted or exported from your tracker |
 | `test-cases` | A requirement; for review or restructuring, existing tests exported from your test management tool |
+| `test-data` | A field list, schema, or example file (structure only, never production data), or test cases with placeholders |
 | `test-summary` | Test results exported from your test management tool (latest result per test), plus open defects from a tracker search |
 | `bug-report` | Your description, screenshots, and logs |
 

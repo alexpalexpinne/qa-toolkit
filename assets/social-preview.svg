@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 640" width="1280" height="640">
+<rect width="1280" height="640" fill="#f6f8fa"/>
+<rect x="0" y="0" width="1280" height="10" fill="#8250df"/>
+<text x="80" y="170" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="84" fill="#1f2328" font-weight="800" text-anchor="start">Test Skills</text>
+<text x="80" y="236" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="38" fill="#1f2328" font-weight="600" text-anchor="start">Five AI skills for software testers,</text>
+<text x="80" y="286" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="38" fill="#1f2328" font-weight="600" text-anchor="start">from requirement to release report.</text>
+<text x="80" y="344" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="26" fill="#59636e" font-weight="normal" text-anchor="start">Built to ask instead of making things up.</text>
+<rect x="931.5" y="122" width="268.5" height="56" rx="28" fill="#fbefff" stroke="#8250df" stroke-width="2"/>
+<text x="1065.75" y="160" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="26" fill="#8250df" font-weight="700" text-anchor="middle">[TO CLARIFY: …]</text>
+<rect x="80.0" y="410" width="201.6" height="110" rx="14" fill="#ffffff" stroke="#d1d9e0" stroke-width="1.5"/>
+<circle cx="110.0" cy="442" r="15" fill="#8250df"/>
+<text x="110.0" y="448.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="17" fill="#ffffff" font-weight="700" text-anchor="middle">1</text>
+<text x="98.0" y="482" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="21" fill="#1f2328" font-weight="700" text-anchor="start">Review</text>
+<text x="98.0" y="505" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="21" fill="#1f2328" font-weight="700" text-anchor="start">requirements</text>
+<path d="M285.6,465.0 l18,0" stroke="#8c959f" stroke-width="2.5"/>
+<path d="M299.6,459.0 l7,6 l-7,6" fill="none" stroke="#8c959f" stroke-width="2.5"/>
+<rect x="309.6" y="410" width="201.6" height="110" rx="14" fill="#ffffff" stroke="#d1d9e0" stroke-width="1.5"/>
+<circle cx="339.6" cy="442" r="15" fill="#8250df"/>
+<text x="339.6" y="448.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="17" fill="#ffffff" font-weight="700" text-anchor="middle">2</text>
+<text x="327.6" y="482" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="21" fill="#1f2328" font-weight="700" text-anchor="start">Design</text>
+<text x="327.6" y="505" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="21" fill="#1f2328" font-weight="700" text-anchor="start">test cases</text>
+<path d="M515.2,465.0 l18,0" stroke="#8c959f" stroke-width="2.5"/>
+<path d="M529.2,459.0 l7,6 l-7,6" fill="none" stroke="#8c959f" stroke-width="2.5"/>
+<rect x="539.2" y="410" width="201.6" height="110" rx="14" fill="#ffffff" stroke="#d1d9e0" stroke-width="1.5"/>
+<circle cx="569.2" cy="442" r="15" fill="#8250df"/>
+<text x="569.2" y="448.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="17" fill="#ffffff" font-weight="700" text-anchor="middle">3</text>
+<text x="557.2" y="482" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="21" fill="#1f2328" font-weight="700" text-anchor="start">Create</text>
+<text x="557.2" y="505" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="21" fill="#1f2328" font-weight="700" text-anchor="start">test data</text>
+<path d="M744.8,465.0 l18,0" stroke="#8c959f" stroke-width="2.5"/>
+<path d="M758.8,459.0 l7,6 l-7,6" fill="none" stroke="#8c959f" stroke-width="2.5"/>
+<rect x="768.8" y="410" width="201.6" height="110" rx="14" fill="#ffffff" stroke="#d1d9e0" stroke-width="1.5"/>
+<circle cx="798.8" cy="442" r="15" fill="#8250df"/>
+<text x="798.8" y="448.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="17" fill="#ffffff" font-weight="700" text-anchor="middle">4</text>
+<text x="786.8" y="482" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="21" fill="#1f2328" font-weight="700" text-anchor="start">Report</text>
+<text x="786.8" y="505" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="21" fill="#1f2328" font-weight="700" text-anchor="start">defects</text>
+<path d="M974.4,465.0 l18,0" stroke="#8c959f" stroke-width="2.5"/>
+<path d="M988.4,459.0 l7,6 l-7,6" fill="none" stroke="#8c959f" stroke-width="2.5"/>
+<rect x="998.4" y="410" width="201.6" height="110" rx="14" fill="#ffffff" stroke="#d1d9e0" stroke-width="1.5"/>
+<circle cx="1028.4" cy="442" r="15" fill="#8250df"/>
+<text x="1028.4" y="448.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="17" fill="#ffffff" font-weight="700" text-anchor="middle">5</text>
+<text x="1016.4" y="482" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="21" fill="#1f2328" font-weight="700" text-anchor="start">Summarize</text>
+<text x="1016.4" y="505" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="21" fill="#1f2328" font-weight="700" text-anchor="start">results</text>
+<text x="80" y="584" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="22" fill="#59636e" font-weight="normal" text-anchor="start">Claude Code  ·  Codex  ·  Agent Skills format  ·  Any language  ·  MIT</text>
+</svg>
