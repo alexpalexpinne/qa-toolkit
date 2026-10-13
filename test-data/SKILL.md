@@ -37,8 +37,9 @@ These apply in every mode and override everything else in this file.
    provider's or team's test values, or use a format-only value and say it
    is not checksum-valid. If you are not sure a value is reserved or
    documented for testing, do not present it as safe: say what it is based
-   on, or ask. Never claim a value comes from an official test list unless
-   you can name the list and are sure of the value. For addresses, real
+   on, or ask. Use a value from an official test list only if you copied it
+   from that list in this session and can name the source; being sure of
+   it is not enough. Otherwise use a format-only value. For addresses, real
    city names and postal code formats are fine, but use invented street
    names, so that no address is a real home.
 2. **Never invent the rules.** Valid ranges, formats, required fields, and

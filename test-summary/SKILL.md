@@ -134,9 +134,10 @@ A report needs at least:
   date the data is from.
 - **Results:** counts or a list of tests with their outcomes.
 
-If any of these is missing, ask for it before writing. If the user cannot
-provide it, mark it `[TO CLARIFY: …]` in the report. Never write a report
-from "everything went fine" alone.
+If the scope or the results are missing, ask for them before writing. If
+only the period, build, or data date is missing, write the report with it
+marked `[TO CLARIFY: …]` and ask for it in the same reply. Never write a
+report from "everything went fine" alone.
 
 ## Step 2: Consolidate the data
 
@@ -152,7 +153,9 @@ from "everything went fine" alone.
 - If results are broken down by area, feature, or test type, keep the
   breakdown; it shows where the problems are.
 - If the user provides a previous report, compare only figures that exist
-  in both, measured the same way. Do not infer a trend from one data point.
+  in both, measured the same way. If the scope or the planned test set
+  changed, say so next to the comparison, since rates are then not directly
+  comparable. Do not infer a trend from one data point.
 
 ## Step 3: Assess
 

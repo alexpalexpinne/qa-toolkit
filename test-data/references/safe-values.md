@@ -62,7 +62,9 @@ identity numbers) can belong to real people.
 
 - Use test numbers that the issuing authority publishes for testing, where
   they exist, or the team's test numbers. Some tax and population
-  authorities publish such lists.
+  authorities publish such lists. Use a published number only if you
+  copied it from the list in this session; a remembered number may be
+  wrong and could belong to a real person.
 - If none is known, ask the user. Otherwise use a value with the right
   format that deliberately fails the checksum, and label it as format-only
   and not checksum-valid.
