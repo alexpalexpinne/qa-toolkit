@@ -1,8 +1,8 @@
 # Test skills
 
-Three agent skills for everyday testing work: reviewing requirements,
-designing test cases, and writing bug reports a developer can act on. They
-are written for testers, and `bug-report` also for anyone who needs to
+Four agent skills for everyday testing work: reviewing requirements,
+designing test cases, writing bug reports a developer can act on, and
+reporting test results honestly. They are written for testers, and `bug-report` also for anyone who needs to
 report a problem. They follow the open [Agent Skills](https://agentskills.io)
 format, so they run in Claude Code and Codex and can be adapted to other
 assistants.
@@ -13,6 +13,7 @@ assistants.
 |-------|--------------|
 | [`review-requirements`](review-requirements/) | Reviews user stories, use cases, requirements, and acceptance criteria for testability. Finds ambiguous wording, missing cases, contradictions, and gaps against parent requirements such as an epic or high-level requirement, and turns them into concrete questions for the product owner. |
 | [`test-cases`](test-cases/) | Designs test cases from user stories, use cases, and requirements, covering the main flow, errors, and boundaries, each traced to the criterion or flow it covers. Can use supporting material such as a design or a requirements review, and can also review existing test cases or restructure them into a consistent format without changing what they test. |
+| [`test-summary`](test-summary/) | Turns test results and defect lists into an honest status or completion report: passed, failed, blocked, and not-run tests shown separately, open defects by severity, what was not tested, and an assessment against exit criteria. Can also review an existing report for misleading figures. |
 | [`bug-report`](bug-report/) | Helps write defect reports a developer can act on: drafts a new report through a short interview, turns a conversation into a report, or reviews an existing one. |
 
 The skills are instructions only: no scripts, dependencies, or API keys.
@@ -26,11 +27,11 @@ assistant's skills folder (macOS, Linux, or a compatible shell):
 ```bash
 # Claude Code
 mkdir -p ~/.claude/skills
-cp -r bug-report review-requirements test-cases ~/.claude/skills/
+cp -r bug-report review-requirements test-cases test-summary ~/.claude/skills/
 
 # Codex
 mkdir -p ~/.agents/skills
-cp -r bug-report review-requirements test-cases ~/.agents/skills/
+cp -r bug-report review-requirements test-cases test-summary ~/.agents/skills/
 ```
 
 To install for a single project, copy them into that project's
@@ -45,6 +46,7 @@ message. In Claude Code:
 ```text
 /review-requirements <paste a story, use case, or requirement, and its parent if you have one>
 /test-cases <paste a requirement or use case, or test cases to review or restructure>
+/test-summary <paste test results and open defects, or a report to review>
 /bug-report <describe the problem, or paste a report to review>
 /bug-report setup
 ```
@@ -59,6 +61,9 @@ the requirement.
 After a requirements review, give `test-cases` the requirement together
 with the answers to the review's questions. Proposed acceptance criteria
 from the review are treated as proposals until you say they were accepted.
+
+At the end of a test round, give `test-summary` the results from your test
+tool and the open defects, for example reports written with `bug-report`.
 
 ## What the skills always do
 
@@ -76,6 +81,35 @@ These rules apply whatever your settings say:
 
 These are instructions to the assistant, not technical guarantees. Review
 drafts before you share them.
+
+## Your data
+
+The skills send nothing anywhere on their own; they only publish after your
+explicit yes. But everything you paste or attach, such as requirements,
+test exports, defect lists, and logs, is sent to the AI service behind your
+assistant, like any other message. Exports from tools like Jira can contain
+customer data or internal information. Check your organization's policy on
+AI tools before using the skills with real project data, and remove what
+should not be shared.
+
+### Getting data out of your tools
+
+The skills read whatever you paste or attach, so the simplest way to work
+with a test management tool or tracker is to export from it, for example as
+CSV, and attach the file:
+
+| Skill | Typical input |
+|-------|---------------|
+| `review-requirements` | Stories or requirements, pasted or exported from your tracker |
+| `test-cases` | A requirement; for review or restructuring, existing tests exported from your test management tool |
+| `test-summary` | Test results exported from your test management tool (latest result per test), plus open defects from a tracker search |
+| `bug-report` | Your description, screenshots, and logs |
+
+If your assistant has a working connector for your tracker, the skills can
+read from it directly, but only from a project you have confirmed. To
+avoid explaining your exports every time, describe them in the skill's
+`team-conventions.md`: which export to use, which columns matter, and what
+your statuses mean.
 
 ## Customizing
 

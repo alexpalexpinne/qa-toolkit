@@ -28,6 +28,8 @@ language. Error messages are quoted in their original language.
 - Jira, project key SHOP.
 - Issue type: Bug. Component is required.
 - Valid components: Checkout, Search, Account, Admin.
+- Duplicate search: `project = SHOP AND type = Bug AND statusCategory !=
+  Done AND text ~ "<keywords>"`.
 
 ## Severity
 We use our own scale instead of the default:

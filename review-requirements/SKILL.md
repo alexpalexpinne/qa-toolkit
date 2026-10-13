@@ -76,6 +76,14 @@ fetch from a tracker or project you guessed. If the user refers to a file
 or document you do not have, ask them to attach it or give its path; never
 search the file system for it.
 
+**Exports from tools** (CSV, Excel, JSON, XML): use the column and field
+names as they appear. If a column's meaning matters and is unclear (for
+example whether *Priority* means severity, or what a custom status means),
+ask; do not guess. Use every row: if some rows cannot be interpreted, say
+how many and why instead of dropping them silently. Before working on a
+large export, say briefly what it contains and which columns you will
+use. An export of several stories or requirements is mode B.
+
 Separate two kinds of input:
 
 - **The item under review:** what the user wants reviewed.

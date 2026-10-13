@@ -41,6 +41,12 @@ time allows).
 ## Tool
 Xray in Jira, project SHOP. Test cases are created as issue type "Test".
 
+## Data sources
+- Existing tests are exported from Xray as CSV, one row per step, with the
+  columns `Issue Key`, `Summary`, `Action`, `Data`, and `Expected Result`.
+- Requirements are Jira stories in project SHOP; acceptance criteria are in
+  the custom field `Acceptance Criteria`.
+
 ## Required fields
 - Component (Checkout, Search, Account, Admin)
 - Test level: UI, API, or Integration

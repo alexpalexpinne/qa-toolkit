@@ -23,6 +23,8 @@ Everything below this line is an example and is ignored by the skill.
   names the HLR it implements.
 - Use cases follow our template: actor, preconditions, main flow,
   alternative flows, end state.
+- Stories exported from Jira as CSV have the columns `Issue key`,
+  `Summary`, `Description`, and `Acceptance Criteria` (a custom field).
 
 ## Language
 Requirements are written in German. Reviews are written in German.

@@ -147,6 +147,16 @@ for it. If a path the user gives does not exist, say so and ask. You may
 name a folder or file with the same name in the current working folder as
 the likely intended one, but do not open it until the user confirms.
 
+**Exports from tools** (CSV, Excel, JSON, XML): use the column and field
+names as they appear. If a column's meaning matters and is unclear (for
+example whether *Priority* means severity, or what a custom status means),
+ask; do not guess. Use every row: if some rows cannot be interpreted, say
+how many and why instead of dropping them silently. Before working on a
+large export, say briefly what it contains and which columns you will
+use. Exports of test cases often have one row per step, with the test's
+ID repeated on each row; keep each test's steps together and in their
+original order.
+
 The user may also provide supporting material: a parent requirement, a
 design, a specification, or a requirements review. Use it as a source for
 screens, flows, and expected results, and name it when a case relies on it.
