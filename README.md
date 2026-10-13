@@ -11,7 +11,7 @@ assistants.
 
 | Skill | What it does |
 |-------|--------------|
-| [`review-requirements`](review-requirements/) | Reviews user stories, requirements, and acceptance criteria for testability. Finds ambiguous wording, missing cases, and contradictions, and turns them into concrete questions for the product owner. |
+| [`review-requirements`](review-requirements/) | Reviews user stories, use cases, requirements, and acceptance criteria for testability. Finds ambiguous wording, missing cases, contradictions, and gaps against parent requirements such as an epic or high-level requirement, and turns them into concrete questions for the product owner. |
 | [`test-cases`](test-cases/) | Designs test cases from requirements, covering the main flow, errors, and boundaries, each traced to the criterion it covers. Can also review existing test cases, or restructure them into a consistent format without changing what they test. |
 | [`bug-report`](bug-report/) | Helps write defect reports a developer can act on: drafts a new report through a short interview, turns a conversation into a report, or reviews an existing one. |
 
@@ -85,6 +85,8 @@ write there takes precedence over the skill's defaults, for example:
 - your severity scale
 - which tracker and project to use, and required fields
 - what words like "must" and "should" mean in your requirements
+- how your requirements are organized, for example epics, use cases, or
+  high-level requirements
 - terminology and things to always check
 
 You can also replace `bug-report/references/template.md` with your own

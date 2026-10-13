@@ -16,6 +16,14 @@ it as is to use the defaults.
 Everything below this line is an example and is ignored by the skill.
 
 ```markdown
+## Requirement structure
+- Epics and user stories are in Jira, project SHOP. Every story links its
+  epic.
+- High-level requirements are in Confluence, with IDs `HLR-nnn`. Each story
+  names the HLR it implements.
+- Use cases follow our template: actor, preconditions, main flow,
+  alternative flows, end state.
+
 ## Language
 Requirements are written in German. Reviews are written in German.
 

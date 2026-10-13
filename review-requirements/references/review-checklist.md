@@ -30,9 +30,11 @@ its absence matters for this requirement.
 |------|------------------|
 | **Users and permissions** | Who can do this? What happens for users who are not allowed? |
 | **Inputs** | What are valid values, formats, lengths, ranges? Which fields are required? |
+| **Outputs** | What information must be shown or returned, and in what format? |
 | **Boundaries** | What happens at minimum, maximum, empty, zero, and just outside the limits? |
 | **Errors** | What does the user see when input is invalid, a service is down, or a timeout occurs? |
 | **States** | What happens if the item is in another state (draft, locked, deleted, expired)? |
+| **Lifecycle** | When something is deactivated, deleted, archived, expired, or reactivated: what happens to its existing data, and what do users see afterwards, including when access is denied? |
 | **Data** | Where is data stored, for how long, and who can see it? What happens to existing data? |
 | **Concurrency** | What if two users change the same thing at the same time? What if the user double-clicks? |
 | **Integrations** | Which other systems are involved, and what happens if one of them fails? |
@@ -45,6 +47,10 @@ its absence matters for this requirement.
 - Do any criteria contradict each other?
 - Does the requirement contradict existing behavior, other requirements, or
   the design (if provided)?
+- If a parent requirement is provided (epic, use case, or HLR): does the
+  item contradict it, or leave out something the parent requires of it?
+- If all children of a parent are provided: is every part of the parent
+  covered by at least one child?
 - In mode B (several items): do items overlap, conflict, or leave a gap
   between them? Are the same rules defined differently in different items?
 
@@ -55,3 +61,14 @@ its absence matters for this requirement.
   edge cases sensibly.
 - Does it prescribe a technical solution where it should describe a need?
   (Flag gently: sometimes this is intentional.)
+
+## 6. Use cases
+
+Only when the item is a use case:
+
+- Does every step that can fail or branch have an alternative or error
+  flow? (Invalid input, a service that does not respond, a user who
+  cancels.)
+- Are the preconditions and the end state stated, and can each be checked?
+- Does each alternative flow say where it ends: back to a step in the main
+  flow, or a different end state?

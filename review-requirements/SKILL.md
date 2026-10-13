@@ -1,11 +1,12 @@
 ---
 name: review-requirements
 description: >
-  Reviews user stories, requirements, and acceptance criteria for
-  testability before development starts: finds ambiguous wording, missing
-  cases, contradictions, and untestable criteria, and turns them into
-  concrete questions for the product owner. Use only when the user
-  explicitly invokes this skill or asks for it by name.
+  Reviews user stories, use cases, requirements, and acceptance criteria
+  for testability before development starts: finds ambiguous wording,
+  missing cases, contradictions, untestable criteria, and gaps against
+  parent requirements, and turns them into concrete questions for the
+  product owner. Use only when the user explicitly invokes this skill or
+  asks for it by name.
 license: MIT (see LICENSE)
 disable-model-invocation: true
 ---
@@ -42,11 +43,12 @@ These apply in every mode and override everything else in this file.
    its author. Use neutral wording.
 5. **Use plain language.** Testers and product owners may not share technical
    vocabulary. Explain any testing term you use.
-6. **Protect sensitive data.** If the requirement contains customer data,
-   credentials, or personal data, do not repeat it anywhere in your reply,
-   including commentary, and even if it looks fake or like test data. Refer
-   to it by type and location only (for example "the email address in the
-   example") and tell the user it should be removed from the requirement.
+6. **Protect sensitive data.** If the requirement or its supporting material
+   contains customer data, credentials, or personal data, do not repeat it
+   anywhere in your reply, including commentary, and even if it looks fake
+   or like test data. Refer to it by type and location only (for example
+   "the email address in the example") and tell the user it should be
+   removed from the document it appears in.
 7. **Never publish without confirmation.** Posting comments to a tracker or
    editing a requirement changes shared work. Show exactly what will be
    posted and get an explicit "yes" first.
@@ -54,8 +56,9 @@ These apply in every mode and override everything else in this file.
    write in, in a polite, neutral tone. Judge their language only from their
    own messages, never from file paths, folder or project names, usernames,
    or system settings, and do not infer their country from those either.
-   Write the review in the language of the requirement unless the
-   user asks otherwise. Quote the requirement exactly, untranslated, except
+   Write the review in the language the user asks for; otherwise in the
+   review language set by the team conventions; otherwise in the language
+   of the requirement. Quote the requirement exactly, untranslated, except
    for masking required by rule 6; add a translation in parentheses if the
    review is in another language.
    Translate all headings, labels, priorities, and verdicts from this file
@@ -73,11 +76,21 @@ fetch from a tracker or project you guessed. If the user refers to a file
 or document you do not have, ask them to attach it or give its path; never
 search the file system for it.
 
+Separate two kinds of input:
+
+- **The item under review:** what the user wants reviewed.
+- **Supporting material:** what to check it against, such as its parent
+  epic, use case, or high-level requirement (HLR), a glossary, business
+  rules, designs, or API specifications.
+
+If it is unclear which is which, ask. Review only the item under review;
+do not review the supporting material itself unless the user asks.
+
 Choose the mode:
 
 | Mode | When |
 |------|------|
-| **A. Single item** | One story, requirement, or feature description |
+| **A. Single item** | One story, use case, requirement, or feature description |
 | **B. Set of items** | Several stories, an epic, or a specification section. Also check for conflicts and gaps *between* items |
 
 Ask only if it changes the review, and at most three questions. Three is a
@@ -85,8 +98,8 @@ maximum, not a target; often no questions are needed. This limit applies to
 questions asking the user for an immediate reply. The review's findings
 may each include their required clarification question. For example:
 - Who are the users of this feature (roles, permissions)?
-- Is there a related design, specification, or existing behavior it should
-  match?
+- Is there a parent requirement (epic, use case, or HLR), design, or
+  existing behavior it should match?
 - Is anything deliberately out of scope?
 
 If the user has no context to give, proceed and note your assumptions in the
@@ -101,18 +114,48 @@ the defaults in this skill wherever they conflict. Conventions the user
 states in the conversation take precedence over the file. The core rules
 always apply.
 
-Then work through `references/review-checklist.md`, and use
+Start with the main flow: who acts, what inputs they use, and what information
+is shown or state changes on success. Raise missing decisions needed to test
+that flow before reviewing vague wording.
+
+If supporting material was provided, use it to:
+
+- **Answer questions instead of asking them.** Do not ask about something
+  the material already settles.
+- **Check against the parent.** Flag where the item contradicts its parent,
+  or leaves out something the parent requires of it. If the user says all
+  the children of a parent are provided (for example every story under an
+  HLR), also report any part of the parent that no child covers.
+- **Use its terms,** for example from a glossary.
+
+Quote supporting material only where it contradicts the item or answers a
+question, and name its source (ID, title, or section). Do not assume what a
+parent says if it was not provided.
+
+Work through `references/review-checklist.md`, and use
 `references/ambiguity-patterns.md` to spot vague wording. The patterns are
 written in English, but look for the same kinds of wording in any language.
+When the requirement deactivates, deletes, archives, expires, or reactivates
+something, go through the checklist's *Lifecycle* row explicitly.
 
 For each problem found, record:
-- **Where:** the quoted text, or "Missing" with what is missing
+- **Where:** the quoted text, or "Missing" with what is missing and, if
+  supporting material requires it, the source (for example "Missing: email
+  notification required by HLR-4")
 - **Problem:** why it blocks building or testing, in one sentence
 - **Question:** the concrete question that would resolve it
 - **Priority:**
   - **Must clarify:** cannot be built or tested correctly without an answer
   - **Should clarify:** likely to cause defects, rework, or disagreement
   - **Consider:** wording or clarity improvements
+
+An unanswered detail is not automatically a development blocker. For each
+*Must clarify*, explain which intended behavior or acceptance decision cannot
+be established without the answer. When the main behavior and stated outcomes
+are already testable, treat additional precision or edge cases as
+*Should clarify* or *Consider* unless their consequences justify blocking
+development. Group related questions and keep findings focused on decisions
+that matter for the stated scope.
 
 ## Step 3: Decide the verdict
 
@@ -166,7 +209,9 @@ Guidance for proposed acceptance criteria:
 - Choose the format in this order:
   1. **The team conventions or the user** name a format: use it.
   2. **The requirement already has a format** (for example Given/When/Then,
-     a numbered list, or "The system shall …" statements): match it.
+     a numbered list, use-case steps with alternative flows, or "The system
+     shall …" statements): match it. For a use case, propose missing
+     alternative flows in its own numbering, for example "4a.".
   3. **Otherwise:** plain, testable sentences in the review language, for
      example "If the email address is not registered, the message
      `[TO CLARIFY: message text]` is shown."
@@ -180,6 +225,9 @@ Go through the draft and fix anything that fails:
 - [ ] Every finding quotes the exact text, or starts with "Missing:".
 - [ ] Every finding ends in a concrete question someone can answer.
 - [ ] No two findings ask the same question. Merge duplicates.
+- [ ] Nothing is asked that the supporting material already answers.
+      Findings that rely on it name their source, and the material itself
+      was not reviewed.
 - [ ] The finding limits from core rule 3 are respected.
 - [ ] The verdict matches the table in Step 3.
 - [ ] Every proposed acceptance criterion is presented as a proposal, and
@@ -199,6 +247,10 @@ environment:
   integration, the confirmed item, and explicit approval of the exact text.
 - **Save as a file** if you can write files.
 - **Copy-paste:** always available.
+
+If the user asks to post and there is no working integration, say so and
+give the exact text in your reply, ready to copy and paste. Do not guess
+the tracker from the item's ID.
 
 When the open questions have been answered, suggest the next step: writing
 test cases from the clarified requirement (for example with the

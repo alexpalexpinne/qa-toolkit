@@ -46,6 +46,11 @@ Instead, in this order:
    Never classify an item as optional or mandatory based on an assumption
    about the language.
 
+When team conventions or the document define a word as recommended or
+optional, do not ask what it means. Missing details alone do not make such
+an item *Must clarify*; it may still be *Should clarify* or *Consider*.
+Mention the item's status when it matters for its scope or priority.
+
 ## Example
 
 > The system should quickly notify the user when their export is ready.
