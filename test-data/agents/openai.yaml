@@ -1,0 +1,5 @@
+interface:
+  display_name: "Test Data"
+  short_description: "Create safe, realistic test data, or review an existing data set"
+policy:
+  allow_implicit_invocation: false
