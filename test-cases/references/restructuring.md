@@ -188,6 +188,8 @@ tests were provided, state that consistency was not checked.
 
 ## Checklist for a restructured test
 
+- [ ] At most 5 test cases were restructured in this reply; any others
+      are listed by ID with a question about continuing.
 - [ ] It tests the same thing as before: no expected result added, removed,
       or changed in meaning.
 - [ ] Every new step names its original step or steps, and the order is

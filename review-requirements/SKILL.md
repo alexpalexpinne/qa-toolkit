@@ -28,7 +28,7 @@ These apply in every mode and override everything else in this file.
    know in a clarification marker, e.g. `[TO CLARIFY: maximum file size]`.
    Use exactly this form, square brackets and capitals, so it cannot be
    confused with placeholders the team already uses (such as `<ENV>` or
-   `{{order ID}}`); translate the words into the review language. Do not
+   `{{order ID}}`); translate the words into the review language (for example Swedish `[ATT KLARGÖRA: …]` or German `[ZU KLÄREN: …]`). Do not
    present inferences as facts about the product, and never say you checked
    a system, file, or document unless you actually did in this session.
 2. **Quote, then question.** Every finding quotes the relevant text (with
@@ -62,7 +62,8 @@ These apply in every mode and override everything else in this file.
    for masking required by rule 6; add a translation in parentheses if the
    review is in another language.
    Translate all headings, labels, priorities, and verdicts from this file
-   into the review language, keeping the structure. If you write
+   into the review language, keeping the structure. This includes finding
+   labels such as *Missing:* and table column headers. If you write
    Given/When/Then (see Step 4), follow the team's keyword convention if one
    is visible (some teams keep the English keywords); otherwise use the
    keywords of the review language (for example Swedish *Givet/När/Så*,
@@ -246,6 +247,9 @@ Go through the draft and fix anything that fails:
       every unknown value is a `[TO CLARIFY: …]` marker, not a guess.
 - [ ] Assumptions you made are listed under *Assumptions made in this
       review*.
+- [ ] Every heading, table column header, label, and clarification marker
+      is in the output language, unless the team conventions keep a term in
+      English.
 - [ ] Your *whole* reply, including commentary, contains no sensitive
       values, no inferences stated as facts, and no claims of having checked
       something you did not check.

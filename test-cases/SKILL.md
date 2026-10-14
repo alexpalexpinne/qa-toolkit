@@ -72,8 +72,9 @@ These apply in every mode and override everything else in this file.
    own messages, never from file paths, folder or project names, usernames,
    or system settings, and do not infer their country from those either.
    Write the test cases in the language of the input unless the team
-   conventions or the user say otherwise. Translate headings and labels
-   from this file into that language, keeping the structure. For
+   conventions or the user say otherwise. Translate every heading, table
+   column header, and label from this file into that language, keeping the
+   structure, unless the team conventions keep them in English. For
    Given/When/Then, follow the team's convention if one is visible;
    otherwise use the keywords of the output language (for example Swedish
    *Givet/När/Så*, German *Angenommen/Wenn/Dann*). Write dates in test
@@ -88,8 +89,9 @@ These apply in every mode and override everything else in this file.
    disclose redactions by type only. If a runnable value was removed, mark
    the case *Blocked: pending clarification* until safe test data is
    supplied. Keep three kinds of placeholder apart:
-   - `[TO CLARIFY: …]`: unknown; a person must provide it. Use exactly this
-     form, translating the words into the output language.
+   - `[TO CLARIFY: …]`: unknown; a person must provide it. Use this form
+     with the words translated into the output language (for example Swedish `[ATT KLARGÖRA: …]` or German `[ZU KLÄREN: …]`);
+     keep the square brackets and capitals.
    - `{{…}}`: a value the tester chooses when running the test, for example
      `{{order number}}`.
    - The team's own technical placeholders, such as `<ENV>` or
@@ -299,6 +301,9 @@ Go through the draft and fix anything that fails:
       questions.
 - [ ] UI texts, messages, and technical identifiers are copied exactly, and
       the three kinds of placeholder are not mixed up.
+- [ ] Every heading, table column header, label, and clarification marker
+      is in the output language, unless the team conventions keep a term in
+      English.
 - [ ] Your *whole* reply, including commentary, contains no credentials
       from the input, no real-looking personal data, no inferences stated as
       facts, and no claims of having checked something you did not check.
@@ -349,11 +354,16 @@ they test**. Follow `references/restructuring.md` for the detailed rules on
 where content belongs, when steps may be merged or split, attachments, and
 scope.
 
-1. Read each test case in full, including IDs, step numbers, attachments,
+1. **Count the test cases first.** If there are more than 5, restructure
+   only the first 5 in this reply, then stop: list the remaining ones by
+   ID and ask whether the result looks right and whether to continue. Do
+   this even if the user asked to clean up all of them, unless they
+   explicitly said to do every case in one reply.
+2. Read each test case in full, including IDs, step numbers, attachments,
    and any grouping (suite, folder, test set). If related test cases from
    the same group are provided, read them too, to match their naming and
    style.
-2. For each test case, produce:
+3. For each test case, produce:
    - The restructured test case, in the team's format or the default from
      `references/test-case-template.md`, with each step naming its original
      step or steps.
@@ -364,10 +374,8 @@ scope.
      do not tell the reviewer what to decide.
    - **Open questions:** missing expected results, unclear mappings, and
      attachment decisions a person must make.
-3. If related test cases were not provided, say that consistency with the
+4. If related test cases were not provided, say that consistency with the
    group was not checked. Do not invent the group's conventions.
-4. Check the result against Step 6 and the checklist in
-   `references/restructuring.md`, then deliver as in Step 7.
-
-If more than 5 test cases are provided, restructure the first 5 and ask whether
-the result looks right before continuing.
+5. Check the result against Step 6 and the checklist in
+   `references/restructuring.md`, including the 5-case limit from point 1,
+   then deliver as in Step 7.

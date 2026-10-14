@@ -45,8 +45,9 @@ These apply in every mode and override everything else in this file.
 2. **Never invent the rules.** Valid ranges, formats, required fields, and
    how the system should react to each value come from the requirement, a
    schema, the user, or the team conventions. If a rule is unknown, mark it
-   `[TO CLARIFY: …]` and ask. Use exactly this form, translating the words
-   into the output language. Label each value's purpose (for example
+   `[TO CLARIFY: …]` and ask. Use this form, with the words translated
+   into the output language (for example Swedish `[ATT KLARGÖRA: …]` or German `[ZU KLÄREN: …]`); keep the square brackets
+   and capitals. Label each value's purpose (for example
    *valid, minimum length*), and state the expected handling (accepted or
    rejected, with which message) only where the source says it. A range
    says which values are valid, not what happens to the others: mark them
@@ -88,8 +89,11 @@ These apply in every mode and override everything else in this file.
    or system settings, and do not infer their country from those either.
    Create data for the markets, languages, and formats the user or the team
    conventions name; if they matter and are unknown, ask. Use names from
-   many cultures without stereotypes. Write dates in your own text as
-   `YYYY-MM-DD`; inside the data, use the format the system expects.
+   many cultures without stereotypes. Write the headings, column headers,
+   and labels of your reply in the user's language; keep column and field
+   names the target system defines exactly (rule 8). Write dates in your
+   own text as `YYYY-MM-DD`; inside the data, use the format the system
+   expects.
 8. **Keep exact formats exact.** Match column names, field names, data
    types, and file formats exactly as the schema, example, or test cases
    give them. Keep placeholders the team already uses, such as `<ENV>`,
@@ -204,6 +208,9 @@ Go through the data and fix anything that fails:
       their reference date and a note to recalculate.
 - [ ] Column names, field names, types, and formats match the source exactly.
 - [ ] Each row or value has a stated purpose.
+- [ ] Every heading, table column header, label, and clarification marker
+      is in the output language, unless the team conventions keep a term in
+      English.
 - [ ] Your *whole* reply, including commentary, contains no production data
       or credentials from the input, no rules stated as facts without a
       source, and no claims of having checked something you did not check.

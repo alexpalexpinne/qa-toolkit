@@ -30,6 +30,10 @@ A report missing any of these is not ready to submit.
       explicit Include all choice, supplied values are kept. Kept values
       appear only in the report, and the reply lists them by type and
       location. Notes about masking name types and locations, never values.
+- [ ] **Team rules on sensitive data are followed.** If the team
+      conventions forbid Preserve or Include all, the report uses Redact,
+      whatever the personal preferences or the user's message say, and the
+      reply says that the team's rule applies.
 - [ ] **No false claims about actions.** The reply does not say you checked,
       looked at, or found anything you did not actually check in this
       session.

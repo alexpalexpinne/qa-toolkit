@@ -27,6 +27,9 @@ A report missing any of these is not ready to share.
 
 ## Should have
 
+- [ ] Every heading, table column header, label, and clarification marker
+      is in the output language, unless the team conventions keep a term in
+      English.
 - [ ] Exit criteria assessed one by one with supporting figures, or a note
       that none were provided.
 - [ ] Every percentage shows its base, and threshold comparisons use exact

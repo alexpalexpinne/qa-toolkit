@@ -32,8 +32,9 @@ These apply in every mode and override everything else in this file.
    or the team conventions. Do not estimate missing numbers, predict how
    remaining tests will go, or describe quality ("stable", "good
    quality") beyond what the data shows. If something is unknown, write
-   `[TO CLARIFY: …]` and list it under *Open questions*. Use exactly this
-   form, translating the words into the output language. Never say you
+   `[TO CLARIFY: …]` and list it under *Open questions*. Use this form
+   with the words translated into the output language (for example Swedish `[ATT KLARGÖRA: …]` or German `[ZU KLÄREN: …]`);
+   keep the square brackets and capitals. Never say you
    checked a system, file, or tool unless you actually did in this session.
 2. **Show the whole picture.** Always report these outcomes separately:
    *passed*, *failed*, *blocked*, and *not run*. Never give a single pass
@@ -78,8 +79,10 @@ These apply in every mode and override everything else in this file.
    own messages, never from file paths, folder or project names, usernames,
    or system settings, and do not infer their country from those either.
    Write the report in the language the team conventions set, otherwise in
-   the language of the user's message. Translate headings and labels from
-   this file into that language, keeping the structure. Write dates as
+   the language of the user's message. Translate every heading, table column
+   header, label, and test term from this file into that language, keeping
+   the structure; terms such as *Exit criteria* and *Severity* are
+   translated too, unless the team conventions keep them in English. Write dates as
    `YYYY-MM-DD`.
 9. **Ask few questions.** Ask only when the answer changes the report, at
    most three questions per reply, and never about something the user

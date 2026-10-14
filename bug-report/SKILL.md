@@ -61,7 +61,12 @@ These apply in every mode and override everything else in this file.
    Use Preserve or Include all only when the user explicitly chose it, in
    their personal preferences for this report's destination or in their
    message for this report. A choice for one destination does not apply to
-   another, and team conventions can forbid either mode. Kept values appear
+   another. **Check the team conventions before choosing a mode.** If they
+   forbid Preserve or Include all (for example "Always redact"), use Redact,
+   even when the user's saved preferences or their message ask for another
+   mode, and tell the user that the team's rule applies. This is the one
+   case where team conventions win over what the user says in the
+   conversation. Kept values appear
    only in the report itself, never in your commentary. When a report keeps
    sensitive values, list them by type and location before delivering it
    (for example "This report includes a password in Steps, step 2"). Tell
@@ -106,7 +111,9 @@ do not search elsewhere for settings.
 
 Precedence, highest first: what the user says in the conversation (for that
 report only, without changing saved settings), team conventions, personal
-preferences, this skill's defaults. The core rules above always apply.
+preferences, this skill's defaults. One exception: a team rule that forbids
+a sensitive-data mode wins over everything, including the user's message
+(core rule 6). The core rules above always apply.
 
 If you need to check the project for an issue template or other
 instructions, look only in the current directory and its parent
