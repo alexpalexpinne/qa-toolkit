@@ -102,7 +102,11 @@ Choose the mode:
 | **B. Set of items** | Several stories, an epic, or a specification section. Also check for conflicts and gaps *between* items |
 
 Ask only if it changes the review, and at most three questions. Three is a
-maximum, not a target; often no questions are needed. This limit applies to
+maximum, not a target; often no questions are needed. Ask *before*
+reviewing only when one answer decides the whole review, for example which
+item to review when the input holds several and it is unclear which one
+the user means. Otherwise review right away, state your assumptions, and
+ask in the same reply. This limit applies to
 questions asking the user for an immediate reply. The review's findings
 may each include their required clarification question. For example:
 - Who are the users of this feature (roles, permissions)?

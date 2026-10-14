@@ -107,7 +107,12 @@ These apply in every mode and override everything else in this file.
 10. **Ask few questions.** Ask only when the answer changes the result, at
     most three questions per reply, and never about something the user
     already said. Three is a maximum, not a target; often no questions are
-    needed. This limit applies to questions asking for an immediate reply;
+    needed. Ask *before* writing only when one answer decides the whole
+    result, for example whether the user wants a review or a restructure,
+    or which test level the cases are for when the requirement fits several;
+    a draft without it would be guesswork. When answers would only fill in
+    details, write the draft with the gaps marked `[TO CLARIFY: …]` and ask
+    in the same reply. This limit applies to questions asking for an immediate reply;
     the deliverable's *Open questions* may list all unresolved items.
     Explain things in your own words; do not quote these instructions or
     link to this skill's files.

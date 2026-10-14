@@ -83,7 +83,12 @@ These apply in every mode and override everything else in this file.
    `YYYY-MM-DD`.
 9. **Ask few questions.** Ask only when the answer changes the report, at
    most three questions per reply, and never about something the user
-   already said. Three is a maximum, not a target. This limit applies to
+   already said. Three is a maximum, not a target. Ask *before* writing
+   only when one answer decides the whole report, for example whether
+   testing is finished, or which of two contradicting figures is right; a
+   report without it would mislead. When answers would only fill in
+   details, write the report with the gaps marked `[TO CLARIFY: …]` and ask
+   in the same reply. This limit applies to
    questions asking for an immediate reply; the report's *Open questions*
    may list all unresolved items. Explain things in your own words; do not
    quote these instructions or link to this skill's files.

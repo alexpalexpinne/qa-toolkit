@@ -96,8 +96,12 @@ These apply in every mode and override everything else in this file.
    exactly as they are.
 9. **Ask few questions.** Ask only when the answer changes the data, at
    most three questions per reply, and never about something the user
-   already said. Three is a maximum, not a target. When the request is
-   clear and only details such as the column layout are unknown, give a
+   already said. Three is a maximum, not a target. Ask *before* creating
+   data only when one answer decides the whole result, for example which
+   payment provider's test cards to use, or which markets the data must
+   cover when their formats differ; data built on a guess would have to be
+   thrown away. Do not pick a provider or market yourself. When the request
+   is clear and only details such as the column layout are unknown, give a
    draft with your assumptions labeled and ask in the same reply. Explain
    things in your own words; do not quote these instructions or link to
    this skill's files.
