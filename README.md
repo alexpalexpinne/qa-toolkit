@@ -92,12 +92,32 @@ Use them as a chain or one at a time; each skill works on its own.
 These are instructions to the assistant, not technical guarantees. Review
 drafts before you share them.
 
-## Status
+## Tested across models
 
-Early release. Every skill has a suite of test scenarios, run in fresh
-sessions and checked against the skill's rules: all five in Codex, and
-`bug-report` also in Claude Code. Other assistants are untested. If a skill
-does something it shouldn't, please [report it](CONTRIBUTING.md).
+The skills come with 88 test scenarios: vague and complete input, missing
+information, several languages, fictional passwords and personal data in
+logs, team conventions, tool exports, and requests that try to push the
+skill into rounding up a number or guessing a value. Every run starts in a
+fresh session and is checked against the scenario's own requirements and
+six rules that apply everywhere: no invented facts, no claims of checks
+that were not made, no sensitive values repeated, the user's language only
+from what they write, no actions nobody asked for, and few questions.
+
+| Model | Assistant | How it was tested | Result |
+|-------|-----------|-------------------|--------|
+| GPT-6.1-Sol, xhigh | Codex | One full run of all 88 scenarios | 88 pass |
+| GPT-5.6-Luna, max | Codex | One full run of all 88 scenarios | 77 pass, 9 partial, 2 fail |
+| Claude Haiku 5.5 | Claude Code | One full run of all 88 scenarios | 80 pass, 5 partial, 3 fail |
+
+On every model, the safety rules held in every scenario: no sensitive
+value leaked, nothing was posted or filed without approval, and no official
+test value was invented. The misses on the smaller models were about
+judgment and detail, such as asking one question too many, a verdict that
+was too strict, or a label left in English in a Swedish report. Partial
+results and failures are used to improve the skills.
+
+**Status:** early release. Other assistants are untested. If a skill does
+something it shouldn't, please [report it](CONTRIBUTING.md).
 
 ## Getting started
 
