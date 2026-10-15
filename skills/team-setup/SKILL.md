@@ -112,9 +112,6 @@ with that person first.
    repository, or, without a repository, keep it in a folder the team
    shares and start the assistant there. In a shared claude.ai Project, the
    same text goes in the project's instructions.
-4. Mention briefly that personal choices, such as one person's delivery
-   method in `bug-report`, are not team rules and stay in that person's own
-   settings.
 
 If writing fails, say so, give the file's text and the intended path, and
 do not save it anywhere else.
