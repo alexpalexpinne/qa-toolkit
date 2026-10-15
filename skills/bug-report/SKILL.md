@@ -128,8 +128,8 @@ including the user's message (core rule 6). The core rules above always
 apply.
 
 If you need to check the project for an issue template or other
-instructions, look only in the current directory and its parent
-directories, not in neighboring projects.
+instructions, look only in the current directory or, in a repository, at
+its root; never in parent folders or neighboring projects.
 
 If no team conventions were found and the user states rules a team would
 normally decide once (such as the report language, tracker, required
