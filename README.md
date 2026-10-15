@@ -1,6 +1,10 @@
-# Test Skills
+# QA Toolkit
 
 AI skills for software testers—built to ask instead of making things up.
+
+Install the five skills and the `team-setup` helper as the **QA Toolkit**
+plugin (`qa-toolkit`), or copy individual skill folders for local use. The
+repository remains `alexpalexpinne/test-skills`.
 
 ![License: MIT](https://img.shields.io/badge/license-MIT-blue)
 ![Format: Agent Skills](https://img.shields.io/badge/format-Agent%20Skills-6f42c1)
@@ -8,7 +12,7 @@ AI skills for software testers—built to ask instead of making things up.
 ![Codex](https://img.shields.io/badge/Codex-supported-333333)
 ![Any language](https://img.shields.io/badge/language-any-2ea44f)
 
-<img src="assets/testing-evidence-map-v2.jpg" width="100%" alt="Test Skills: five AI skills for a test round. Clarify requirements, design traceable cases, and prepare safe test data. You run the tests. Observations feed actionable bug reports; results and defects feed a summary with passed, failed, blocked, and not-run tests, open defects, and exit criteria. Illustrative outputs, not recorded results.">
+<img src="assets/readme-hero.jpg" width="100%" alt="QA Toolkit: from requirement to test report. Five upright documents represent requirements review, traceable test cases, safe test data, actionable bug reports, and honest test summaries. A password-reset example shows clarification questions, a named test case, expiry boundaries, expected versus actual behavior, and passed, failed, blocked, and not-run statuses. Illustrative workflow; you run the tests.">
 
 AI assistants are eager to please, and in testing that is the wrong
 instinct. Ask one for test cases and it can invent the expected results.
@@ -54,11 +58,15 @@ More real outputs, one per skill:
 
 | Skill | Gives you |
 |-------|-----------|
-| [`review-requirements`](review-requirements/) | A testability review of stories, use cases, and acceptance criteria: ambiguous wording, missing cases, contradictions, and gaps against the parent requirement, as concrete questions for the product owner. |
-| [`test-cases`](test-cases/) | Test cases covering the main flow, errors, and boundaries, each traced to the criterion it covers. Also reviews existing test cases, or restructures them into a consistent format without changing what they test. |
-| [`test-data`](test-data/) | Valid values, boundaries, invalid input, and international cases, using reserved and documented test values so no value can belong to a real person. Also reviews existing data sets. |
-| [`bug-report`](bug-report/) | A defect report a developer can act on, from a short interview, from the conversation so far, or by reviewing a draft. Also for non-testers who need to report a problem. |
-| [`test-summary`](test-summary/) | A status or completion report with passed, failed, blocked, and not-run tests shown separately, open defects by severity, what was not tested, and an assessment against exit criteria. Also reviews existing reports for misleading figures. |
+| [`review-requirements`](skills/review-requirements/) | A testability review of stories, use cases, and acceptance criteria: ambiguous wording, missing cases, contradictions, and gaps against the parent requirement, as concrete questions for the product owner. |
+| [`test-cases`](skills/test-cases/) | Test cases covering the main flow, errors, and boundaries, each traced to the criterion it covers. Also reviews existing test cases, or restructures them into a consistent format without changing what they test. |
+| [`test-data`](skills/test-data/) | Valid values, boundaries, invalid input, and international cases, using reserved and documented test values so no value can belong to a real person. Also reviews existing data sets. |
+| [`bug-report`](skills/bug-report/) | A defect report a developer can act on, from a short interview, from the conversation so far, or by reviewing a draft. Also for non-testers who need to report a problem. |
+| [`test-summary`](skills/test-summary/) | A status or completion report with passed, failed, blocked, and not-run tests shown separately, open defects by severity, what was not tested, and an assessment against exit criteria. Also reviews existing reports for misleading figures. |
+
+Plus one helper: [`team-setup`](skills/team-setup/) writes your team's
+shared conventions file, so every skill uses the same languages, tracker,
+severity scale, and rules. See [Team conventions](#team-conventions).
 
 Use them as a chain or one at a time; each skill works on its own.
 
@@ -91,7 +99,7 @@ drafts before you share them.
 
 ## Tested across models
 
-The skills come with 88 test scenarios: vague and complete input, missing
+The skills were evaluated with 88 test scenarios: vague and complete input, missing
 information, several languages, fictional passwords and personal data in
 logs, team conventions, tool exports, and requests that try to push the
 skill into rounding up a number or guessing a value. Every run starts in a
@@ -106,6 +114,10 @@ from what they write, no actions nobody asked for, and few questions.
 | GPT-5.6-Luna, max | Codex | One full run of all 88 scenarios | 77 pass, 9 partial, 2 fail |
 | Claude Haiku 5.5 | Claude Code | One full run of all 88 scenarios | 80 pass, 5 partial, 3 fail |
 
+The Sol full run passed all 88 scenarios; reporting of that run was
+incomplete. The local evaluation suite and historical results are kept
+outside the distributed plugin packages.
+
 On every model, the safety rules held in every scenario: no sensitive
 value leaked, nothing was posted or filed without approval, and no official
 test value was invented. The misses on the smaller models were about
@@ -118,17 +130,73 @@ something it shouldn't, please [report it](CONTRIBUTING.md).
 
 ## Getting started
 
+### Install the Claude Code plugin
+
+From a local checkout, run:
+
+```bash
+claude plugin marketplace add .
+claude plugin install qa-toolkit@qa-toolkit-marketplace
+```
+
+After this packaging revision is pushed to GitHub, install from a Claude
+Code session with:
+
+```text
+/plugin marketplace add alexpalexpinne/test-skills
+/plugin install qa-toolkit@qa-toolkit-marketplace
+```
+
+Claude Code 2.1.275 or later also supports the one-step install:
+
+```text
+/plugin install qa-toolkit --marketplace alexpalexpinne/test-skills
+```
+
+Plugin skills use the package name as a prefix:
+
+```text
+/qa-toolkit:review-requirements <paste a requirement>
+/qa-toolkit:test-cases <paste a requirement or existing test cases>
+/qa-toolkit:test-data <describe fields or a schema>
+/qa-toolkit:bug-report <describe the problem>
+/qa-toolkit:test-summary <paste results and open defects>
+/qa-toolkit:team-setup
+```
+
+### Install in Codex or ChatGPT desktop
+
+This checkout includes an OpenAI repo marketplace at
+`.agents/plugins/marketplace.json`. In a recent Codex CLI, run:
+
+```bash
+codex plugin marketplace add .
+codex plugin add qa-toolkit@qa-toolkit-marketplace
+```
+
+In the ChatGPT desktop app, open this repository, restart the app, and
+select **QA Toolkit** as a local source in the Plugins Directory. Install
+the plugin and test it in a new chat. Use the plugin or skill picker to
+invoke a workflow; installed names can include the plugin prefix.
+
+Public directory publication is a separate step. This repository includes
+the package files for submission, and makes no claim of an approved public
+listing. See OpenAI's [packaging guide](https://developers.openai.com/plugins/build/plugins)
+and [submission guide](https://developers.openai.com/plugins/deploy/submission).
+
+### Install individual skills
+
 Clone or download this repository and copy the skill folders into your
 assistant's skills folder (macOS, Linux, or a compatible shell):
 
 ```bash
 # Claude Code
 mkdir -p ~/.claude/skills
-cp -r bug-report review-requirements test-cases test-data test-summary ~/.claude/skills/
+cp -r skills/* ~/.claude/skills/
 
 # Codex
 mkdir -p ~/.agents/skills
-cp -r bug-report review-requirements test-cases test-data test-summary ~/.agents/skills/
+cp -r skills/* ~/.agents/skills/
 ```
 
 To install for a single project, copy them into that project's
@@ -138,19 +206,18 @@ back up any `team-conventions.md` you have edited first, since the copy
 replaces it.
 
 Start a new session and call a skill by name, with or without a first
-message. In Claude Code:
+message. The examples and recorded outputs in this repository use these
+standalone skill names. In Claude Code:
 
 ```text
 /review-requirements <paste a story, use case, or requirement, and its parent if you have one>
 /test-cases <paste a requirement or use case, or test cases to review or restructure>
 /test-data <describe fields or a schema, or paste test cases with {{placeholders}}>
 /bug-report <describe the problem, or paste a report to review>
-/bug-report setup
 /test-summary <paste test results and open defects, or a report to review>
+/team-setup
 ```
 
-`/bug-report setup` saves your own defaults, such as report language and
-destination; see [Personal defaults](#personal-defaults-for-bug-report).
 In Codex, use `$` instead of `/`. Write in any language: the skills answer
 in your language. Reports, reviews, and test cases are written in the
 language your team has set, otherwise in the language of your message or
@@ -164,6 +231,9 @@ At the end of a test round, give `test-summary` the results from your test
 tool and the open defects, for example reports written with `bug-report`.
 
 ## Your data
+
+See the [privacy notice](PRIVACY.md) for processing, storage, and support
+disclosures.
 
 The skills send nothing anywhere on their own; they only publish after your
 explicit yes. But everything you paste or attach, such as requirements,
@@ -197,9 +267,26 @@ your statuses mean.
 
 ### Team conventions
 
-Each skill has a `references/team-conventions.md` file for your team's
-shared rules. It ships empty, with an example to copy from. Anything you
-write there takes precedence over the skill's defaults, for example:
+Give the whole team the same rules with one file in your project,
+`.qa-toolkit/conventions.md`. There are three ways to create it:
+
+- **Run `team-setup`** (`/qa-toolkit:team-setup` with the plugin). It asks a
+  few questions at a time, first about languages, tracker, and severity
+  scale, then only about the skills your team uses. It shows the whole file
+  and writes it only after you say yes. Run it again to change something.
+- **Accept the offer while working.** When a skill notices you stating rules
+  a team would decide once, such as the report language or severity scale,
+  it offers once, after its result, to save them for the team.
+- **Write it by hand** from the
+  [template](skills/team-setup/references/conventions-template.md). An
+  empty section means the skill's defaults apply.
+
+The skills never write the file without your approval, and never commit it.
+
+Every skill looks for `.qa-toolkit/conventions.md` in the current folder and
+its parent folders up to the repository root, reads the *General* section
+and its own section, and says which conventions it used. Anything in the
+file takes precedence over the skill's defaults, for example:
 
 - the language reports and reviews are written in
 - your severity scale
@@ -209,44 +296,58 @@ write there takes precedence over the skill's defaults, for example:
   high-level requirements
 - terminology and things to always check
 
-You can also replace `bug-report/references/template.md` with your own
-report format.
+What you say in the conversation still wins for that task, and the core
+rules (no invented facts, protecting sensitive data, confirming before
+publishing) always apply.
 
-### Personal defaults for `bug-report`
+#### Sharing it with the team
 
-`bug-report` can remember your report language, destination (for example
-Jira), and delivery method. After your first report it offers to save the
-choices you used, or you can run `/bug-report setup` (`$bug-report setup`
-in Codex) at any time.
+| Where the team works | How everyone gets the file |
+|----------------------|----------------------------|
+| In a project repository | Commit `.qa-toolkit/conventions.md`. Everyone who pulls has it, and changes go through review like any other change. |
+| Without a code repository | Keep the file in a shared team folder, for example `qa-team/.qa-toolkit/conventions.md`, and start your assistant in that folder or a subfolder. |
+| claude.ai chat or Cowork | Paste the conventions into a shared claude.ai Project's instructions, or attach the file to the conversation. |
+| The whole organization | Fork the plugin, fill in each skill's own `references/team-conventions.md`, and distribute the fork through your organization's marketplace. |
 
-Your choices are saved in `~/.config/bug-report/preferences.md`
-(`%USERPROFILE%\.config\bug-report\preferences.md` on Windows), outside the
-skill folder, so updating the skill keeps them. Team conventions win over
-personal defaults, and anything you say for a single report wins over both
-without changing what is saved.
+**If you maintain your own copy of the skills,** you can instead edit each
+skill's `references/team-conventions.md`, and replace
+`skills/bug-report/references/template.md` with your own report format.
+Don't do this in a plugin installation: plugins are installed into a cache,
+and an update replaces edits made there.
 
-By default, sensitive data is masked (**Redact**). For a destination that
-is allowed to hold it, you can choose:
+### Sensitive data in bug reports
+
+By default, `bug-report` masks sensitive data (**Redact**). For a
+destination that is allowed to hold it, a report can instead use:
 
 - **Preserve:** keeps the personal or customer details needed to reproduce
   a problem, such as an account email or order ID. Credentials stay masked.
 - **Include all:** keeps everything you supply, including credentials such
   as a test account's password, so developers can log in and reproduce.
 
-Choose a mode in setup, or for a single report by saying so. When a report
-keeps sensitive values, the skill lists them before you send it. A team can
-turn either mode off in its conventions file.
+Ask for a mode for a single report by saying so, or set it per destination
+in the team conventions (for example "Preserve in Jira SHOP"). A team can
+also turn either mode off, for example "Always redact"; that rule wins even
+over a request in the conversation. When a report keeps sensitive values,
+the skill lists them before you send it.
+
+There are no personal settings to configure. Rules you want every report to
+follow, such as the report language or tracker, go in the team conventions
+file, which also works for a team of one.
 
 ## Compatibility
 
 | Assistant | Install to | Call a skill | Called only by name? |
 |-----------|-----------|--------------|----------------------|
 | Claude Code | `~/.claude/skills/` or `<project>/.claude/skills/` | `/bug-report` | Yes, via `disable-model-invocation: true` in `SKILL.md` |
+| Claude Code plugin | Install `qa-toolkit` from the repository marketplace | `/qa-toolkit:bug-report` | Yes, via the same skill setting |
 | Codex (CLI, IDE extension) | `~/.agents/skills/` or `<repo>/.agents/skills/` | `$bug-report`, or pick one with `/skills` | Yes, via `agents/openai.yaml` |
+| Codex plugin | Install `qa-toolkit` from the OpenAI repository marketplace | Use the skill picker for the installed name | `allow_implicit_invocation: false` is included |
 | ChatGPT desktop | See OpenAI's [Build skills](https://learn.chatgpt.com/docs/build-skills) | Type `@` and pick the skill | Not verified |
+| ChatGPT plugin | Local desktop marketplace or an approved public listing | Use the plugin or skill picker | Not verified across ChatGPT surfaces |
 | Other Agent Skills hosts | See the host's documentation | See the host's documentation | Not verified; depends on the host |
 
-This table follows each host's documentation as of 2026-10-11
+This table follows each host's documentation as of 2026-10-14
 ([Claude Code skills](https://code.claude.com/docs/en/skills),
 [Agent Skills specification](https://agentskills.io/specification)). It
 does not mean every skill has been tested on every host.
@@ -261,6 +362,36 @@ folder per ZIP where ZIP upload is used). Keep the line for Claude Code.
 into the conversation and attach the files in its `references/` folder as
 needed. The skill then works as a regular prompt, without invocation
 settings.
+
+## Build release packages
+
+From a source checkout, run the packaging helper with Python 3. It uses only
+the standard library:
+
+```bash
+python3 scripts/package_plugins.py
+```
+
+It creates `dist/qa-toolkit-0.2.0-openai.zip`,
+`dist/qa-toolkit-0.2.0-claude.zip`, and `dist/SHA256SUMS`. Each archive
+contains all six self-contained skills, their references and licenses,
+listing assets, documentation, and examples. The helper excludes local
+settings, evaluation files, marketplaces, and repository tooling.
+
+The OpenAI archive uses root `plugin.json` and removes only the
+Claude-specific `disable-model-invocation` frontmatter line from its skill
+copies. Its `agents/openai.yaml` invocation policies remain intact. The
+Claude archive uses `.claude-plugin/plugin.json` and preserves that line.
+The maintained sources under `skills/` are shared by both builds.
+
+Push the packaging revision to GitHub so the listing's documentation,
+support, and privacy links are available. Upload the OpenAI ZIP through the
+[plugin submission portal](https://platform.openai.com/plugins).
+Resolve its metadata and skill scan findings, complete publisher
+verification and review, and publish when approved. Claude publication is
+separate; see [Publish a plugin](https://code.claude.com/docs/en/plugins/publish).
+Public-directory behavior and approval require testing on the target
+platforms.
 
 ## Contributing
 

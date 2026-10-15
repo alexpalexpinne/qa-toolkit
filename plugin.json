@@ -1,0 +1,38 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "qa-toolkit",
+  "version": "0.2.0",
+  "description": "Five software testing workflows: review requirements, design and review test cases, prepare test data, draft bug reports, and summarize results with gaps and unknowns made visible.",
+  "author": {
+    "name": "Alexander Danvall",
+    "url": "https://github.com/alexpalexpinne"
+  },
+  "homepage": "https://github.com/alexpalexpinne/test-skills",
+  "repository": "https://github.com/alexpalexpinne/test-skills",
+  "license": "MIT",
+  "keywords": ["qa", "software-testing", "requirements", "test-cases", "test-data", "bug-reports", "test-summary"],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "QA Toolkit",
+        "shortDescription": "Guided software testing",
+        "longDescription": "Five focused workflows for software testers and people reporting defects. Review requirements for testability, design or improve traceable test cases, prepare test data, draft or review bug reports, and summarize test results with blocked and not-run tests visible. Supply text, attachments, or tool exports. Missing facts become questions or marked gaps. Outputs are drafts for review; you run the tests. Tracker access depends on tools already available in your assistant, and filing requires confirmation.",
+        "developerName": "Alexander Danvall",
+        "category": "Developer Tools",
+        "capabilities": [],
+        "websiteURL": "https://github.com/alexpalexpinne/test-skills",
+        "supportURL": "https://github.com/alexpalexpinne/test-skills/issues",
+        "privacyPolicyURL": "https://github.com/alexpalexpinne/test-skills/blob/main/PRIVACY.md",
+        "defaultPrompt": [
+          "Use review-requirements to find unclear or untestable acceptance criteria in this story.",
+          "Use bug-report to turn my description into an actionable defect report.",
+          "Use test-summary to report these results, including blocked and not-run tests."
+        ],
+        "brandColor": "#157347",
+        "brandColorDark": "#56D986",
+        "composerIcon": "./assets/qa-toolkit-icon.svg",
+        "logo": "./assets/qa-toolkit-icon.svg"
+      }
+    }
+  }
+}

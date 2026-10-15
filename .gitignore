@@ -24,3 +24,10 @@ Thumbs.db
 
 # Original AI-generated images and their prompts (kept locally for re-export)
 /assets/originals/
+
+# Ship only the OpenAI marketplace from the local .agents directory.
+!.agents/
+.agents/*
+!.agents/plugins/
+.agents/plugins/*
+!.agents/plugins/marketplace.json

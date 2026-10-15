@@ -1,0 +1,5 @@
+interface:
+  display_name: "Team Setup"
+  short_description: "Create or update your team's shared QA Toolkit conventions"
+policy:
+  allow_implicit_invocation: false
