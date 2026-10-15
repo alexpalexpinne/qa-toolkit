@@ -283,8 +283,9 @@ Give the whole team the same rules with one file in your project,
 
 The skills never write the file without your approval, and never commit it.
 
-Every skill looks for `.qa-toolkit/conventions.md` in the current folder and
-its parent folders up to the repository root, reads the *General* section
+Every skill opens `.qa-toolkit/conventions.md` in the current folder or, in
+a repository, at the repository root (it does not search other folders),
+reads the *General* section
 and its own section, and says which conventions it used. Anything in the
 file takes precedence over the skill's defaults, for example:
 
@@ -305,7 +306,7 @@ publishing) always apply.
 | Where the team works | How everyone gets the file |
 |----------------------|----------------------------|
 | In a project repository | Commit `.qa-toolkit/conventions.md`. Everyone who pulls has it, and changes go through review like any other change. |
-| Without a code repository | Keep the file in a shared team folder, for example `qa-team/.qa-toolkit/conventions.md`, and start your assistant in that folder or a subfolder. |
+| Without a code repository | Keep the file in a shared team folder, for example `qa-team/.qa-toolkit/conventions.md`, and start your assistant in that folder. |
 | claude.ai chat or Cowork | Paste the conventions into a shared claude.ai Project's instructions, or attach the file to the conversation. |
 | The whole organization | Fork the plugin, fill in each skill's own `references/team-conventions.md`, and distribute the fork through your organization's marketplace. |
 

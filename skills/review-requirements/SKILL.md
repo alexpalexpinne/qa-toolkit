@@ -85,9 +85,10 @@ These apply in every mode and override everything else in this file.
 Team conventions can come from three places. Use the first one that
 exists; do not combine them, and do not search anywhere else:
 
-1. **The project's shared file:** `.qa-toolkit/conventions.md` in the
-   current directory, or in the nearest parent directory that has one, up to
-   the repository root. Read its *General* section and its *review-requirements*
+1. **The project's shared file:** `.qa-toolkit/conventions.md`. Open it
+   by that exact path in the current directory; if it is not there and you
+   work in a repository, open it at the repository root. Do not list
+   folders, search, or walk up parent folders to find it. Read its *General* section and its *review-requirements*
    section; ignore the sections for other skills and its *Example* section.
    Never look in neighboring projects.
 2. **Conventions supplied to you:** team conventions the user pasted or

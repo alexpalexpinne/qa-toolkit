@@ -65,8 +65,8 @@ These apply in every step and override everything else in this file.
    folder is inside a repository, otherwise the current folder. Do not
    search other folders or neighboring projects. Tell the user the full
    path the file will have, and let them change it.
-3. **Is there already a `.qa-toolkit/conventions.md`** in the current folder
-   or a parent folder up to the project root? If so, read it and work in
+3. **Is there already a `.qa-toolkit/conventions.md`** at the project root?
+   Open it by that exact path; do not search for it. If so, read it and work in
    update mode: ask what the user wants to change, change only that, and
    keep everything else exactly as it is.
 
