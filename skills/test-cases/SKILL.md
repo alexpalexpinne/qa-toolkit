@@ -57,13 +57,13 @@ These apply in every mode and override everything else in this file.
    action generally (for example "submit the change") and list the missing
    detail under *Open questions*; do not invent UI elements.
 5. **Use only fake test data.** Never use real personal data, customer data,
-   or credentials in test cases, even if the input contains them. Use
-   clearly fake values (for example `example.com` addresses). Never repeat
-   credentials from the input (passwords, tokens, keys, connection strings)
-   anywhere in your reply, however fake they look. Do not repeat
+   or credentials in test cases, even if the input contains them. Never
+   repeat credentials from the input (passwords, tokens, keys, connection
+   strings) anywhere in your reply, however fake they look. Do not repeat
    real-looking personal or customer data either; refer to it by type only,
    and tell the user that production data should not be used in tests.
-   Clearly fake values, such as `example.com` addresses, may be reused.
+   Clearly fake values, such as `example.com` addresses, may be used and
+   reused.
 6. **Never publish without confirmation.** Adding or changing cases in a
    test management tool or tracker changes shared work. Show exactly what
    will be created or changed and get an explicit "yes" first.
@@ -73,8 +73,9 @@ These apply in every mode and override everything else in this file.
    or system settings, and do not infer their country from those either.
    Write the test cases in the language the user asks for, otherwise the one
    the team conventions set, otherwise the input's language. Dates in test
-   data are `YYYY-MM-DD` too; dates in UI texts, messages, and formats under
-   test stay exactly as they are (rule 8).
+   data use the format the system expects, otherwise `YYYY-MM-DD`; dates in
+   UI texts, messages, and formats under test stay exactly as they are
+   (rule 8).
    For Given/When/Then, follow the team's keyword convention if one is
    visible; otherwise use the output language's keywords (for example
    Swedish *Givet/När/Så*, German *Angenommen/Wenn/Dann*).
@@ -83,12 +84,11 @@ These apply in every mode and override everything else in this file.
    unless the team conventions keep them in English. Write dates in your own
    text as `YYYY-MM-DD`.
 8. **Keep exact text exact, and placeholders apart.** Copy UI texts,
-   messages, and technical identifiers exactly: names of tables, columns,
-   fields, statuses, scripts, jobs, files, paths, queues, APIs, message
-   types, and requirement or defect IDs. Never rewrite, shorten, or "fix"
-   scripts, queries, payloads, or configuration, except to mask sensitive
-   values as required by rule 5. Preserve the remaining text exactly and
-   disclose redactions by type only. If a runnable value was removed, mark
+   messages, and technical identifiers exactly: names of tables, fields,
+   statuses, jobs, files, queues, APIs, and requirement or defect IDs. Never
+   rewrite, shorten, or "fix" scripts, queries, payloads, or configuration,
+   except to mask sensitive values as required by rule 5, and disclose
+   redactions by type only. If a runnable value was removed, mark
    the case *Blocked: pending clarification* until safe test data is
    supplied. Keep three kinds of placeholder apart:
    - `[TO CLARIFY: …]`: unknown; a person must provide it. Use this form
@@ -163,11 +163,10 @@ conversation, to save them for the team. Follow
 If the user provides existing test cases and it is unclear whether they want
 a review or a restructured version, ask.
 
-If the request fits none of the modes (for example running tests, writing
-automated test code, or something unrelated), say briefly what this skill
-does and which mode, if any, comes closest, and ask how the user wants to
-continue. Do not start other work, such as running tests or commands, under
-this skill.
+If the request fits none of the modes (for example running tests or writing
+automated test code), say briefly what this skill does and which mode comes
+closest, and ask how to continue. Do not start other work, such as running
+tests or commands, under this skill.
 
 Accept input in whatever form the user has: pasted text, a file, or a link
 if you have a working integration for that tool. Never fetch from a tool or
@@ -205,17 +204,15 @@ limits.
 
 - **A few gaps:** continue, and use `[TO CLARIFY: …]` markers for the
   unknown expected results.
-- **Many gaps, or the main flow itself is unclear:** say so briefly, and
-  suggest reviewing the requirement first (for example with the
-  `review-requirements` skill, if the user has it). Continue only if the
-  user wants to.
+- **Many gaps, or the main flow itself is unclear:** say so up front
+  and recommend reviewing the requirement first (for example with the
+  `review-requirements` skill, if the user has it). Then draft anyway (core
+  rule 10).
 
 Ask only if it changes the result (core rule 10). For example:
 - Which level are these tests for: manual tests through the user interface,
   API tests, or something else?
 - Which format do you want: step tables or Given/When/Then?
-- Are there areas that are especially risky or that have failed before?
-
 If the user has no preference, use the defaults: manual tests, step-table
 format from `references/test-case-template.md`.
 
@@ -301,8 +298,8 @@ Then add:
 
 Go through the draft and fix anything that fails:
 
-- [ ] Every expected result comes from the requirement, the existing test,
-      the user, or the team conventions. Unknown ones are `[TO CLARIFY: …]`
+- [ ] Every expected result comes from the requirement, supporting
+      material, the existing test, the user, or the team conventions. Unknown ones are `[TO CLARIFY: …]`
       markers listed under *Open questions*, and their cases are marked
       *Blocked: pending clarification*.
 - [ ] Where the source settles part of a result, that part is stated and
@@ -320,8 +317,8 @@ Go through the draft and fix anything that fails:
 - [ ] The limit from Step 4 is respected.
 - [ ] All test data is fake.
 - [ ] Every screen, button, and flow in the steps comes from the
-      requirement, the existing test, or the user; missing details are open
-      questions.
+      requirement, supporting material, the existing test, or the user;
+      missing details are open questions.
 - [ ] UI texts, messages, and technical identifiers are copied exactly, and
       the three kinds of placeholder are not mixed up.
 - [ ] Every heading, table column header, label, and clarification marker
@@ -344,9 +341,12 @@ current environment:
 - **Save as a file** if you can write files.
 - **Copy-paste:** always available.
 
-If the user asks to create or change cases in a tool and there is no
-working integration, say so and give the exact content in your reply, ready
-to copy and paste. Do not guess the tool from an ID.
+If you cannot do what the user asks right now (no working integration, no
+write access, or an unknown target), say so and give the complete result
+again in your reply, ready to copy and paste. Do not point back to an
+earlier message or switch to another destination, such as a file, without
+asking. Never ask for approval for something you cannot do, or claim to
+have done it.
 
 ## Review mode (mode B)
 

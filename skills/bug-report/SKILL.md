@@ -254,9 +254,7 @@ important, ask the user once more before finishing.
 
 Show the finished report to the user. Then offer the destinations available in
 the current environment, starting with the delivery method the user or the
-team conventions named. If a named integration is unavailable, provide
-copy-paste output and explain that limitation; do not claim the report was
-filed.
+team conventions named.
 
 - **Issue tracker** (GitHub, Jira, Azure DevOps, or similar): only if you have
   a working integration or command-line tool for it. Confirm the project or
@@ -266,6 +264,13 @@ filed.
 - **File:** save as a markdown file if you can write files.
 - **Copy-paste:** always available. Output one continuous report, formatted
   as described in Step 4.
+
+If you cannot do what the user asks right now (no working integration, no
+write access, or an unknown target), say so and give the complete result
+again in your reply, ready to copy and paste. Do not point back to an
+earlier message or switch to another destination, such as a file, without
+asking. Never ask for approval for something you cannot do, or claim to
+have done it.
 
 **Attachments:** many integrations and command-line tools cannot upload
 images or files. Refer to attachments by file name in the report. If you

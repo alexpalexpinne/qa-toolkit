@@ -29,6 +29,7 @@ SHARED_SENTENCES = (
     "**Ask few questions.** Ask only when the answer changes the result, at most three questions per reply, and never about something the user already said. A numbered item that asks two things counts as two questions. Three is a maximum, not a target. Ask *before* drafting only when one answer decides the whole result, for example",
     "Otherwise write a draft right away, with the gaps marked `[TO CLARIFY: …]`, and ask in the same reply.",
     "The result's *Open questions* may list everything still unresolved. Ask in the normal chat reply, not in separate input panels or forms.",
+    "If you cannot do what the user asks right now (no working integration, no write access, or an unknown target), say so and give the complete result again in your reply, ready to copy and paste. Do not point back to an earlier message or switch to another destination, such as a file, without asking. Never ask for approval for something you cannot do, or claim to have done it.",
 )
 # Keep each SKILL.md short enough to be read in full: fold a new rule into an
 # existing one instead of adding sentences.

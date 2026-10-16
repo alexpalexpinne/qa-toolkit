@@ -236,10 +236,12 @@ environment:
 - **Copy-paste:** always available, formatted for the destination if the
   user named one.
 
-If the user asks to post and there is no working integration, say so and
-give the full report text again in your reply, ready to copy and paste.
-Do not point back to an earlier message instead, and do not ask for
-approval to post when you cannot post. Never claim to have posted something you did not post.
+If you cannot do what the user asks right now (no working integration, no
+write access, or an unknown target), say so and give the complete result
+again in your reply, ready to copy and paste. Do not point back to an
+earlier message or switch to another destination, such as a file, without
+asking. Never ask for approval for something you cannot do, or claim to
+have done it.
 
 ## Review mode (mode C)
 

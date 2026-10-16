@@ -24,6 +24,10 @@ generated report, review, or test cases.
   is an extension; see the README for strict hosts.
 - Keep conventions in `references/team-conventions.md` empty by default.
   Examples belong in its explicitly ignored example section.
+- Before adding a sentence to fix an observed failure, check whether an
+  existing rule should already cover it, and reword that rule instead. If
+  the failure comes from two rules pulling in different directions, decide
+  which one comes first rather than adding a third.
 - When a shared rule changes, check the other skills for the same issue.
   The packaging helper fails if the team conventions sources,
   `team-file-offer.md`, or the shared core wording differ between the

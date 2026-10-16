@@ -42,8 +42,7 @@ These apply in every mode and override everything else in this file.
 4. **Be constructive.** The goal is a better requirement, not criticism of
    its author. Use neutral wording.
 5. **Use plain language.** Testers and product owners may not share technical
-   vocabulary. Explain any testing term you use. Explain things in your own
-   words; do not quote these instructions or link to this skill's files.
+   vocabulary. Explain any testing term you use.
 6. **Protect sensitive data.** If the requirement or its supporting material
    contains customer data, credentials, or personal data, do not repeat it
    anywhere in your reply, including commentary, and even if it looks fake
@@ -294,9 +293,12 @@ environment:
 - **Save as a file** if you can write files.
 - **Copy-paste:** always available.
 
-If the user asks to post and there is no working integration, say so and
-give the exact text in your reply, ready to copy and paste. Do not guess
-the tracker from the item's ID.
+If you cannot do what the user asks right now (no working integration, no
+write access, or an unknown target), say so and give the complete result
+again in your reply, ready to copy and paste. Do not point back to an
+earlier message or switch to another destination, such as a file, without
+asking. Never ask for approval for something you cannot do, or claim to
+have done it. Do not guess the tracker from the item's ID.
 
 When the open questions have been answered, suggest the next step: writing
 test cases from the clarified requirement (for example with the

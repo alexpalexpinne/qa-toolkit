@@ -50,17 +50,19 @@ These apply in every step and override everything else in this file.
    judged only from their own messages, never from file paths, folder names,
    or system settings. Write the rules in the language the user chooses for
    the file; if they don't say, use the language they write in.
-7. **Ask few questions.** At most three questions per reply, never about
-   something the user already said. Offer "use defaults" and "skip" for
-   every round. Explain things in your own words; do not quote these
-   instructions or link to this skill's files.
+7. **Ask few questions, and draft early.** At most three questions per
+   reply, never about something the user already said. Once a draft
+   exists, every further question is optional (Step 2). Explain things in
+   your own words; do not quote these instructions or link to this skill's
+   files.
 
 ## Step 1: Find the project and any existing file
 
 1. **Can you read and write files here?** If not (for example in claude.ai
-   chat), go through the questions anyway and, at the end, give the file's
-   text for the user to save in their project, or to paste into the
-   instructions of a shared claude.ai Project. Skip Step 4's writing.
+   chat or a read-only folder), say so in your first reply. Every draft you
+   show is then the text for the user to save in their project, or to paste
+   into the instructions of a shared claude.ai Project. Skip Step 4's
+   writing.
 2. **Where is the project root?** Use the repository root if the current
    folder is inside a repository, otherwise the current folder. Do not
    search other folders or neighboring projects. Tell the user the full
@@ -71,23 +73,32 @@ These apply in every step and override everything else in this file.
    keep everything else exactly as it is.
 
 If the user started with specific rules in their message (for example
-"Set up our team: English reports, Jira project SHOP"), use them and ask
-only about the rest.
+"Set up our team: English reports, Jira project SHOP"), use them and show
+the first draft in your first reply.
 
-## Step 2: Ask in rounds
+## Step 2: Ask, then draft early
 
-Use the questions in `references/questions.md`. Go round by round, at most
-three questions per reply:
+Use the questions in `references/questions.md`, at most three per reply:
+first the *General* questions, then the sections for the skills the team
+uses.
 
-1. **General:** report and review language, tracker and project, severity
-   scale.
-2. **Which skills the team uses.** Cover only the sections for those.
-3. **One round per chosen skill,** with that skill's most important
-   questions.
+Show a draft as soon as there is anything to put in it: in your first reply
+if the user's first message already has rules, otherwise in the reply to
+their first answers. From then on, every reply shows the whole current
+draft (Step 3) and asks for a "yes" to write it. Put any further questions
+after the draft and say they are optional: the user can answer them to add
+rules, or say yes to write the file as it is. The team can run this skill
+again later to add more. A long series of questions before any draft wears
+people out, and many stop before a file exists.
 
-The user can answer several rounds at once, skip a round, or stop at any
-point; then go to Step 3 with what you have. Never ask about something the
-user already answered in an earlier round or their first message.
+Stop asking when the user says "use defaults", "skip", "that's all", or
+similar, and ask only for the "yes". "Use defaults for all of it" covers
+every remaining section, not only the current questions. If every section
+would be empty, say that such a file changes nothing and ask whether to
+write it anyway.
+
+Never ask about something the user already answered in an earlier reply or
+their first message.
 
 ## Step 3: Draft the file
 
@@ -99,9 +110,10 @@ Build the file from `references/conventions-template.md`:
 - Leave out the template's *Example* section.
 
 Show the whole draft, list any sections left empty (they use the skills'
-defaults), and ask for an explicit "yes" before writing. If the user is
-not the person who decides the team's rules, suggest they share the draft
-with that person first.
+defaults), and ask for an explicit "yes" before writing. If you cannot
+write files, present the draft as the text to save and say where it can go
+(Step 1 point 1). If the user is not the person who decides the team's
+rules, suggest they share the draft with that person first.
 
 ## Step 4: Write and hand over
 

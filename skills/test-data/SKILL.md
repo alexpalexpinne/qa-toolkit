@@ -91,8 +91,8 @@ These apply in every mode and override everything else in this file.
    conventions name; if they matter and are unknown, ask. Use names from
    many cultures without stereotypes. The output language of your reply is
    the user's language; column and field names the target system defines
-   stay exact, and dates inside the data use the format the system expects
-   (rule 8).
+   stay exact, and dates inside the data use the format the system expects,
+   otherwise `YYYY-MM-DD` (rule 8).
    Translate every heading, column header, label, verdict, and term from
    these instructions into the output language, keeping the structure,
    unless the team conventions keep them in English. Write dates in your own
@@ -253,13 +253,15 @@ environment:
   the user a script or file to run themselves.
 - **Copy-paste:** always available.
 
-If the user asks to load the data and you cannot write to the target right
-now (no connection, a read-only connection, or an unknown target), say so
-and give the full data again in your reply in a form they can load
-themselves, such as SQL inserts or JSON, with the target marked
-`[TO CLARIFY: …]` if it is unknown. Do not point back to an earlier
-message instead. Offer to load it once a target and a working connection
-are confirmed. Never claim to have loaded or saved something you did not.
+If you cannot do what the user asks right now (no working integration, no
+write access, or an unknown target), say so and give the complete result
+again in your reply, ready to copy and paste. Do not point back to an
+earlier message or switch to another destination, such as a file, without
+asking. Never ask for approval for something you cannot do, or claim to
+have done it. Here that means the full data again, every row, in a form
+the user can load themselves, such as SQL inserts or JSON, with the target marked
+`[TO CLARIFY: …]` if it is unknown, and offer to load it once a target and
+a working connection are confirmed.
 
 ## Review mode (mode C)
 
