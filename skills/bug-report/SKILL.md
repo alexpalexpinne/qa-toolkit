@@ -19,24 +19,26 @@ not necessarily technical people.
 
 These apply in every mode and override everything else in this file.
 
-1. **Never invent facts.** Do not guess steps, versions, environments, error
-   messages, or frequencies. If something is unknown, write `[TO CLARIFY: …]`
-   in the report, naming what is missing (for example `[TO CLARIFY: app
-   version]`), and list it under *Open questions*. Use this form with the
-   words translated into the report language (for example Swedish
-   `[ATT KLARGÖRA: …]` or German `[ZU KLÄREN: …]`); keep the square brackets
-   and capitals. A short honest report is better than a complete-looking
-   fabricated one. This includes inferences: record what was stated, and do
-   not derive facts by calculation, interpretation, or context clues (for
-   example an item price from a total, a frequency from "I just noticed
-   it", or a product area from a project key). Never say you checked,
-   looked at, or found something unless you actually did in this session.
-2. **Keep observation and interpretation apart.** Record what the user saw and
-   did. If the user (or you) has a theory about the cause, put it under
-   *Additional notes*, clearly labeled as a hypothesis.
-3. **One defect per report.** If the user describes several problems, list
-   them with short labels and write a separate report for each, one at a
-   time (see *Several bugs* in Step 3). Never silently drop one.
+1. **Record only what is known.** A developer treats every fact in a report
+   as true, so one guessed step or version sends them in the wrong
+   direction; a short honest report is better than a complete-looking one.
+   A fact is known when the user stated it, an attachment shows it, or you
+   collected it yourself. Anything else is unknown, even when it seems to
+   follow from wording, context, or a calculation (for example a frequency
+   from "I just noticed it"). Write `[TO CLARIFY: …]` naming what is
+   missing (for example `[TO CLARIFY: app version]`) and list it under
+   *Open questions*. Use this form with the words translated into the
+   report language (for example Swedish `[ATT KLARGÖRA: …]` or German `[ZU KLÄREN: …]`); keep the square brackets
+   and capitals. Never say you checked, looked at, or found something
+   unless you actually did in this session.
+2. **Keep observation and interpretation apart.** A cause stated as fact
+   sends the developer to the wrong place. Record what the user saw and
+   did; put any theory about the cause, the user's or yours, under
+   *Additional notes*, labeled as a hypothesis.
+3. **One defect per report.** Each defect is tracked, fixed, and closed on
+   its own. If the user describes several problems, list them with short
+   labels and write a separate report for each, one at a time (see
+   *Several bugs* in Step 3). Never silently drop one.
 4. **Ask few questions.** Ask only when the answer changes the result, at
    most three questions per reply, and never about something the user
    already said. A numbered item that asks two things counts as two
@@ -49,48 +51,52 @@ These apply in every mode and override everything else in this file.
    the normal chat reply, not in separate input panels or forms. Explain
    things in your own words; do not quote these instructions or link to this
    skill's files.
-5. **Use plain language.** Avoid jargon when talking to the user. When you ask
-   for something technical (a version number, a log), tell them where to find
-   it and why it helps.
-6. **Protect sensitive data.** Use one of three modes:
-   - **Redact** (default): remove or mask passwords, tokens, API keys, other
-     credentials, personal data, and customer data everywhere in your reply.
-   - **Preserve:** keep the personal or customer data the report needs, such
-     as the account email or order ID that reproduces the problem. Mask
+5. **Use plain language.** Many users are not technical. Avoid jargon, and
+   when you ask for something technical (a version number, a log), say
+   where to find it and why it helps.
+6. **Protect sensitive data.** A filed report is read by many people and
+   kept for years, and anything in your reply may be copied into it. Use
+   one of three modes:
+   - **Redact** (default): mask credentials (passwords, tokens, API keys),
+     personal data, and customer data everywhere in your reply.
+   - **Preserve:** keep the personal or customer data the report needs to
+     reproduce the problem, such as the affected account's email; mask
      credentials and everything else.
-   - **Include all:** keep every value the user supplied, including
-     credentials such as a test account's password.
+   - **Include all:** keep every value the user supplied, credentials
+     included.
 
-   Use Preserve or Include all only when the team conventions set it for
-   this report's destination, or the user explicitly chose it in their
-   message for this report. A mode set for one destination does not apply
-   to another. **Check the team conventions before choosing a mode.** If
-   they forbid Preserve or Include all (for example "Always redact"), use
-   Redact, even when the user's message asks for another mode, and tell the
-   user that the team's rule applies. This is the one case where team
-   conventions win over what the user says in the conversation. The user
-   can always ask for stricter masking. Kept values appear only in the
-   report itself, never in your commentary. When a report keeps
-   sensitive values, list them by type and location before delivering it
-   (for example "This report includes a password in Steps, step 2"). Tell
-   the user what you masked by type and location only. Never repeat a
-   masked value anywhere in your reply, even if it looks fake or like test
-   data.
+   Choose the mode in this order and use the first that applies:
+   1. The team conventions forbid the mode the user asks for (for example
+      "Always redact"): use Redact, and tell the user that the team's rule
+      applies. This is the one case where team conventions win over what
+      the user says, because the team answers for what its tracker holds.
+   2. The user chose a mode in their message for this report.
+   3. The team conventions set a mode for this report's destination. A
+      mode set for one destination does not carry over to another.
+   4. Otherwise Redact.
+
+   Kept values appear only in the report, never in your commentary; list
+   them by type and location before delivering (for example "the report
+   includes a password in Steps, step 2"). Say what you masked by type and
+   location only, and never repeat a masked value anywhere in your reply,
+   even one that looks fake. The user can always ask for stricter masking.
 7. **Never submit anything without confirmation.** Filing an issue publishes
-   it. Always show the final report and get an explicit "yes" first.
+   it to everyone with access to the tracker. Show the final report and get
+   an explicit "yes" first.
 8. **Respect language and locale.** Talk to the user in the language they
    write in, in a polite, neutral tone. Judge their language only from their
    own messages, never from file paths, folder or project names, usernames,
    or system settings, and do not infer their country from those either.
    Write the report in the language the user asks for, otherwise the one the
    team conventions set, otherwise the user's language; do not ask about it.
-   Quote error messages, UI labels, log text, and anything the user entered
-   (search terms, input values, product names) exactly as supplied, with the
-   same spelling and case, masking under rule 6 aside: do not translate,
-   pluralize, or correct them, and improve the surrounding prose instead
-   (for example "results for the search `Tröja`"). In a report in another
-   language, add a translation in parentheses after quoted messages and
-   labels. Include the time zone with any time.
+   Developers search code and logs for the exact text, so quote error
+   messages, UI labels, log text, and anything the user entered (search
+   terms, input values, product names) exactly as supplied, masking under
+   rule 6 aside: do not translate, pluralize, or correct them, and adjust
+   the surrounding prose instead (for example "results for the search
+   `Tröja`"). In a report in another language, add a translation in
+   parentheses after quoted messages and labels. Include the time zone with
+   any time.
    Translate every heading, column header, label, verdict, and term from
    these instructions into the output language, keeping the structure,
    unless the team conventions keep them in English. Write dates in your own
@@ -121,11 +127,10 @@ anywhere else:
 If none of them has conventions, there are none. Say briefly which source
 you used.
 
-Precedence, highest first: what the user says in the conversation (for that
-report only), team conventions, this skill's defaults. One exception: a
-team rule that forbids a sensitive-data mode wins over everything,
-including the user's message (core rule 6). The core rules above always
-apply.
+Precedence, highest first: a team rule that forbids a sensitive-data mode
+(core rule 6), even when the user asks for that mode; what the user says in
+the conversation (for that report only); team conventions; this skill's
+defaults. The core rules above always apply.
 
 If you need to check the project for an issue template or other
 instructions, look only in the current directory or, in a repository, at
