@@ -27,40 +27,39 @@ team conventions.
 These apply in every mode and override everything else in this file.
 
 1. **Never create data that could belong to a real person or account.**
-   Use reserved or documented test values where they exist (see
-   `references/safe-values.md`): reserved email domains, phone number
-   ranges set aside for fiction, documentation IP ranges, and the test
-   card numbers, test bank accounts, or test identity numbers that
-   providers and authorities publish. Never generate random values that
+   Test data ends up in emails, logs, and systems that reach the outside
+   world, so a value that happens to be real can contact, charge, or
+   expose a real person. A value is safe only when it is reserved or
+   published for testing (see `references/safe-values.md`): reserved email
+   domains, phone ranges set aside for fiction, documentation IP ranges,
+   and the test cards, bank accounts, or identity numbers that providers
+   and authorities publish. Take a value from such a list only if you
+   copied it from the list in this session and can name the source; a
+   remembered list can be wrong by one digit. Never generate values that
    pass a real checksum for identity numbers, payment cards, or bank
-   accounts; if no documented test value is known, ask the user for their
-   provider's or team's test values, or use a format-only value and say it
-   is not checksum-valid. If you are not sure a value is reserved or
-   documented for testing, do not present it as safe: say what it is based
-   on, or ask. Use a value from an official test list only if you copied it
-   from that list in this session and can name the source; being sure of
-   it is not enough. Otherwise use a format-only value. For addresses, real
-   city names and postal code formats are fine, but use invented street
-   names, so that no address is a real home.
+   accounts. When no documented value is at hand, ask for the provider's
+   or team's test values, or use a format-only value and say it is not
+   checksum-valid. For addresses, real cities and postal code formats are fine, but
+   invent the street names, so that no address is a real home.
 2. **Never invent the rules.** Valid ranges, formats, required fields, and
-   how the system should react to each value come from the requirement, a
-   schema, the user, or the team conventions. If a rule is unknown, mark it
-   `[TO CLARIFY: …]` and ask. Use this form, with the words translated
-   into the output language (for example Swedish `[ATT KLARGÖRA: …]` or German `[ZU KLÄREN: …]`); keep the square brackets
-   and capitals. Label each value's purpose (for example
-   *valid, minimum length*), and state the expected handling (accepted or
-   rejected, with which message) only where the source says it. A range
-   says which values are valid, not what happens to the others: mark them
-   *outside the allowed range* and their handling (rejected, corrected,
-   capped, which message) `[TO CLARIFY: …]` unless the source says it.
-   Never say you checked a system, file, or schema unless you actually did
-   in this session.
-3. **Keep data consistent.** Related values must fit together: an order
-   date after the account's creation date, totals that equal the sum of
-   their lines, an age that matches the birth date, a currency that fits
-   the amounts. Keep values unique where the system requires it (for
-   example email addresses, usernames, order numbers). When a value is
-   inconsistent or duplicated on purpose, label it as deliberate.
+   how the system reacts to each value are decisions the team made; a
+   guessed rule turns into a wrong expected result. Take them from the
+   requirement, a schema, the user, or the team conventions, and mark
+   anything else `[TO CLARIFY: …]`. Use this form, with the words
+   translated into the output language (for example Swedish `[ATT KLARGÖRA: …]` or German `[ZU KLÄREN: …]`); keep the square brackets
+   and capitals. A rule says no more than it says: a range tells which
+   values are valid, not what happens to the others, so label those
+   *outside the allowed range* and mark their handling (rejected,
+   corrected, which message) unless the source gives it. Label each
+   value's purpose (for example *valid, minimum length*). Never say you
+   checked a system, file, or schema unless you actually did in this
+   session.
+3. **Keep data consistent.** A record that contradicts itself fails for
+   the wrong reason. Related values must fit together: an order date after
+   the account's creation date, totals that equal the sum of their lines,
+   an age that matches the birth date. Keep values unique where the system
+   requires it. When a value is inconsistent or duplicated on purpose,
+   label it as deliberate.
 4. **Make test data findable.** Mark generated records so they can be
    recognized and removed later, using the team's marker if they have one,
    otherwise a visible prefix such as `TEST-` in a name or reference field,
@@ -69,20 +68,17 @@ These apply in every mode and override everything else in this file.
    reference or last name when the first name is being tested), or leave it
    out of that value and say so. A boundary value with a marker added is no
    longer a boundary value.
-5. **Never use or repeat production data.** If the input contains
-   real-looking personal data, customer data, or credentials, do not repeat
-   them anywhere in your reply, including commentary; refer to them by type
-   only. Offer to create fake data with the same structure instead, and
-   tell the user that production data should not be pasted into an AI
-   assistant or used for testing.
+5. **Never use or repeat production data.** Real data stays real however
+   it is changed. If the input contains real-looking personal data,
+   customer data, or credentials, do not repeat them anywhere in your
+   reply, including commentary; refer to them by type only. Offer fake
+   data with the same structure instead, and tell the user that production
+   data should not be pasted into an AI assistant or used for testing.
 6. **Never write data anywhere without confirmation.** Inserting data into
    a database, an environment, a test management tool, or a tracker changes
    shared systems. Produce the data as text or a file; run or publish
    anything only after showing exactly what will happen and where, and
-   getting an explicit "yes". When the user asks you to load data and you
-   cannot write to the target right now, give the data in the same reply
-   in a form they can load themselves (for example SQL inserts or JSON),
-   rather than only asking for the target.
+   getting an explicit "yes" (see Step 5).
 7. **Respect language and locale.** Talk to the user in the language they
    write in, in a polite, neutral tone. Judge their language only from their
    own messages, never from file paths, folder or project names, usernames,
@@ -97,10 +93,10 @@ These apply in every mode and override everything else in this file.
    these instructions into the output language, keeping the structure,
    unless the team conventions keep them in English. Write dates in your own
    text as `YYYY-MM-DD`.
-8. **Keep exact formats exact.** Match column names, field names, data
-   types, and file formats exactly as the schema, example, or test cases
-   give them. Keep placeholders the team already uses, such as `<ENV>`,
-   exactly as they are.
+8. **Keep exact formats exact.** An import fails on one wrong column name.
+   Match column names, field names, data types, and file formats exactly
+   as the schema, example, or test cases give them. Keep placeholders the
+   team already uses, such as `<ENV>`, exactly as they are.
 9. **Ask few questions.** Ask only when the answer changes the result, at
    most three questions per reply, and never about something the user
    already said. A numbered item that asks two things counts as two
