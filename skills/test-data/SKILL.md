@@ -37,10 +37,20 @@ These apply in every mode and override everything else in this file.
    copied it from the list in this session and can name the source; a
    remembered list can be wrong by one digit. Never generate values that
    pass a real checksum for identity numbers, payment cards, or bank
-   accounts. When no documented value is at hand, ask for the provider's
-   or team's test values, or use a format-only value and say it is not
-   checksum-valid. For addresses, real cities and postal code formats are fine, but
-   invent the street names, so that no address is a real home.
+   accounts. Choose the source by what the value is for:
+   - **To be accepted** by a system that validates it: a documented value,
+     or one the provider or team supplies. If none is at hand, ask.
+   - **To be rejected for its format,** or where nothing is validated: a
+     value whose structure cannot be real (for example month 13 in an
+     identity number's date part), labeled as format-only.
+   - **To be rejected for its check digit:** a documented or supplied
+     value with only the check digit changed. Exactly one check digit is
+     valid, so any other one makes the value invalid; never guess which
+     digit is wrong. Without such a value, ask.
+
+   If the purpose is unclear, say which kind each value is. For addresses,
+   real cities and postal code formats are fine, but invent the street
+   names, so that no address is a real home.
 2. **Never invent the rules.** Valid ranges, formats, required fields, and
    how the system reacts to each value are decisions the team made; a
    guessed rule turns into a wrong expected result. Take them from the

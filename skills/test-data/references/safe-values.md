@@ -65,9 +65,11 @@ identity numbers) can belong to real people.
   authorities publish such lists. Use a published number only if you
   copied it from the list in this session; a remembered number may be
   wrong and could belong to a real person.
-- If none is known, ask the user. Otherwise use a value with the right
-  format that deliberately fails the checksum, and label it as format-only
-  and not checksum-valid.
+- If none is known, ask the user. For a format test, use a value whose
+  structure cannot be real (for example an impossible date part), labeled
+  as format-only. For a check-digit test, change only the check digit of a
+  documented or supplied test number; do not guess a wrong check digit on
+  an invented number.
 - Never generate checksum-valid identity numbers.
 
 ## Names and addresses

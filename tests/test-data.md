@@ -598,3 +598,21 @@ without making sure. TD-09, HO-09, and HO-60 (data given again when the
 target cannot be written) pass on both versions, so removing the sentence
 from rule 6 cost nothing. Same on both versions: HO-51 quotes and links
 SKILL.md when it asks for the bank's test IBANs.
+
+## Values chosen by purpose, recorded 2026-10-16
+
+Rule 1 and `safe-values.md` now choose the source of an identity, card,
+or account value by what it is for: accepted by a validating system
+(documented or supplied value, otherwise ask), rejected for format (a
+structure that cannot be real, such as month 13), or rejected for the
+check digit (a documented or supplied value with only the check digit
+changed, never a guessed wrong digit). Before, a format-only value was
+to "deliberately fail the checksum", which made the model guess a wrong
+check letter (HO-62 draft 1). GPT-6.1-Sol, medium, 2 runs each of TD-01,
+TD-02, TD-03, HO-08, HO-50, HO-51, HO-62
+(`observations/codex-sol61-medium-td-purpose-2026-10-16`).
+
+All pass. HO-50 and HO-08 now ask for approved test numbers when the data
+is for a sign-up that must succeed, instead of giving format-only values
+(the checker flagged that only because it looked for a format-only
+label). HO-62 2 of 2.
