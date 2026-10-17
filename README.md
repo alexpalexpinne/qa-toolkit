@@ -378,8 +378,8 @@ the standard library:
 python3 scripts/package_plugins.py
 ```
 
-It creates `dist/qa-toolkit-0.2.0-openai.zip`,
-`dist/qa-toolkit-0.2.0-claude.zip`, and `dist/SHA256SUMS`. Each archive
+It creates `dist/qa-toolkit-0.3.0-openai.zip`,
+`dist/qa-toolkit-0.3.0-claude.zip`, and `dist/SHA256SUMS`. Each archive
 contains all six self-contained skills, their references and licenses,
 listing assets, documentation, and examples. The helper excludes local
 settings, evaluation files, marketplaces, and repository tooling.
