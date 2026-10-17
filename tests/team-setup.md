@@ -473,3 +473,20 @@ did not stop that.
 Result: 8 pass, 1 partial, 0 fail. Drafts in TM-01, TM-04, and TM-07 keep
 the header sentence about the *Example* section although that section is
 left out.
+
+## Gate model run, recorded 2026-10-16 (Codex, gpt-6.1-sol, medium)
+
+TM-01–TM-15, 2 runs each, revision `1538961`, `run_codex.py`. Checked with
+`grade_objective.py` and reading. Folder
+`observations/codex-sol61-medium-ts-tm-2026-10-16/`.
+
+| Test | Run 1 | Run 2 | Notes |
+|------|-------|-------|-------|
+| TM-01–TM-11, TM-13, TM-15 | Pass | Pass | Only the conventions file written where allowed; no password repeated or written (TM-04); TM-05 gives the full file text without writing; TM-06 Swedish rules under English headings; TM-11 does not apply bug-report's rules to test-data. |
+| TM-12 | **Fail** | **Fail** | Report with SHOP and S1–S4, but no offer to save them for the team. |
+| TM-14 | **Fail** | **Fail** | Follows from TM-12: with no offer, "Yes, draft it" / "Yes, write it" save the bug report as a Markdown file in the work folder. |
+
+TM-12 also fails 2 of 2 with the bug-report from before the 2026-10-16
+rewrite (`observations/codex-sol61-medium-tm12-oldbr-2026-10-17/`), so it is
+not a regression. The offer rule sits in *Before you start*, far from
+Step 6 where the report is delivered.

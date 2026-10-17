@@ -650,3 +650,15 @@ The conventions lookup now opens the file by its exact path (`cat` or
 | TS-16 | Pass | Skill not loaded; log summarized. |
 
 Result: 15 pass, 1 partial, 0 fail.
+
+## Gate model run, recorded 2026-10-16 (Codex, gpt-6.1-sol, medium)
+
+TS-01–TS-16 and held-out HO-10–HO-12, 2 runs each, revision `1538961`,
+`run_codex.py`. Checked with the new `check_test_summary.py`,
+`grade_objective.py`, and reading. Folder
+`observations/codex-sol61-medium-ts-tm-2026-10-16/`.
+
+All 19 scenarios pass in both runs. TS-06 keeps 43 of 48 as 89.58 % and
+reports the 95 % criterion as not met; TS-04 keeps the user's "go",
+labeled as theirs, with PAY-88 Critical and Open and no exit criteria
+noted; HO-10 reports 80 % against the 95 % criterion as not met.
