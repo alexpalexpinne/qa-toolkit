@@ -117,7 +117,7 @@ scenario:
 | `test-data` | 14 + 17 | All pass; HO-54 sometimes asks before giving a draft |
 | `bug-report` | 19 + 19 | All pass; BR-08 searches the current folder as if it were the reported app |
 | `test-summary` | 16 + 3 | All pass |
-| `team-setup` | 15 | 13 pass; TM-12 and TM-14 fail: `bug-report` does not offer to save the team's rules after the report |
+| `team-setup` | 15 | 14 pass; TM-12 fails: `bug-report` does not offer to save the team's rules after the report |
 
 Testing found two safety problems, both fixed and rerun: `bug-report` kept
 an email address that a team rule forbids when the user asked for it, and
