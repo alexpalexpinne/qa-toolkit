@@ -1,0 +1,15 @@
+{
+  "name": "qa-toolkit-marketplace",
+  "description": "QA Toolkit software testing skills by Alexander Danvall.",
+  "owner": {
+    "name": "Alexander Danvall"
+  },
+  "plugins": [
+    {
+      "name": "qa-toolkit",
+      "source": "./",
+      "description": "Five software testing workflows with gaps and unknowns made visible.",
+      "category": "development"
+    }
+  ]
+}

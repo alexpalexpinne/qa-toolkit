@@ -1,0 +1,5 @@
+Issue key,Summary,Issue Type,Status,Priority
+SHOP-901,Locked account can still log in after password reset,Bug,Open,High
+SHOP-905,Voucher discount applied twice,Bug,In Progress,Highest
+SHOP-907,Saved card payment times out,Bug,Open,Medium
+SHOP-912,Typo in footer,Bug,Open,Low

@@ -1,0 +1,6 @@
+Issue Key,Summary,Step,Action,Data,Expected Result
+SHOP-T204,Voucher at checkout,1,Log in and add SKU-1001 to the cart,,
+SHOP-T204,Voucher at checkout,2,Go to checkout and enter the voucher,WINTER25,Discount line shown
+SHOP-T204,Voucher at checkout,3,,,Total reduced by 25%
+SHOP-T205,Remove voucher,1,"With a voucher applied, select 'Remove'",,Voucher line removed; total restored
+SHOP-T205,Remove voucher,2,Place the order,,

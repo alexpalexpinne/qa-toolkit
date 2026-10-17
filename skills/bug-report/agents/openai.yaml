@@ -1,0 +1,5 @@
+interface:
+  display_name: "Bug Report"
+  short_description: "Draft or review defect reports"
+policy:
+  allow_implicit_invocation: false

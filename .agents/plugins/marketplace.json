@@ -1,0 +1,20 @@
+{
+  "name": "qa-toolkit-marketplace",
+  "interface": {
+    "displayName": "QA Toolkit"
+  },
+  "plugins": [
+    {
+      "name": "qa-toolkit",
+      "source": {
+        "source": "local",
+        "path": "./"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    }
+  ]
+}
