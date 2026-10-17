@@ -55,7 +55,8 @@ A report missing any of these is not ready to submit.
       Search terms, entered values, and product names keep their supplied
       spelling and case, untranslated and unpluralized. Any translation is
       separate from the original quote.
-- [ ] **Unambiguous dates and times.** `YYYY-MM-DD`, with time zone for times.
+- [ ] **Unambiguous dates and times.** `YYYY-MM-DD`; times with their time zone,
+      or the time zone marked unknown if the user did not give it.
 
 ## Nice to have
 

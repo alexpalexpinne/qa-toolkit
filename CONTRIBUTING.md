@@ -28,6 +28,12 @@ generated report, review, or test cases.
   existing rule should already cover it, and reword that rule instead. If
   the failure comes from two rules pulling in different directions, decide
   which one comes first rather than adding a third.
+- Keep a rule that must trigger behavior in `SKILL.md`. A model opens a
+  reference file only once it has decided it needs it, so a rule moved
+  into one is easily skipped: it happened with the slimmed test-cases
+  draft (`tests/test-cases.md`) and with the team-file offer
+  (`tests/team-setup.md`). References suit detail used after that
+  decision, such as templates, value lists, and checklists.
 - When a shared rule changes, check the other skills for the same issue.
   The packaging helper fails if the team conventions sources,
   `team-file-offer.md`, or the shared core wording differ between the

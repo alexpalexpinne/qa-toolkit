@@ -1073,3 +1073,32 @@ missing execution detail, and coverage counts *Ready* cases.
 TC-07, TC-11, TC-14, TC-16, and HO-07 pass 2 of 2; TC-14 still blocks
 the case whose expected result ("verify count") is unknown. Folder
 `observations/codex-sol61-medium-review-fixes-2026-10-17/`.
+
+## Conflict audit, recorded 2026-10-17 (Codex, gpt-6.1-sol, medium)
+
+A read of all five skills for rules that pull in different directions.
+Fixed by rewording:
+
+- test-cases rule 1 did not say whether a partly unknown expected result
+  blocks the case, and the checklist implied it did not. Now: unknown
+  wholly or in part means *Blocked*, because such a case can show a
+  failure but not a pass; the known part is still stated.
+- The test-cases checklist gave "a time zone" as an example of an
+  assumption, while rule 1 now treats how a time limit is measured as an
+  unknown decision. The example is gone.
+- bug-report rule 8 said "include the time zone with any time", which
+  pushed toward adding one the user never gave (rule 1). Now: give it, or
+  mark it unknown. Same in the quality checklist.
+- bug-report Step 5 said "ask the user once more before finishing", next
+  to "do not push more than once" in Step 3 and the three-question limit.
+  Now: ask only if not asked yet, within the limit.
+
+TC-03, TC-12, TC-13, TC-16, BR-06, BR-12, HO-42 pass 2 of 2; TC-12 and
+TC-13 stay *Ready*. TC-05 raises the time question in both runs, but run
+1 asks only which moment counts, not the time zone. Folder
+`observations/codex-sol61-medium-conflicts-2026-10-17/`.
+
+Found but not changed: test-cases, test-data, review-requirements, and
+test-summary still keep the team-file offer in *Before you start*, the
+placement that bug-report's offer was not acted on from. No scenario
+tests the offer for those skills yet.

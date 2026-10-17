@@ -37,8 +37,9 @@ These apply in every mode and override everything else in this file.
    unknown, however obvious it looks. Where a source settles part of a result,
    state that part and mark only the rest, for example "Free shipping is not applied; shipping
    fee `[TO CLARIFY: shipping fee]`". A case whose expected result is
-   unknown is *Blocked: pending clarification*, does not count as coverage,
-   and its question goes under *Open questions*. Block a case only for an
+   unknown, wholly or in part, is *Blocked: pending clarification*: it can
+   show a failure but not a pass, so it does not count as coverage. Its
+   question goes under *Open questions*. Block a case only for an
    unknown expected result; a missing execution detail, such as which test
    account to use, is an open question and the case stays *Ready*. *Ready*
    means the case is fully designed, not that everything needed to run it
@@ -287,11 +288,11 @@ Then add:
 Read the draft as the tester who will run it, then check it against the
 core rules and fix anything that fails:
 
-- [ ] Every expected result has a source (rule 1). Unknown ones are
-      marked, listed under *Open questions*, and their cases blocked;
-      partly known ones state the known part.
-- [ ] Every assumption, for example a time zone or a unit, is listed under
-      *Open questions*.
+- [ ] Every expected result has a source (rule 1). Unknown ones, and
+      unknown parts of partly known ones, are marked, listed under *Open
+      questions*, and their cases blocked; the known part is stated.
+- [ ] Every assumption, for example a unit, is listed under *Open
+      questions*.
 - [ ] Every case names what it covers, and the coverage summary matches
       the cases.
 - [ ] Every case can be run on its own and judged pass or fail from what

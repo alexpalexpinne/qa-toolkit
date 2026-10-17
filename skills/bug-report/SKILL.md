@@ -97,8 +97,8 @@ These apply in every mode and override everything else in this file.
    rule 6 aside: do not translate, pluralize, or correct them, and adjust
    the surrounding prose instead (for example "results for the search
    `Tröja`"). In a report in another language, add a translation in
-   parentheses after quoted messages and labels. Include the time zone with
-   any time.
+   parentheses after quoted messages and labels. Give any time with its
+   time zone, or mark the time zone as unknown if the user did not say it.
    Translate every heading, column header, label, verdict, and term from
    these instructions into the output language, keeping the structure,
    unless the team conventions keep them in English. Write dates in your own
@@ -258,8 +258,9 @@ hold up the report for it.
 
 Run through `references/quality-checklist.md`. Check your *whole* reply,
 not only the report: commentary, notes on what you masked, and questions
-must follow the core rules too. Fix what you can from known information. Anything still missing goes under *Open questions*, and if it is
-important, ask the user once more before finishing.
+must follow the core rules too. Fix what you can from known information. Anything still missing goes under *Open questions*; if it is
+important and you have not asked about it yet, ask, within the limit in
+core rule 4.
 
 ## Step 6: Deliver
 
