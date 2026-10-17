@@ -295,10 +295,11 @@ core rules and fix anything that fails:
       questions*.
 - [ ] Every case names what it covers, and the coverage summary matches
       the cases.
-- [ ] Every case can be run on its own and judged pass or fail from what
-      it says (rule 4): no "works correctly", no dependence on another
-      case unless its preconditions say so, no invented screens or
-      buttons.
+- [ ] Every case stands on its own (rule 4): no "works correctly", no
+      dependence on another case unless its preconditions say so, no
+      invented screens or buttons. A *Ready* case can be judged pass or
+      fail from what it says; a blocked one is complete except for its
+      marked parts.
 - [ ] No duplicates, and the limit from Step 4 is respected.
 - [ ] Exact text is exact, and the three kinds of placeholder are not
       mixed up (rule 8).

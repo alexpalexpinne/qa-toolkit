@@ -309,7 +309,11 @@ def run(sid, out, model, rev, baseline=False):
             f.write(f"### `{root}/{path}`\n\n")
             try:
                 with open(source, encoding="utf-8") as text:
-                    f.write("```\n" + text.read()[:20000] + "\n```\n\n")
+                    content = text.read()
+                    f.write("```\n" + content[:20000] + "\n```\n\n")
+                    if len(content) > 20000:
+                        f.write(f"(Preview: first 20,000 of {len(content):,} characters. "
+                                "The complete file is under files/ and is what the grader scans.)\n\n")
             except (UnicodeDecodeError, OSError):
                 f.write("(not a text file)\n\n")
             os.makedirs(os.path.dirname(f"{dest}/files/{root}/{path}"), exist_ok=True)

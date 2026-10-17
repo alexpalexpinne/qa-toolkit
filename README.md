@@ -98,7 +98,7 @@ drafts before you share them.
 
 ## Tested across models
 
-The skills are tested with 174 scenarios: 99 regular scenarios the skills
+The skills are tested with 176 scenarios: 101 regular scenarios the skills
 are improved against, and 75 *held-out* scenarios, kept apart from that
 work, that check whether the rules also work on cases they were not
 written for. A held-out scenario that ends up informing a fix is retired
@@ -108,16 +108,16 @@ tool exports, and requests that push the skill to round up a number or
 guess a value. Every run starts in a fresh session and is checked against
 the scenario's requirements, by script where possible and by reading.
 
-Results on GPT-6.1-Sol (medium effort) in Codex, 2026-10-16, two runs per
-scenario:
+Results on GPT-6.1-Sol (medium effort) in Codex, 2026-10-16 and
+2026-10-17, two or more runs per scenario:
 
 | Skill | Scenarios (regular + held-out) | Result |
 |-------|--------------------------------|--------|
 | `review-requirements` | 13 + 13 | All pass, except that RR-07 sometimes drops minor findings without the one-line summary |
 | `test-cases` | 22 + 23 | All pass, except that TC-02 recommends reviewing the requirement first in only about half the runs |
 | `test-data` | 14 + 17 | All pass; HO-54 sometimes asks before giving a draft |
-| `bug-report` | 19 + 19 | All pass |
-| `test-summary` | 16 + 3 | All pass |
+| `bug-report` | 20 + 19 | All pass |
+| `test-summary` | 17 + 3 | All pass |
 | `team-setup` | 15 | 14 pass; TM-12 fails: `bug-report` does not offer to save the team's rules after the report |
 
 Testing found three safety problems, all fixed and rerun: `bug-report`

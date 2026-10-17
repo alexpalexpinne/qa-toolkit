@@ -69,6 +69,13 @@ def parse(path):
         tools = re.findall(r"(?m)^- `(.*)`$", tools_part.split("### Tool calls", 1)[-1])
         turns.append({"tools": tools, "answer": answer.strip()})
     written = re.findall(r"(?m)^### `([^`]+)`$", files)
+    # The transcript shows only a preview of each written file: scan the
+    # complete copies under files/ too, so a value late in a file is found.
+    copies = os.path.join(os.path.dirname(path), "files")
+    for root, _, names in os.walk(copies):
+        for name in sorted(names):
+            with open(os.path.join(root, name), encoding="utf-8", errors="replace") as f:
+                files += "\n" + f.read()
     return turns, written, files
 
 
