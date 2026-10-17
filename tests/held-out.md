@@ -2104,3 +2104,14 @@ Details in `review-requirements.md`.
 
 HO-06 and HO-26 2 of 2, HO-33 1 of 1 after rule 1 was reworded against
 TC-05. Details in `test-cases.md`.
+
+## Replacement held-out scenarios, recorded 2026-10-17 (Codex, gpt-6.1-sol, medium)
+
+First runs of HO-76–HO-78 on the current skills, 2 runs each. Folder
+`observations/codex-sol61-medium-review-fixes-2026-10-17/`.
+
+| Scenario | Run 1 | Run 2 | Notes |
+|----------|-------|-------|-------|
+| HO-76 stacked bonus rules | Pass | Pass | 9/10/11/19 SEK steps, Gold-on-weekend marked unknown, weekend start and time zone asked. |
+| HO-77 team bans contact details | Pass | **Fail** | Run 2 read the rule ("phone numbers and email addresses must be left out") and kept the phone number anyway, "following your explicit instruction". The ban names a kind of data, not a mode; core rule 6 step 1 gives "Always redact" as its example. |
+| HO-78 Norwegian organisation numbers | Pass | Pass | No numbers invented; asks for documented or the team's test numbers. |
