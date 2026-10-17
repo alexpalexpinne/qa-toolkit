@@ -262,7 +262,16 @@ other than TM-05. Each `<ID>/transcript.md` records the model, the skill
 revision, every turn with its tool calls, and the files the session wrote.
 Grading against *Must*, *Must not*, and the universal checks is still done
 by reading the transcripts, after the objective checks below. TM-13 runs input B only; its input A is covered
-by the TM-09 transcript. The copy in
+by the TM-09 transcript.
+
+Both runners record every assistant message of a turn as its answer, and
+accept a turn only if it ran to the end (exit code 0 and a successful
+result in Claude Code, `turn.completed` in Codex). A failed, crashed, or
+timed-out scenario is deleted and reported as `FAILED`, and a folder
+without a transcript is run again, so a rerun of the same command picks
+up exactly what is missing. Before 2026-10-17, `run_haiku.py` graded only
+the final message of each turn: a value leaked in an intermediate message
+of an earlier Claude run would not have been caught. The copy in
 `observations/claude-haiku-regression-2026-10-14/` is the script as it was
 for that run.
 

@@ -69,8 +69,10 @@ def describe(item):
 
 def run(sid, out, model, effort, rev, baseline=False):
     dest = f"{out}/{sid}"
-    if os.path.exists(dest):
+    if os.path.exists(f"{dest}/transcript.md"):
         return f"{sid}: skipped (exists)"
+    # A folder without a transcript is an interrupted run: start it again.
+    shutil.rmtree(dest, ignore_errors=True)
     base = tempfile.mkdtemp(prefix=f"qa-{sid}-")
     home, work, cwd = prepare(sid, base, baseline, skills_dir=".agents/skills")
     os.makedirs(f"{home}/.codex", exist_ok=True)
@@ -98,11 +100,12 @@ def run(sid, out, model, effort, rev, baseline=False):
         cmd = ["codex", "exec", "resume", thread, *flags, "-"] if thread else ["codex", "exec", *flags, "-"]
         with open(f"{dest}/turn{n}.jsonl", "w") as ev, open(f"{dest}/turn{n}.stderr", "w") as er:
             try:
-                subprocess.run(cmd, cwd=cwd, env=env, stdout=ev, stderr=er,
-                               input=prompt, text=True, timeout=1800)
+                code = subprocess.run(cmd, cwd=cwd, env=env, stdout=ev, stderr=er,
+                                      input=prompt, text=True, timeout=1800).returncode
             except subprocess.TimeoutExpired:
                 er.write("\nTIMEOUT\n")
-        messages, tools = [], []
+                code = "timeout"
+        messages, tools, completed, failure = [], [], False, None
         with open(f"{dest}/turn{n}.jsonl") as ev:
             for line in ev:
                 try:
@@ -116,13 +119,18 @@ def run(sid, out, model, effort, rev, baseline=False):
                     if item.get("type") == "agent_message":
                         messages.append(item.get("text", ""))
                     tools += describe(item)
+                if e.get("type") == "turn.completed":
+                    completed = True
                 if e.get("type") == "turn.failed":
-                    # A failed turn (for example a usage limit) is not a result:
-                    # drop the scenario so a rerun picks it up again.
-                    reason = (e.get("error") or {}).get("message", "turn failed")
-                    shutil.rmtree(base, ignore_errors=True)
-                    shutil.rmtree(dest, ignore_errors=True)
-                    return f"{sid}: FAILED in turn {n}: {reason[:120]}"
+                    completed = False
+                    failure = (e.get("error") or {}).get("message", "turn failed")
+        # Only a turn that ran to the end is a result (not a usage limit, a
+        # crash, or a timeout): drop the scenario so a rerun picks it up again.
+        if code != 0 or not completed:
+            reason = failure or f"exit {code}, turn not completed"
+            shutil.rmtree(base, ignore_errors=True)
+            shutil.rmtree(dest, ignore_errors=True)
+            return f"{sid}: FAILED in turn {n}: {reason[:120]}"
         log.append((prompt, tools, "\n\n".join(messages)))
     after = {"home": snapshot(home, internal), "work": snapshot(work, set())}
     written = [(root, path) for root in ("home", "work") for path, mtime in sorted(after[root].items())

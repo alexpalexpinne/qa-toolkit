@@ -221,8 +221,10 @@ def set_writable(top, writable):
 
 def run(sid, out, model, rev, baseline=False):
     dest = f"{out}/{sid}"
-    if os.path.exists(dest):
+    if os.path.exists(f"{dest}/transcript.md"):
         return f"{sid}: skipped (exists)"
+    # A folder without a transcript is an interrupted run: start it again.
+    shutil.rmtree(dest, ignore_errors=True)
     base = tempfile.mkdtemp(prefix=f"qa-{sid}-")
     home, work, cwd = prepare(sid, base, baseline)
     internal = {f"{home}/.claude", f"{home}/.cache"}
@@ -249,9 +251,12 @@ def run(sid, out, model, rev, baseline=False):
         if session:
             cmd += ["--resume", session]
         with open(f"{dest}/turn{n}.jsonl", "w") as ev, open(f"{dest}/turn{n}.stderr", "w") as er:
-            subprocess.run(cmd, cwd=cwd, env=env, stdout=ev, stderr=er,
-                           input=prompt, text=True, timeout=900)
-        result, tools = "", []
+            try:
+                code = subprocess.run(cmd, cwd=cwd, env=env, stdout=ev, stderr=er,
+                                      input=prompt, text=True, timeout=900).returncode
+            except subprocess.TimeoutExpired:
+                code = "timeout"
+        texts, tools, final = [], [], None
         with open(f"{dest}/turn{n}.jsonl") as ev:
             for line in ev:
                 try:
@@ -262,12 +267,25 @@ def run(sid, out, model, rev, baseline=False):
                     for c in e["message"].get("content", []):
                         if c.get("type") == "tool_use":
                             tools.append(f"{c['name']} {json.dumps(c['input'], ensure_ascii=False)[:200]}")
+                        if c.get("type") == "text" and c.get("text", "").strip():
+                            texts.append(c["text"])
                 if e.get("type") == "user" and isinstance(e["message"].get("content"), list):
                     for c in e["message"]["content"]:
                         if c.get("type") == "tool_result" and c.get("is_error"):
                             tools.append(f"  -> error: {str(c.get('content'))[:160]}")
                 if e.get("type") == "result":
-                    result, session = e.get("result") or "", e.get("session_id")
+                    final, session = e, e.get("session_id")
+        # Only a turn that ran to the end is a result; anything else is rerun.
+        if code != 0 or not final or final.get("subtype") != "success" or final.get("is_error"):
+            reason = (final or {}).get("result") or (final or {}).get("subtype") or f"exit {code}, no result"
+            if read_only:
+                set_writable(work, True)
+            shutil.rmtree(base, ignore_errors=True)
+            shutil.rmtree(dest, ignore_errors=True)
+            return f"{sid}: FAILED in turn {n}: {str(reason)[:120]}"
+        # Grade every assistant message of the turn, not only the last one:
+        # a value leaked in an intermediate message is still in the reply.
+        result = "\n\n".join(texts) or final.get("result") or ""
         log.append((prompt, tools, result))
     after = {"home": snapshot(home, internal), "work": snapshot(work, set())}
     written = [(root, path) for root in ("home", "work") for path, mtime in sorted(after[root].items())
@@ -275,7 +293,8 @@ def run(sid, out, model, rev, baseline=False):
     with open(f"{dest}/transcript.md", "w", encoding="utf-8") as f:
         f.write(f"# {sid} — Claude Code, {model}, {time.strftime('%Y-%m-%d')}\n\n")
         setup = "baseline, no skills installed" if baseline else f"skill revision {rev}"
-        f.write(f"Configuration: {setup}. Working folder: `{os.path.relpath(cwd, base)}`.\n\n")
+        f.write(f"Configuration: {setup}. Working folder: `{os.path.relpath(cwd, base)}`. "
+                "Every assistant message of a turn is shown under its answer.\n\n")
         for n, (prompt, tools, result) in enumerate(log, 1):
             f.write(f"## Turn {n}: prompt\n```\n{prompt}\n```\n\n")
             f.write("### Tool calls\n" + ("\n".join(f"- `{t}`" for t in tools) or "- none") + "\n\n")
