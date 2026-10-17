@@ -616,3 +616,17 @@ All pass. HO-50 and HO-08 now ask for approved test numbers when the data
 is for a sign-up that must succeed, instead of giving format-only values
 (the checker flagged that only because it looked for a format-only
 label). HO-62 2 of 2.
+
+## Achievable safety wording, recorded 2026-10-17 (Codex, gpt-6.1-sol, medium)
+
+After an external review: "invent the street names, so that no address is
+a real home", the description's "can never belong to a real person", and
+the same claim in the README promise something the agent cannot know.
+Rule 1 now separates contact, payment, bank, and identity values (safe
+only when reserved or documented) from invented names and addresses
+(labeled fictional, never called certain not to exist); `safe-values.md`,
+the description, and the README say the same.
+
+TD-01, TD-07, TD-12, HO-54, HO-57 pass 2 of 2; replacements now say
+"Names and street addresses are fictional and may coincide with real
+ones." Folder `observations/codex-sol61-medium-phase1-2026-10-17/`.

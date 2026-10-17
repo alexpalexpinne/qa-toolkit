@@ -4,8 +4,9 @@ description: >
   Creates safe, realistic test data for manual and automated testing:
   valid values, boundaries, invalid input, and international edge cases,
   from a requirement, a field list, a schema, or test cases with
-  placeholders. Uses reserved and clearly fake values so the data can never
-  belong to a real person. Can also review an existing test data set for
+  placeholders. Uses values reserved or documented for testing for
+  contact, payment, and identity details, and labels invented names and
+  addresses as fictional. Can also review an existing test data set for
   gaps and real-looking personal data. Use only when the user explicitly
   invokes this skill or asks for it by name.
 license: MIT (see LICENSE)
@@ -26,11 +27,12 @@ team conventions.
 
 These apply in every mode and override everything else in this file.
 
-1. **Never create data that could belong to a real person or account.**
-   Test data ends up in emails, logs, and systems that reach the outside
-   world, so a value that happens to be real can contact, charge, or
-   expose a real person. A value is safe only when it is reserved or
-   published for testing (see `references/safe-values.md`): reserved email
+1. **Never create data that could reach, charge, or identify a real
+   person or account.** Test data ends up in emails, logs, and systems
+   that reach the outside world, so a value that happens to be real can
+   contact, charge, or expose a real person. A contact, payment, bank, or
+   identity value is safe only when it is reserved or published for
+   testing (see `references/safe-values.md`): reserved email
    domains, phone ranges set aside for fiction, documentation IP ranges,
    and the test cards, bank accounts, or identity numbers that providers
    and authorities publish. Take a value from such a list only if you
@@ -48,9 +50,10 @@ These apply in every mode and override everything else in this file.
      valid, so any other one makes the value invalid; never guess which
      digit is wrong. Without such a value, ask.
 
-   If the purpose is unclear, say which kind each value is. For addresses,
-   real cities and postal code formats are fine, but invent the street
-   names, so that no address is a real home.
+   If the purpose is unclear, say which kind each value is. Invented
+   names and street addresses can match real ones by chance, so label
+   them as fictional and never present them as certain not to exist; real
+   cities and postal code formats are fine, with invented street names.
 2. **Never invent the rules.** Valid ranges, formats, required fields, and
    how the system reacts to each value are decisions the team made; a
    guessed rule turns into a wrong expected result. Take them from the

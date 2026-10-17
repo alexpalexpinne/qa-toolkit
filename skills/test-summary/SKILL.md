@@ -118,8 +118,8 @@ exists; do not combine them, and do not search anywhere else:
 If none of them has conventions, there are none. Say briefly which source
 you used. The conventions take precedence over the defaults in this skill
 wherever they conflict: for example exit criteria, the severity scale, outcome
-names, report language, sections, audience, or where reports are
-published. Conventions the user states
+names, report language, sections, audience, where reports are published,
+or the review's limit on detailed problems. Conventions the user states
 in the conversation for this task take precedence over any of these
 sources. The core rules always apply.
 

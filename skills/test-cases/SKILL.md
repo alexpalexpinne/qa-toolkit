@@ -148,7 +148,8 @@ exists; do not combine them, and do not search anywhere else:
 If none of them has conventions, there are none. Say briefly which source
 you used. The conventions take precedence over the defaults in this skill
 wherever they conflict: for example the format, ID scheme, title pattern,
-priority scale, required fields, or test management tool. Conventions the
+priority scale, required fields, test management tool, or the limits on
+cases, findings, and batch size. Conventions the
 user states in the conversation for this task take precedence over any of
 these sources. The core rules always apply.
 
@@ -240,7 +241,7 @@ Assign each case a priority:
 - **Medium:** important error cases and boundaries
 - **Low:** rare combinations and cosmetic checks
 
-Limits, unless the user asks for more:
+Default limits, unless the user or the team conventions set others:
 - At most **15 test cases** per requirement. If more conditions remain,
   list them in one line each under *Further test ideas*, so the user can
   ask for them.

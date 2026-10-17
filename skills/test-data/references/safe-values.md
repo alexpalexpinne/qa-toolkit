@@ -1,6 +1,8 @@
 # Safe values
 
-Values that cannot belong to a real person, account, or system. Prefer the
+Values reserved or documented for testing, which cannot reach a real
+person, account, or system, and how to label the values that are only
+invented. Prefer the
 team's own test values (from `team-conventions.md`) over these, and prefer
 values a provider or authority documents for testing over anything you
 generate.
@@ -77,7 +79,8 @@ identity numbers) can belong to real people.
 - Invent names; combine first and last names freely across cultures, and
   avoid well-known people.
 - Real city names and real postal code *formats* are fine. Use invented
-  street names, so that no address is a real home.
+  street names, and label names and addresses as fictional: an invented
+  name or street can still exist, so never call one guaranteed not to.
 - Do not pair a real company's name with fake customer data in a way that
   could look like a real record.
 

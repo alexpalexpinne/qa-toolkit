@@ -38,8 +38,9 @@ These apply in every mode and override everything else in this file.
    sensitive values masked under rule 6) or names what is missing, and ends
    in a question someone can answer.
 3. **Prioritize.** A review with 40 nitpicks gets ignored. Report every
-   *Must clarify* finding. Report at most 7 *Should clarify* and *Consider*
-   findings combined, choosing the most important; summarize the rest in one
+   *Must clarify* finding. By default, report at most 7 *Should clarify*
+   and *Consider* findings combined (the team conventions can set another
+   limit), choosing the most important; summarize the rest in one
    line (for example "6 further minor wording issues, mostly unclear
    obligation words").
 4. **Be constructive.** The goal is a better requirement, not criticism of
@@ -106,7 +107,7 @@ exists; do not combine them, and do not search anywhere else:
 If none of them has conventions, there are none. Say briefly which source
 you used. The conventions take precedence over the defaults in this skill
 wherever they conflict: for example the review language, obligation words, acceptance
-criteria format, terminology, or what to always check. Conventions the user states
+criteria format, terminology, what to always check, or the finding limit. Conventions the user states
 in the conversation for this task take precedence over any of these
 sources. The core rules always apply.
 
