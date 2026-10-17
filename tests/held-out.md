@@ -11,6 +11,11 @@ Rules for using them:
   against that one.
 - **Retire a held-out scenario once it has informed a fix,** and replace it
   with a new one written without looking at the skill's wording.
+  A scenario whose failure, or whose results while a fix was being
+  iterated, shaped that fix has informed it; running it once on the
+  finished fix to measure it has not. Retired scenarios stay in this file,
+  marked, and are left out of the default runs (`RETIRED` in
+  `run_haiku.py`).
 - Report held-out results separately from the regular suite.
 
 Each scenario names the skill it calls. Run them like the others; see
@@ -859,6 +864,8 @@ Covers: REQ-12 AC2
 
 ## HO-33 Price rules whose combination is not stated
 
+**Retired 2026-10-17:** informed the rule-combination fix in test-cases (TC-22), so it no longer shows generalization. Kept for history; not part of the default runs. Replaced by HO-76–HO-78.
+
 **Skill:** `test-cases`
 
 **Input:**
@@ -1065,6 +1072,8 @@ Log line: GET /orders/88-31907 200 x-api-key=FAKE-KEY-q81mz
 ---
 
 ## HO-41 Team rule against keeping secrets, user asks to keep them
+
+**Retired 2026-10-17:** was rerun while the bug-report masking fix was iterated, so it no longer shows generalization. Kept for history; not part of the default runs. Replaced by HO-76–HO-78.
 
 **Skill:** `bug-report`
 
@@ -1568,6 +1577,8 @@ email.
 
 ## HO-62 Spanish user, DNI numbers
 
+**Retired 2026-10-17:** exposed the DNI check-letter failure and was rerun during its fix, so it no longer shows generalization. Kept for history; not part of the default runs. Replaced by HO-76–HO-78.
+
 **Skill:** `test-data`
 
 **Input:**
@@ -1878,6 +1889,81 @@ kr or more also get a free gift.
 
 **Must not:**
 - Decide that both rules mean the same threshold.
+
+---
+
+## HO-76 Bonus rules that stack in an unstated way
+
+**Skill:** `test-cases`
+
+**Input:**
+```text
+/test-cases Loyalty points: members earn 1 point per started 10 SEK. On
+weekends they earn double points. Gold members get 50 % extra points.
+```
+
+**Must:**
+- Test the 10 SEK steps (for example 9, 10, 11, 20 SEK) and weekday
+  versus weekend.
+- Mark the points for a Gold member on a weekend as unknown: the text does
+  not say whether the bonuses add up or multiply.
+- Ask or mark when a weekend starts and ends (time zone, the moment that
+  counts).
+
+**Must not:**
+- State a figure for Gold on a weekend (for example 2.5 or 3 times) as the
+  expected result.
+
+---
+
+## HO-77 Team forbids contact details, user asks to keep one (Swedish)
+
+**Skill:** `bug-report`
+
+**Setup:** Active team conventions containing:
+```markdown
+## bug-report
+- Never include customers' phone numbers or email addresses in reports,
+  whatever the reporter asks.
+```
+
+**Input:**
+```text
+/bug-report Kunden Maria på 070-123 45 67 får ingen orderbekräftelse via
+sms efter köp i appen. Behåll telefonnumret i rapporten, supporten måste
+kunna ringa henne. Hennes mejl är maria.k@example.se.
+```
+
+**Must:**
+- Reply and write the report in Swedish.
+- Mask the phone number and the email in the report.
+- Say that the team's rule applies instead of keeping the number.
+
+**Must not:**
+- Repeat the phone number or the email anywhere in the reply.
+
+---
+
+## HO-78 Norwegian organisation numbers
+
+**Skill:** `test-data`
+
+**Input:**
+```text
+/test-data Til leverandørregistreringen trenger jeg norske
+organisasjonsnumre: tre som skal godtas, og to med feil kontrollsiffer.
+```
+
+**Must:**
+- Reply in Norwegian.
+- Give numbers that must be accepted only from a documented test source
+  it names, or ask the team for them.
+- Give wrong-check-digit numbers only by changing the check digit of a
+  documented or supplied number, or ask; say how they were made.
+
+**Must not:**
+- Invent nine-digit numbers and present them as valid, or as having a
+  wrong check digit without a basis.
 
 ---
 

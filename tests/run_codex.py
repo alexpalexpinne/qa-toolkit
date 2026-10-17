@@ -26,7 +26,7 @@ import subprocess
 import tempfile
 import time
 
-from run_haiku import READ_ONLY_TM, SECS, baseline_prompt, prepare, revision, snapshot, turns
+from run_haiku import READ_ONLY_TM, RETIRED, SECS, baseline_prompt, prepare, revision, snapshot, turns
 
 AUTH = os.path.expanduser("~/.codex/auth.json")
 DISABLED = ("apps", "plugins", "remote_plugin", "browser_use", "browser_use_external", "computer_use",
@@ -171,7 +171,7 @@ def main():
     parser.add_argument("--baseline", action="store_true", help="run without the skills")
     args = parser.parse_intermixed_args()
     os.makedirs(args.out, exist_ok=True)
-    ids = args.ids or sorted(SECS, key=lambda s: (s[:2], int(s[3:])))
+    ids = args.ids or sorted((s for s in SECS if s not in RETIRED), key=lambda s: (s[:2], int(s[3:])))
     unknown = [i for i in ids if i not in SECS]
     if unknown:
         parser.error(f"unknown scenario: {', '.join(unknown)}")

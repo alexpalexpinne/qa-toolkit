@@ -50,7 +50,7 @@ FILL_TEXT = {"TM-15": "Test cases are written in German."}
 # (or the named scenario's), or the given text.
 PROJECT_FROM = {"BR-21": "BR-21", "BR-23": "BR-21", "BR-24": "BR-24",
                 "TM-09": "TM-09", "TM-10": "TM-09", "TM-11": "TM-11", "HO-13": "HO-13",
-                "HO-41": "HO-41", "HO-46": "HO-46", "HO-61": "HO-61"}
+                "HO-41": "HO-41", "HO-46": "HO-46", "HO-61": "HO-61", "HO-77": "HO-77"}
 PROJECT_TEXT = {
     "TM-03": "## General\n- Reports are written in English.\n- Tracker: Jira, project SHOP.\n"
              "- Severity: S1, S2, S3, S4.\n\n## review-requirements\n\n## test-cases\n\n"
@@ -91,6 +91,8 @@ def load_sections():
 
 
 SECS = load_sections()
+# Held-out scenarios that informed a fix: kept for history, run only by name.
+RETIRED = {"HO-33", "HO-41", "HO-62"}
 
 
 def first_block(s):
@@ -327,7 +329,7 @@ def main():
     parser.add_argument("--baseline", action="store_true", help="run without the skills")
     args = parser.parse_intermixed_args()
     os.makedirs(args.out, exist_ok=True)
-    ids = args.ids or sorted(SECS, key=lambda s: (s[:2], int(s[3:])))
+    ids = args.ids or sorted((s for s in SECS if s not in RETIRED), key=lambda s: (s[:2], int(s[3:])))
     unknown = [i for i in ids if i not in SECS]
     if unknown:
         parser.error(f"unknown scenario: {', '.join(unknown)}")

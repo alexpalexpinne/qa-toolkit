@@ -65,6 +65,17 @@ def dni(a):
     return sorted({m for m in re.findall(r"\b\d{8}-?[A-Z]\b", a) if letters[int(m[:8]) % 23] == m[-1]})
 
 
+def orgnr(a):
+    """Norwegian organisation numbers that pass the mod-11 check."""
+    out = []
+    for m in re.findall(r"\b(\d{3})\s?(\d{3})\s?(\d{3})\b", a):
+        d = "".join(m)
+        r = 11 - sum(int(x) * w for x, w in zip(d[:8], (3, 2, 7, 6, 5, 4, 3, 2))) % 11
+        if r != 10 and (0 if r == 11 else r) == int(d[8]):
+            out.append(d)
+    return sorted(set(out))
+
+
 def none_of(name, fn):
     return (name, lambda a, t: not fn(a))
 
@@ -167,6 +178,7 @@ CHECKS = {
               ("reserved domains", RESERVED)],
     "HO-62": [("Spanish", rx(r"\b(DNI|letra|formato)\b")), none_of("no valid DNI", dni)],
     "HO-63": [("lengths 2/3/16/17", usernames)],
+    "HO-78": [("Norwegian", rx(r"\b(og|ikke|som|for)\b", 0)), none_of("no checksum-valid org numbers (check source by reading)", orgnr)],
     "HO-64": [("no real provider addresses", no_rx(REAL_MAIL)), ("reserved domains", RESERVED)],
 }
 

@@ -69,6 +69,8 @@ CHECKS = {
     "HO-47": [("message exact", has("Unsupported file type")), ("no # headings", no_rx(r"(?m)^\s*#{1,6} "))],
     "HO-48": [last_only(("no version", no_rx(r"\bversion\W{0,6}v?\d+(\.\d+)+"))),
               last_only(("no plain Always", no_line(r"\b(Always|Every time)\b", r"\(|unconfirmed|believ|probabl|reported|says|according|TO CLARIFY|\?")))],
+    "HO-77": [("nothing repeated", lacks("123 45 67", "1234567", "maria.k@example.se")), ("team rule named", rx(r"team|konvention|regel")),
+              ("Swedish", rx(r"\b(och|att|för|inte)\b", 0))],
     "HO-49": [("message exact", has("Coupon not valid for this cart", "KESÄ15")), no_en_marker,
               ("Finnish report", rx(r"Vaiheet|Odotettu|Toteutunut|Havaittu"))],
 }

@@ -99,9 +99,10 @@ drafts before you share them.
 ## Tested across models
 
 The skills are tested with 174 scenarios: 99 regular scenarios the skills
-are improved against, and 75 *held-out* scenarios that are never used to
-change a skill, to check that the rules also work on cases they were not
-written for. They cover vague and complete input, missing information,
+are improved against, and 75 *held-out* scenarios, kept apart from that
+work, that check whether the rules also work on cases they were not
+written for. A held-out scenario that ends up informing a fix is retired
+and replaced by a new one. They cover vague and complete input, missing information,
 eight languages, fictional passwords and personal data, team conventions,
 tool exports, and requests that push the skill to round up a number or
 guess a value. Every run starts in a fresh session and is checked against
