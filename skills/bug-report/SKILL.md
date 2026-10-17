@@ -136,14 +136,9 @@ If you need to check the project for an issue template or other
 instructions, look only in the current directory or, in a repository, at
 its root; never in parent folders or neighboring projects.
 
-If no team conventions were found and the user states rules a team would
-normally decide once (such as the report language, tracker, required
-fields, or severity scale), offer, after the report and at most once per
-conversation, to save them for the team; follow
-`references/team-file-offer.md`. Never hold up the report for it. This
-skill keeps no personal settings: if the user asks to save defaults for
-future reports, explain that they go in the team conventions file, which
-also works for a team of one, and offer to draft it the same way.
+This skill keeps no personal settings: if the user asks to save defaults
+for future reports, explain that they go in the team conventions file,
+which also works for a team of one, and offer to draft it (Step 6).
 
 ## Step 1: Choose the mode
 
@@ -247,6 +242,15 @@ Moving on to the next draft needs no approval; filing each report does
 - Write reproduction steps as numbered, minimal actions, starting from a known
   state.
 - Omit optional sections that do not apply. Do not fill fields with "N/A".
+
+If no team conventions were found and the user stated rules a team would
+normally decide once (such as the report language, tracker, required
+fields, or severity scale), end the first reply that shows the report, even
+a draft with open questions, with a one-sentence offer to save those rules
+for the team, so nobody has to repeat them; follow
+`references/team-file-offer.md`. The offer is not one of the three
+questions in core rule 4. Make it at most once per conversation, and never
+hold up the report for it.
 
 ## Step 5: Check quality
 

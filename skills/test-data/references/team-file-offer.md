@@ -13,8 +13,9 @@ Offer only when all of these are true:
   once, for example the markets to cover, the test data marker, file formats, or which test accounts and test cards to use.
 - You have not made this offer earlier in the conversation.
 
-Make the offer after the result is delivered, in one sentence: say what the
-team could save and where, and ask whether to draft it. Never hold up the
+Make the offer in the same reply as the result, after it, in one sentence:
+say what the team could save and where, and ask whether to draft it. Do
+not wait until the result has been filed, posted, or saved. Never hold up the
 task for it, and never repeat it.
 
 ## If the user says yes

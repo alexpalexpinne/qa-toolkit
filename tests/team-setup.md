@@ -490,3 +490,20 @@ TM-12 also fails 2 of 2 with the bug-report from before the 2026-10-16
 rewrite (`observations/codex-sol61-medium-tm12-oldbr-2026-10-17/`), so it is
 not a regression. The offer rule sits in *Before you start*, far from
 Step 6 where the report is delivered.
+
+## Offer timing in bug-report, recorded 2026-10-17 (Codex, gpt-6.1-sol, medium)
+
+The failing runs never opened `team-file-offer.md`: the offer rule in
+*Before you start* was not acted on. Three changes were tried:
+
+| Version | TM-12 offer | TM-14 | No-offer checks (BR-01, BR-14, TM-13, HO-46) |
+|---------|-------------|-------|---------------------------------------------|
+| Before (`039132d`) | 0 of 4 (incl. 2 runs on the pre-rewrite skill) | 0 of 2: saves the bug report as a file | clean |
+| Offer moved to Step 6; `team-file-offer.md` says "in the same reply as the result", not after filing | 0 of 3 | 1 of 2 | clean |
+| Offer at the end of Step 4, for the first reply with a draft, "not one of the three questions" (adopted) | 0 of 3 | 2 of 2: turn 2 shows a conventions draft with only the stated rules, turn 3 writes it | clean |
+
+TM-12 still fails on this model: the reply ends with three questions and
+no offer. Kept because TM-14 now drafts and writes the conventions file
+instead of saving the report as a file, and nothing else changed.
+Folders `observations/codex-sol61-medium-offer-2026-10-17/` and
+`observations/codex-sol61-medium-offer-v2-2026-10-17/`.
