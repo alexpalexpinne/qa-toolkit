@@ -54,7 +54,7 @@ customer data in it, because the file is meant to be shared with your team.
 ## Support
 
 Information you voluntarily post in a public
-[GitHub issue](https://github.com/alexpalexpinne/test-skills/issues) is visible
+[GitHub issue](https://github.com/alexpalexpinne/qa-toolkit/issues) is visible
 to others and retained by GitHub. Use fictional reproductions and remove
 private information before posting. For a privacy question, open an issue
 without including the private information in question.

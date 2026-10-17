@@ -1,18 +1,17 @@
 # QA Toolkit
 
+<img src="assets/readme-hero.jpg" width="100%" alt="QA Toolkit: from requirement to test report. Five upright documents represent requirements review, traceable test cases, safe test data, actionable bug reports, and honest test summaries. A password-reset example shows clarification questions, a named test case, expiry boundaries, expected versus actual behavior, and passed, failed, blocked, and not-run statuses. Illustrative workflow; you run the tests.">
+
 AI skills for software testers—built to ask instead of making things up.
 
 Install the five skills and the `team-setup` helper as the **QA Toolkit**
-plugin (`qa-toolkit`), or copy individual skill folders for local use. The
-repository remains `alexpalexpinne/test-skills`.
+plugin (`qa-toolkit`), or copy individual skill folders for local use.
 
 ![License: MIT](https://img.shields.io/badge/license-MIT-blue)
 ![Format: Agent Skills](https://img.shields.io/badge/format-Agent%20Skills-6f42c1)
 ![Claude Code](https://img.shields.io/badge/Claude%20Code-supported-d97757)
 ![Codex](https://img.shields.io/badge/Codex-supported-333333)
 ![Any language](https://img.shields.io/badge/language-any-2ea44f)
-
-<img src="assets/readme-hero.jpg" width="100%" alt="QA Toolkit: from requirement to test report. Five upright documents represent requirements review, traceable test cases, safe test data, actionable bug reports, and honest test summaries. A password-reset example shows clarification questions, a named test case, expiry boundaries, expected versus actual behavior, and passed, failed, blocked, and not-run statuses. Illustrative workflow; you run the tests.">
 
 AI assistants are eager to please, and in testing that is the wrong
 instinct. Ask one for test cases and it can invent the expected results.
@@ -57,7 +56,7 @@ More real outputs, one per skill:
 ## One skill for each step
 
 | Skill | Gives you |
-|-------|-----------|
+|:-----:|-----------|
 | [`review-requirements`](skills/review-requirements/) | A testability review of stories, use cases, and acceptance criteria: ambiguous wording, missing cases, contradictions, and gaps against the parent requirement, as concrete questions for the product owner. |
 | [`test-cases`](skills/test-cases/) | Test cases covering the main flow, errors, and boundaries, each traced to the criterion it covers. Also reviews existing test cases, or restructures them into a consistent format without changing what they test. |
 | [`test-data`](skills/test-data/) | Valid values, boundaries, invalid input, and international cases, using reserved and documented test values so no value can belong to a real person. Also reviews existing data sets. |
@@ -99,31 +98,35 @@ drafts before you share them.
 
 ## Tested across models
 
-The skills were evaluated with 88 test scenarios: vague and complete input, missing
-information, several languages, fictional passwords and personal data in
-logs, team conventions, tool exports, and requests that try to push the
-skill into rounding up a number or guessing a value. Every run starts in a
-fresh session and is checked against the scenario's own requirements and
-six rules that apply everywhere: no invented facts, no claims of checks
-that were not made, no sensitive values repeated, the user's language only
-from what they write, no actions nobody asked for, and few questions.
+The skills are tested with 174 scenarios: 99 regular scenarios the skills
+are improved against, and 75 *held-out* scenarios that are never used to
+change a skill, to check that the rules also work on cases they were not
+written for. They cover vague and complete input, missing information,
+eight languages, fictional passwords and personal data, team conventions,
+tool exports, and requests that push the skill to round up a number or
+guess a value. Every run starts in a fresh session and is checked against
+the scenario's requirements, by script where possible and by reading.
 
-| Model | Assistant | How it was tested | Result |
-|-------|-----------|-------------------|--------|
-| GPT-6.1-Sol, xhigh | Codex | One full run of all 88 scenarios | 88 pass |
-| GPT-5.6-Luna, max | Codex | One full run of all 88 scenarios | 77 pass, 9 partial, 2 fail |
-| Claude Haiku 5.5 | Claude Code | One full run of all 88 scenarios | 80 pass, 5 partial, 3 fail |
+Results on GPT-6.1-Sol (medium effort) in Codex, 2026-10-16, two runs per
+scenario:
 
-The Sol full run passed all 88 scenarios; reporting of that run was
-incomplete. The local evaluation suite and historical results are kept
-outside the distributed plugin packages.
+| Skill | Scenarios (regular + held-out) | Result |
+|-------|--------------------------------|--------|
+| `review-requirements` | 13 + 13 | All pass, except that RR-07 sometimes drops minor findings without the one-line summary |
+| `test-cases` | 22 + 23 | All pass, except two weak spots: TC-05 does not raise the time zone, TC-02 recommends reviewing the requirement first in about half the runs |
+| `test-data` | 14 + 17 | All pass; HO-54 sometimes asks before giving a draft |
+| `bug-report` | 19 + 19 | All pass; BR-08 searches the current folder as if it were the reported app |
+| `test-summary` | 16 + 3 | All pass |
+| `team-setup` | 15 | 13 pass; TM-12 and TM-14 fail: `bug-report` does not offer to save the team's rules after the report |
 
-On every model, the safety rules held in every scenario: no sensitive
-value leaked, nothing was posted or filed without approval, and no official
-test value was invented. The misses on the smaller models were about
-judgment and detail, such as asking one question too many, a verdict that
-was too strict, or a label left in English in a Swedish report. Partial
-results and failures are used to improve the skills.
+Testing found two safety problems, both fixed and rerun: `bug-report` kept
+an email address that a team rule forbids when the user asked for it, and
+`test-data` labeled a valid Spanish identity number as invalid. The final
+fix to each skill was rerun on the scenarios it could affect, not on the
+full set. Not yet tested on these versions: Claude Sonnet 5.5, and other
+assistants. Earlier versions were also run on GPT-5.6-Luna and Claude
+Haiku 5.5. All scenarios, runners, checkers, and results are in
+[`tests/`](tests/); they are not part of the plugin packages.
 
 **Status:** early release. Other assistants are untested. If a skill does
 something it shouldn't, please [report it](CONTRIBUTING.md).
@@ -143,14 +146,14 @@ After this packaging revision is pushed to GitHub, install from a Claude
 Code session with:
 
 ```text
-/plugin marketplace add alexpalexpinne/test-skills
+/plugin marketplace add alexpalexpinne/qa-toolkit
 /plugin install qa-toolkit@qa-toolkit-marketplace
 ```
 
 Claude Code 2.1.275 or later also supports the one-step install:
 
 ```text
-/plugin install qa-toolkit --marketplace alexpalexpinne/test-skills
+/plugin install qa-toolkit --marketplace alexpalexpinne/qa-toolkit
 ```
 
 Plugin skills use the package name as a prefix:

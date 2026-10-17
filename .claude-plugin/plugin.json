@@ -7,12 +7,12 @@
     "name": "Alexander Danvall",
     "url": "https://github.com/alexpalexpinne"
   },
-  "homepage": "https://github.com/alexpalexpinne/test-skills",
-  "repository": "https://github.com/alexpalexpinne/test-skills",
+  "homepage": "https://github.com/alexpalexpinne/qa-toolkit",
+  "repository": "https://github.com/alexpalexpinne/qa-toolkit",
   "license": "MIT",
   "keywords": ["qa", "software-testing", "requirements", "test-cases", "test-data", "bug-reports", "test-summary"],
   "icon": "./assets/qa-toolkit-icon.svg",
-  "documentationUrl": "https://github.com/alexpalexpinne/test-skills#readme",
-  "supportUrl": "https://github.com/alexpalexpinne/test-skills/issues",
-  "privacyPolicyUrl": "https://github.com/alexpalexpinne/test-skills/blob/main/PRIVACY.md"
+  "documentationUrl": "https://github.com/alexpalexpinne/qa-toolkit#readme",
+  "supportUrl": "https://github.com/alexpalexpinne/qa-toolkit/issues",
+  "privacyPolicyUrl": "https://github.com/alexpalexpinne/qa-toolkit/blob/main/PRIVACY.md"
 }
