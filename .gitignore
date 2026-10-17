@@ -1,5 +1,5 @@
-# Local evaluation scenarios and recorded results
-/tests/
+# Raw evaluation transcripts (large)
+/tests/observations/
 
 # Local credentials and assistant settings
 .env
