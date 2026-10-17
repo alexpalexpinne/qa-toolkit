@@ -2013,3 +2013,8 @@ had shortened; no new text was written for a held-out scenario.
 
 HO-04, HO-05, HO-65–HO-75, 2 runs per version: all pass on both versions.
 Details in `review-requirements.md`.
+
+## Test-cases time-limit wording, recorded 2026-10-17 (Codex, gpt-6.1-sol, medium)
+
+HO-06 and HO-26 2 of 2, HO-33 1 of 1 after rule 1 was reworded against
+TC-05. Details in `test-cases.md`.

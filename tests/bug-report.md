@@ -1326,7 +1326,7 @@ the ban first in both places fixed it, with no sentence added.
 
 The dropped inference examples did not come back as failures: BR-02 states
 no item price, BR-09 no product area, BR-12 marks frequency unknown, in
-all runs of both versions. Same on both versions, not fixed: BR-08
-searches the work folder for date and calendar files, as if it were the
-reported app (BR-13 does too, but there the skill is not invoked and
-looking at the code is expected).
+all runs of both versions. BR-08 runs shell searches of the work folder,
+but only in turn 1, before the skill is invoked (corrected 2026-10-17;
+first recorded here as a skill weakness). Once the skill loads in turn 3
+it does not look at the folder, so BR-08 passes.

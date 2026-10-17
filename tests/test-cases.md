@@ -1044,3 +1044,19 @@ suggests reviewing first in about half the runs; TC-03 leaves the 99.99 EUR
 result vaguer than needed in about one run of two. No sign of
 over-blocking: marker counts vary by run, and reading the scenarios with
 the most markers (TC-03, HO-15, HO-20, HO-32) found only real gaps.
+
+## Time limits as hidden decisions, recorded 2026-10-17 (Codex, gpt-6.1-sol, medium)
+
+Rule 1's sentence on combined rules was reworded to cover both decisions
+that hide inside rules that look complete: how separately stated rules
+combine, and how a time limit is measured (time zone, starting moment).
+No sentence added. 3,231 → 3,245 words.
+
+| Test | Runs | Result |
+|------|------|--------|
+| TC-05 time zone raised | 3 | 3 of 3 (run 3 asks "vilken tidsreferens", which the checker misses); was 0 of 2 |
+| TC-22, HO-33 combined rules | 2, 1 | All pass, unchanged |
+| TC-16 60-minute link | 2 | Pass; blocks the boundary case on the start moment, as the version before did (the start moment is only in an unaccepted proposal) |
+| HO-06, HO-26 (held-out) | 2 each | All pass |
+
+Folder `observations/codex-sol61-medium-timelimit-2026-10-17/`.

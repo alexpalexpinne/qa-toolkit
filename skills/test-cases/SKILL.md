@@ -30,10 +30,11 @@ These apply in every mode and override everything else in this file.
    sources are the requirement, supporting material the user provided, the
    existing test, the user, and the team conventions. Proposals nobody has
    accepted, such as suggested criteria in a requirements review, are not
-   sources. How separately stated rules combine is a decision too: if the
-   source does not say how two rules apply together (for example two rules
-   that both change one value), the combined result is unknown, however
-   obvious the calculation looks. Where a source settles part of a result,
+   sources. Some decisions hide inside rules that look complete: how
+   separately stated rules combine (for example two rules that both change
+   one value), and how a time limit is measured (in which time zone, from
+   which moment). If the source does not say, that part of the result is
+   unknown, however obvious it looks. Where a source settles part of a result,
    state that part and mark only the rest, for example "Free shipping is not applied; shipping
    fee `[TO CLARIFY: shipping fee]`". A case whose expected result is
    unknown is *Blocked: pending clarification*, does not count as coverage,

@@ -113,9 +113,9 @@ scenario:
 | Skill | Scenarios (regular + held-out) | Result |
 |-------|--------------------------------|--------|
 | `review-requirements` | 13 + 13 | All pass, except that RR-07 sometimes drops minor findings without the one-line summary |
-| `test-cases` | 22 + 23 | All pass, except two weak spots: TC-05 does not raise the time zone, TC-02 recommends reviewing the requirement first in about half the runs |
+| `test-cases` | 22 + 23 | All pass, except that TC-02 recommends reviewing the requirement first in only about half the runs |
 | `test-data` | 14 + 17 | All pass; HO-54 sometimes asks before giving a draft |
-| `bug-report` | 19 + 19 | All pass; BR-08 searches the current folder as if it were the reported app |
+| `bug-report` | 19 + 19 | All pass |
 | `test-summary` | 16 + 3 | All pass |
 | `team-setup` | 15 | 14 pass; TM-12 fails: `bug-report` does not offer to save the team's rules after the report |
 
