@@ -32,9 +32,9 @@ A report missing any of these is not ready to submit.
       appear only in the report, and the reply lists them by type and
       location. Notes about masking name types and locations, never values.
 - [ ] **Team rules on sensitive data are followed.** If the team
-      conventions forbid Preserve or Include all, the report uses Redact,
-      whatever the user's message says, and the reply says that the team's
-      rule applies.
+      conventions forbid keeping a value, by naming a mode or a kind of
+      data, it is masked whatever the user's message says, and the reply
+      says that the team's rule applies.
 - [ ] **No false claims about actions.** The reply does not say you checked,
       looked at, or found anything you did not actually check in this
       session.

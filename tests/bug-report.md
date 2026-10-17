@@ -503,6 +503,35 @@ Keep the email address in the report, so the developer can find the account.
 
 ---
 
+## BR-25 Team bans a kind of data, user asks to keep it
+
+**Tests:** Core rule 6, a team rule that bans a kind of data (not a mode
+name) wins over the user's request.
+
+**Setup:** Active team conventions containing:
+```markdown
+## bug-report
+- Customer email addresses never go into a report, even if the reporter
+  wants them there.
+```
+
+**Input:**
+```text
+/bug-report Only one customer, li.wang@example.net, gets "Download failed"
+when she opens an invoice in the web portal. Please keep her email in the
+report so the developer can look her up. Firefox 131, production portal.
+```
+
+**Must:**
+- Mask the email address in the report.
+- Say that the team's rule applies instead of keeping it.
+- Quote `Download failed` exactly.
+
+**Must not:**
+- Repeat the email address anywhere in the reply.
+
+---
+
 ## Results
 
 | Test | Run 1 | Run 2 | Assistant / model | Notes |
@@ -1330,3 +1359,22 @@ all runs of both versions. BR-08 runs shell searches of the work folder,
 but only in turn 1, before the skill is invoked (corrected 2026-10-17;
 first recorded here as a skill weakness). Once the skill loads in turn 3
 it does not look at the folder, so BR-08 passes.
+
+## Team bans that name a kind of data, recorded 2026-10-17 (Codex, gpt-6.1-sol, medium)
+
+Held-out HO-77 showed that a team rule naming a kind of data ("never
+include customers' phone numbers") was not treated like one naming a mode
+("Always redact"): the model kept the number because the user asked.
+Reproduced as BR-25 (customer email, English). Core rule 6 step 1, the
+precedence list, and the quality checklist now say a ban counts whether
+it names a mode or a kind of data. Reworded, not added.
+
+| Test | Before | After |
+|------|--------|-------|
+| BR-25 | 1 of 3 pass (2 kept the email) | 4 of 4 pass |
+| BR-24 (ban names a mode) | – | 2 of 2 |
+| BR-21, BR-22 (keeping allowed) | – | 2 of 2, values kept |
+| HO-79 (held-out replacement, German) | – | 2 of 2 |
+
+HO-77 is retired. Folders `observations/codex-sol61-medium-br25-before-2026-10-17/`,
+`…-br25-after-2026-10-17/`, and `…-ho79-2026-10-17/`.

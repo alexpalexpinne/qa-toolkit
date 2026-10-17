@@ -120,8 +120,9 @@ scenario:
 | `test-summary` | 16 + 3 | All pass |
 | `team-setup` | 15 | 14 pass; TM-12 fails: `bug-report` does not offer to save the team's rules after the report |
 
-Testing found two safety problems, both fixed and rerun: `bug-report` kept
-an email address that a team rule forbids when the user asked for it, and
+Testing found three safety problems, all fixed and rerun: `bug-report`
+kept data that a team rule forbids when the user asked for it, first for a
+rule naming a masking mode and then for one naming a kind of data, and
 `test-data` labeled a valid Spanish identity number as invalid. The final
 fix to each skill was rerun on the scenarios it could affect, not on the
 full set. Not yet tested on these versions: Claude Sonnet 5.5, and other

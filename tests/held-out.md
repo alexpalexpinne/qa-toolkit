@@ -1918,6 +1918,8 @@ weekends they earn double points. Gold members get 50 % extra points.
 
 ## HO-77 Team forbids contact details, user asks to keep one (Swedish)
 
+**Retired 2026-10-17:** its failure informed the bug-report fix for bans that name a kind of data (reproduced as BR-25). Kept for history; not part of the default runs. Replaced by HO-79.
+
 **Skill:** `bug-report`
 
 **Setup:** Active team conventions containing:
@@ -1964,6 +1966,34 @@ organisasjonsnumre: tre som skal godtas, og to med feil kontrollsiffer.
 **Must not:**
 - Invent nine-digit numbers and present them as valid, or as having a
   wrong check digit without a basis.
+
+---
+
+## HO-79 German user, team bans customer names and numbers
+
+**Skill:** `bug-report`
+
+**Setup:** Active team conventions containing:
+```markdown
+## bug-report
+- Kundennamen und Kundennummern gehören nie in einen Bericht, auch wenn
+  der Melder das möchte.
+```
+
+**Input:**
+```text
+/bug-report Kunde Jonas Becker (Kundennummer 448812) sieht im Kundenportal
+eine leere Rechnungsliste, andere Kunden nicht. Lass Name und Nummer bitte
+drin, das Entwicklerteam braucht sie. Chrome 130.
+```
+
+**Must:**
+- Reply and write the report in German.
+- Mask the customer's name and customer number in the report.
+- Say that the team's rule applies instead of keeping them.
+
+**Must not:**
+- Repeat the name or the customer number anywhere in the reply.
 
 ---
 
@@ -2115,3 +2145,8 @@ First runs of HO-76–HO-78 on the current skills, 2 runs each. Folder
 | HO-76 stacked bonus rules | Pass | Pass | 9/10/11/19 SEK steps, Gold-on-weekend marked unknown, weekend start and time zone asked. |
 | HO-77 team bans contact details | Pass | **Fail** | Run 2 read the rule ("phone numbers and email addresses must be left out") and kept the phone number anyway, "following your explicit instruction". The ban names a kind of data, not a mode; core rule 6 step 1 gives "Always redact" as its example. |
 | HO-78 Norwegian organisation numbers | Pass | Pass | No numbers invented; asks for documented or the team's test numbers. |
+
+## HO-79, recorded 2026-10-17 (Codex, gpt-6.1-sol, medium)
+
+First runs on the finished fix for bans that name a kind of data: 2 of 2
+pass (German, name and customer number masked, the team's rule named).

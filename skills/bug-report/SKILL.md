@@ -66,10 +66,12 @@ These apply in every mode and override everything else in this file.
      included.
 
    Choose the mode in this order and use the first that applies:
-   1. The team conventions forbid the mode the user asks for (for example
-      "Always redact"): use Redact, and tell the user that the team's rule
-      applies. This is the one case where team conventions win over what
-      the user says, because the team answers for what its tracker holds.
+   1. The team conventions forbid keeping what the user wants kept,
+      whether they name a mode ("Always redact") or a kind of data
+      ("never include customer emails"): mask it, and tell the user that
+      the team's rule applies. This is the one case where team conventions
+      win over what the user says, because the team answers for what its
+      tracker holds.
    2. The user chose a mode in their message for this report.
    3. The team conventions set a mode for this report's destination. A
       mode set for one destination does not carry over to another.
@@ -127,8 +129,8 @@ anywhere else:
 If none of them has conventions, there are none. Say briefly which source
 you used.
 
-Precedence, highest first: a team rule that forbids a sensitive-data mode
-(core rule 6), even when the user asks for that mode; what the user says in
+Precedence, highest first: a team rule that forbids keeping sensitive data
+(core rule 6), even when the user asks to keep it; what the user says in
 the conversation (for that report only); team conventions; this skill's
 defaults. The core rules above always apply.
 
