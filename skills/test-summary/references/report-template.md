@@ -31,7 +31,7 @@ One or two sentences of reasoning, referring to the exit criteria and risks.
 | Not run | <n> | <n %> |
 | **Planned** | **<total>** | **100 %** |
 
-<Counting rule, e.g. "Each test counted once by its latest result.">
+<Counting rule, e.g. "Each test counted once per browser by its latest result.">
 <Status grouping, if not obvious, e.g. "'Retest' counted as failed.">
 
 ### By area (optional)

@@ -171,8 +171,12 @@ report from "everything went fine" alone.
 
 ## Step 2: Consolidate the data
 
-- Count each test once, by its latest result in the period, unless the team
-  conventions say otherwise. Say which rule you used.
+- Count each test once per environment, configuration, or build it ran
+  in, by its latest result there, unless the team conventions say
+  otherwise. A later pass in one browser does not cancel an earlier
+  failure in another; only a retest in the same setting replaces a result.
+  If a test has several results and the data does not say where each came
+  from, ask, or show them all and say so. Say which rule you used.
 - Group the tool's statuses into *passed*, *failed*, *blocked*, and *not
   run*, and keep the original status names visible where they differ.
 - Check that the numbers are consistent: outcomes add up to the total,

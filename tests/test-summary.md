@@ -416,6 +416,34 @@ Can you summarize the failing tests in this project's CI log?
 
 ---
 
+## TS-17 The same test in two browsers
+
+**Tests:** Step 2 (counting each test once per environment, by its latest
+result there).
+
+**Input:**
+```text
+/test-summary Status for the checkout tests in release 3.4, data as of
+2026-10-15 16:00 UTC. Results (test, browser, date, result):
+CHK-1, Chrome, 2026-10-14, Passed
+CHK-1, Safari, 2026-10-13, Failed
+CHK-2, Chrome, 2026-10-14, Passed
+CHK-2, Safari, 2026-10-14, Passed
+CHK-3, Chrome, 2026-10-12, Failed
+CHK-3, Chrome, 2026-10-14, Passed
+```
+
+**Must:**
+- Report CHK-1 as failed in Safari; the later Chrome pass does not
+  replace it.
+- Count CHK-3 by its latest Chrome result (passed on retest).
+- State the counting rule (per test and browser, latest result).
+
+**Must not:**
+- Report CHK-1 as passed, or count CHK-3's earlier failure as current.
+
+---
+
 ## Results
 
 | Test | Run 1 | Run 2 | Assistant / model | Notes |
@@ -662,3 +690,22 @@ All 19 scenarios pass in both runs. TS-06 keeps 43 of 48 as 89.58 % and
 reports the 95 % criterion as not met; TS-04 keeps the user's "go",
 labeled as theirs, with PAY-88 Critical and Open and no exit criteria
 noted; HO-10 reports 80 % against the 95 % criterion as not met.
+
+## Counting per environment, recorded 2026-10-17 (Codex, gpt-6.1-sol, medium)
+
+After an external review: "count each test once, by its latest result"
+let a later Chrome pass replace an earlier Safari failure for the same
+test. Step 2, the checklist, and the template now count each test once
+per environment, configuration, or build, by its latest result there, and
+ask when the data does not say where a result came from. New scenario
+TS-17 reproduces the case.
+
+| Test | Previous version | This version |
+|------|------------------|--------------|
+| TS-17 | 2 of 2 pass | 2 of 2 pass |
+| TS-01, TS-14, TS-15 | – | 2 of 2 pass (TS-14 still counts the duplicate SHOP-T103 once) |
+
+GPT-6.1-Sol already kept the Safari failure without the rule, so this
+model does not show the difference; the change makes the skill say what
+it relied on. Folders `observations/codex-sol61-medium-ts17-old-2026-10-17/`
+and `observations/codex-sol61-medium-review-fixes-2026-10-17/`.

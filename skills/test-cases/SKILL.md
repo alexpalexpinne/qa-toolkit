@@ -40,7 +40,9 @@ These apply in every mode and override everything else in this file.
    unknown is *Blocked: pending clarification*, does not count as coverage,
    and its question goes under *Open questions*. Block a case only for an
    unknown expected result; a missing execution detail, such as which test
-   account to use, is an open question and the case stays *Ready*. Do not
+   account to use, is an open question and the case stays *Ready*. *Ready*
+   means the case is fully designed, not that everything needed to run it
+   is at hand. Do not
    present assumptions about the product as facts, and never say you
    checked a system, file, or document unless you actually did in this
    session.
@@ -88,9 +90,10 @@ These apply in every mode and override everything else in this file.
    them, identifiers, statuses, IDs, scripts, queries, payloads, and
    configuration. Never rewrite, shorten, or "fix" them; the only change
    allowed is masking under rule 5, disclosed by type. If masking removed a
-   value the test needs to run, mark the case *Blocked: pending
-   clarification* until safe test data is supplied. Keep three kinds of
-   placeholder apart:
+   value the test needs to run, put a `{{…}}` placeholder in its place and
+   ask for safe test data under *Open questions*; like any missing
+   execution detail, it does not block the case (rule 1). Keep three kinds
+   of placeholder apart:
    - `[TO CLARIFY: …]`: unknown; a person must provide it. Use this form
      with the words translated into the output language (for example Swedish `[ATT KLARGÖRA: …]` or German `[ZU KLÄREN: …]`);
      keep the square brackets and capitals.
@@ -271,7 +274,7 @@ Then add:
 - **Coverage summary:** a table mapping each criterion (or use-case flow)
   to its cases, with one of these statuses:
   - *Covered:* every part of the criterion (each condition, limit, and
-    outcome it states) has a case, and all its cases are ready to run
+    outcome it states) has a case, and all its cases are *Ready*
   - *Partly covered:* some part has no case, or some of its cases are
     blocked; say which
   - *Blocked:* all its cases are blocked pending clarification

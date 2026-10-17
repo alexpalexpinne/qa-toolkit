@@ -1060,3 +1060,16 @@ No sentence added. 3,231 → 3,245 words.
 | HO-06, HO-26 (held-out) | 2 each | All pass |
 
 Folder `observations/codex-sol61-medium-timelimit-2026-10-17/`.
+
+## One meaning of Ready, recorded 2026-10-17 (Codex, gpt-6.1-sol, medium)
+
+After an external review: rule 1 kept a case *Ready* when an execution
+detail was missing, rule 8 and `restructuring.md` blocked it when masking
+removed data it needed, and coverage required cases "ready to run". Now
+*Ready* means fully designed (expected result known) everywhere; masked
+test data becomes a `{{…}}` placeholder and an open question, like any
+missing execution detail, and coverage counts *Ready* cases.
+
+TC-07, TC-11, TC-14, TC-16, and HO-07 pass 2 of 2; TC-14 still blocks
+the case whose expected result ("verify count") is unknown. Folder
+`observations/codex-sol61-medium-review-fixes-2026-10-17/`.

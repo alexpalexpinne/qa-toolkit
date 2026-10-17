@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Mechanical checks for the test-summary scenarios (TS-01–TS-16, HO-10–HO-12).
+"""Mechanical checks for the test-summary scenarios (TS-01–TS-17, HO-10–HO-12).
 
 Only what can be checked by text: required IDs and figures, values that
 must not appear, headings in the right language. A scenario that passes
@@ -45,6 +45,8 @@ CHECKS = {
     "TS-14": [("11 tests", rx(r"\b11\b")), ("duplicate", has("SHOP-T103")), ("Priority column", rx(r"Priority"))],
     "TS-15": [("SHOP-T105", has("SHOP-T105")), ("not met", rx(r"not met")), ("no Severity column", rx(r"[Ss]everity"))],
     "TS-16": [("skill not loaded", lambda a, t: "test-summary/SKILL.md" not in t)],
+    "TS-17": [("CHK-1 Safari failure kept", rx(r"CHK-1[^\n]{0,160}Safari[^\n]{0,120}fail|Safari[^\n]{0,120}CHK-1[^\n]{0,120}fail|CHK-1[^\n]{0,160}fail[^\n]{0,120}Safari")),
+              ("per-browser rule stated", rx(r"(per|each) (test and )?(browser|environment)|browser[- ]specific|by browser"))],
     "HO-10": [("Swedish", SWEDISH), ("80 % not met", rx(r"80\s?%")), ("not met", rx(r"inte uppfyllt|ej uppfyllt|uppfylls inte|inte uppfylls"))],
     "HO-11": [("205 vs 200", has("205", "200"))],
     "HO-12": [("email masked", lacks("oskar.holm@example.org")), ("PAY-301 Critical", has("PAY-301", "Critical")), not_posted],

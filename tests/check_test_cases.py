@@ -150,7 +150,7 @@ CHECKS = {
               last_only(("no re-ask of answered points", no_rx(r"\?[^\n]{0,0}.*(balance|shipping).{0,40}\?")))],
     "HO-31": [("conflict case", rx(r"web version|conflict")), ("markers", any_marker)],
     "HO-32": [("positive verdict", rx(r"ready to use|needs minor"))],
-    "HO-76": [("10 SEK steps", rx(r"\b(9|11|19|21)(,00)? ?SEK|\b(9|11) kr")), ("combination unknown", any_marker),
+    "HO-76": [("10 SEK steps", rx(r"\b(9|11|19|21)(,00)? ?(SEK|kr)|\|\s*(9|11)\s*\|")), ("combination unknown", any_marker),
               ("weekend boundary asked", rx(r"time zone|midnight|weekend (start|begin|end)|which day|Saturday 00")),
               ("no assumed Gold weekend factor", no_line(r"\b(2[.,]5|3)\s?(x|×|times)\b", r"\?|assum|if the|unknown|TO CLARIFY|or\b"))],
     "HO-33": [("age boundaries", has("64", "65", "79", "80")), ("trip boundary", has("30", "31")),

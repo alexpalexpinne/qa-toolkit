@@ -53,7 +53,7 @@ Look for these in your own drafts and in reports you review.
 | **Quality claims without data** | "The release is stable" | State what was tested and what was found |
 | **Predictions** | "The remaining tests are expected to pass" | "30 tests remain; planned for <date>, if known" |
 | **Trend from one data point or changed measurement** | "Quality improved" when the test set changed | Compare only figures measured the same way |
-| **Retests counted twice** | A test failed, then passed, counted as one fail and one pass | Count each test once by its latest result, and say so |
+| **Retests counted twice** | A test failed, then passed, counted as one fail and one pass | Count each test once per environment, configuration, or build, by its latest result there, and say so |
 | **Missing data date** | Numbers without "as of" | "Data as of <date and time>, source <tool>" |
 | **Decision presented as fact** | "Approved for release" written by the tester | "Proposed recommendation: go, to be confirmed by <role>" |
 | **Percentages of tiny numbers** | "Failure rate up 100 %" (from 1 to 2) | Give the counts |

@@ -133,9 +133,10 @@ configuration block, request or response example, or file content:
   stay intact.
 - Sensitive values are an exception: mask them as required by core rule 5,
   preserve the remaining text exactly, and describe the redaction by type
-  only. If a runnable value was removed, mark the case *Blocked: pending
-  clarification* and ask for safe replacement data. Never reproduce a
-  sensitive value to keep a step unchanged.
+  only. If a runnable value was removed, put a `{{…}}` placeholder in its
+  place and ask for safe replacement data under *Open questions*; the case
+  is not blocked for it (core rule 1). Never reproduce a sensitive value
+  to keep a step unchanged.
 
 ## Attachments
 

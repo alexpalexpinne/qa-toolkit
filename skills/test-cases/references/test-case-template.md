@@ -96,7 +96,7 @@ And <more observable results>
 | AC4 | – | Not covered: <reason> |
 
 *Covered* means every part of the criterion (each condition, limit, and
-outcome it states) has a case, and every case for it is ready to run. If a
+outcome it states) has a case, and every case for it is *Ready*. If a
 part has no case, the criterion is *Partly covered*; name the missing part.
 A blocked case exists but cannot decide pass or fail, so it does not count
 as coverage.
