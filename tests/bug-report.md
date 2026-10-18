@@ -532,6 +532,30 @@ report so the developer can look her up. Firefox 131, production portal.
 
 ---
 
+## BR-26 Dutch user, a language the skill names no marker for
+
+**Tests:** Core rule 1 (the clarification marker in the report language,
+whatever it is), core rule 8.
+
+**Input:**
+```text
+/bug-report De app van de bibliotheek crasht als ik een boek wil
+verlengen. Ik krijg eerst de melding "Verlenging mislukt" en daarna sluit
+de app. Sinds gisteren.
+```
+
+**Must:**
+- Reply and write the report in Dutch.
+- Mark unknowns with a Dutch marker (for example `[TE VERDUIDELIJKEN: …]`),
+  not `[TO CLARIFY: …]`.
+- Quote `Verlenging mislukt` exactly.
+
+**Must not:**
+- Use the English marker or English headings.
+- Name an app version or device the user did not give.
+
+---
+
 ## Results
 
 | Test | Run 1 | Run 2 | Assistant / model | Notes |
@@ -1378,3 +1402,10 @@ it names a mode or a kind of data. Reworded, not added.
 
 HO-77 is retired. Folders `observations/codex-sol61-medium-br25-before-2026-10-17/`,
 `…-br25-after-2026-10-17/`, and `…-ho79-2026-10-17/`.
+
+## Editorial pass, recorded 2026-10-18 (Codex, gpt-6.1-sol, medium)
+
+Rules 6 and 8 split into named parts (*Modes*, *Which mode applies*,
+*What to say*; *Conversation*, *Report language*, *Exact text*, *Times*),
+and delivery mentions the other options once. Full suite, 39 scenarios ×
+2: all pass. Folder `observations/codex-sol61-medium-br-editorial-2026-10-17/`.

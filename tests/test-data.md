@@ -630,3 +630,14 @@ the description, and the README say the same.
 TD-01, TD-07, TD-12, HO-54, HO-57 pass 2 of 2; replacements now say
 "Names and street addresses are fictional and may coincide with real
 ones." Folder `observations/codex-sol61-medium-phase1-2026-10-17/`.
+
+## Editorial pass, recorded 2026-10-18 (Codex, gpt-6.1-sol, medium)
+
+Rule 1 split into named parts (contact, payment, bank, and identity
+values; names and addresses; the source by purpose); the Step 4 checklist
+asks short questions that point to the rules (its first item had still
+allowed "labeled as not checksum-valid"); delivery mentions the other
+options once. Full suite, 31 scenarios × 2: all pass. HO-08 run 1 and
+HO-50 ask for the team's test numbers instead of giving values, which the
+checker flags but the rule asks for. Folder
+`observations/codex-sol61-medium-td-editorial-2026-10-17/`.

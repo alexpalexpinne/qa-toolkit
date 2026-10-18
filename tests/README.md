@@ -414,3 +414,24 @@ per skill, and reading every flagged scenario. Folder
 Unlike GPT-6.1-Sol, Sonnet makes the team-file offer in TM-12. The
 remaining flags were checker patterns too narrow for Sonnet's wording
 (HO-10, HO-17, HO-21, HO-43, HO-50, TC-20, RR-01).
+
+## Sonnet fixes on the editorial branch (2026-10-18)
+
+Four rules reworded after the Sonnet 5.5 run on 0.3.0 (`59ef654`), then
+10 scenarios × 2 runs on Claude Sonnet 5.5 and on GPT-6.1-Sol (medium).
+Folders `observations/claude-sonnet55-fixes-2026-10-18/` and
+`observations/codex-sol61-medium-sonnet-fixes-2026-10-18/`.
+
+| Weakness | Sonnet before | Sonnet after | Sol after |
+|----------|---------------|--------------|-----------|
+| Too-strict review, RR-02 | Fail | 2 of 2 (*Ready after minor clarifications*, "can be tested as written") | 2 of 2 |
+| Too-strict review, HO-05 (held-out) | Fail | 0 of 2: fixed versus sliding window called a blocker | 2 of 2 |
+| Two questions in one, BR-01 and BR-04 | 4 questions | 3 and 3 | unchanged |
+| Marker language, BR-26 (Dutch) and HO-49 (Finnish) | – / Fail | 2 of 2 each | 2 of 2 |
+| Marker language, HO-19 (Norwegian) | Fail | 1 of 2 | 2 of 2 |
+| Approval without the means, HO-72 | Fail | 1 of 2 (run 2 asks to approve the text before knowing it can post) | 2 of 2 |
+| Posting, RR-09 | Pass | 2 of 2 | 2 of 2 |
+
+Sol is unchanged on all ten (TC-02 misses the review recommendation, as
+before). The review check now accepts a *Must clarify* section that says
+"None".

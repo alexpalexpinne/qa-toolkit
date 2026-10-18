@@ -1102,3 +1102,18 @@ Found but not changed: test-cases, test-data, review-requirements, and
 test-summary still keep the team-file offer in *Before you start*, the
 placement that bug-report's offer was not acted on from. No scenario
 tests the offer for those skills yet.
+
+## Editorial pass, recorded 2026-10-18 (Codex, gpt-6.1-sol, medium)
+
+After an external review of the writing: rule 1 split into named parts
+(*Sources*, *Hidden decisions*, *Unknown expected results*, *Execution
+details*, *Claims about checks*); the Step 6 checklist asks short
+questions that point to the rules instead of restating them; rule 8 and
+Step 2 no longer repeat rule 1 and rule 10; delivery mentions the other
+options once and treats a delivered result as complete.
+
+Full suite, 45 scenarios × 2. Same as before the pass: all pass except
+TC-02 (no review recommendation, 2 of 2) and TC-05 run 2 (asks which
+moment counts, not the time zone). TC-15, HO-23, and HO-76 were flagged
+only by over-narrow checks, now fixed. Folder
+`observations/codex-sol61-medium-tc-editorial-2026-10-17/`.
