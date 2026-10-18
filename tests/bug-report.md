@@ -1378,3 +1378,10 @@ it names a mode or a kind of data. Reworded, not added.
 
 HO-77 is retired. Folders `observations/codex-sol61-medium-br25-before-2026-10-17/`,
 `…-br25-after-2026-10-17/`, and `…-ho79-2026-10-17/`.
+
+## Editorial pass, recorded 2026-10-18 (Codex, gpt-6.1-sol, medium)
+
+Rules 6 and 8 split into named parts (*Modes*, *Which mode applies*,
+*What to say*; *Conversation*, *Report language*, *Exact text*, *Times*),
+and delivery mentions the other options once. Full suite, 39 scenarios ×
+2: all pass. Folder `observations/codex-sol61-medium-br-editorial-2026-10-17/`.

@@ -30,16 +30,22 @@ These apply in every mode and override everything else in this file.
 1. **Never create data that could reach, charge, or identify a real
    person or account.** Test data ends up in emails, logs, and systems
    that reach the outside world, so a value that happens to be real can
-   contact, charge, or expose a real person. A contact, payment, bank, or
-   identity value is safe only when it is reserved or published for
-   testing (see `references/safe-values.md`): reserved email
-   domains, phone ranges set aside for fiction, documentation IP ranges,
-   and the test cards, bank accounts, or identity numbers that providers
-   and authorities publish. Take a value from such a list only if you
-   copied it from the list in this session and can name the source; a
-   remembered list can be wrong by one digit. Never generate values that
-   pass a real checksum for identity numbers, payment cards, or bank
-   accounts. Choose the source by what the value is for:
+   contact, charge, or expose a real person.
+   - **Contact, payment, bank, and identity values** are safe only when
+     reserved or published for testing (see `references/safe-values.md`):
+     reserved email domains, phone ranges set aside for fiction,
+     documentation IP ranges, and the test cards, bank accounts, or
+     identity numbers that providers and authorities publish. Take a value
+     from such a list only if you copied it from the list in this session
+     and can name the source; a remembered list can be wrong by one digit.
+     Never generate values that pass a real checksum for identity numbers,
+     payment cards, or bank accounts.
+   - **Names and addresses** you invent can match real ones by chance, so
+     label them as fictional and never present them as certain not to
+     exist; real cities and postal code formats are fine, with invented
+     street names.
+
+   **Choose the source by what the value is for:**
    - **To be accepted** by a system that validates it: a documented value,
      or one the provider or team supplies. If none is at hand, ask.
    - **To be rejected for its format,** or where nothing is validated: a
@@ -50,10 +56,7 @@ These apply in every mode and override everything else in this file.
      valid, so any other one makes the value invalid; never guess which
      digit is wrong. Without such a value, ask.
 
-   If the purpose is unclear, say which kind each value is. Invented
-   names and street addresses can match real ones by chance, so label
-   them as fictional and never present them as certain not to exist; real
-   cities and postal code formats are fine, with invented street names.
+   If the purpose is unclear, say which kind each value is.
 2. **Never invent the rules.** Valid ranges, formats, required fields, and
    how the system reacts to each value are decisions the team made; a
    guessed rule turns into a wrong expected result. Take them from the
@@ -226,23 +229,21 @@ value, and the test cases that use it).
 
 ## Step 4: Check before delivering
 
-Go through the data and fix anything that fails:
+Go through the data and fix anything that fails one of these checks:
 
-- [ ] No value could belong to a real person or account: emails, phone
-      numbers, IP addresses, identity numbers, cards, and bank accounts come
-      from reserved ranges or documented test values, or are labeled as not
-      checksum-valid.
-- [ ] Every rule behind a value (valid, invalid, limit, expected handling)
-      comes from the requirement, a schema, the user, or the team
-      conventions; unknown rules are `[TO CLARIFY: …]` markers.
-- [ ] Related values are consistent, unique where required, and deliberate
-      inconsistencies or duplicates are labeled.
-- [ ] The test data marker is present and named, and does not change what
-      any value tests.
-- [ ] Date-dependent values are given relative to the test day, or with
-      their reference date and a note to recalculate.
-- [ ] Column names, field names, types, and formats match the source exactly.
-- [ ] Each row or value has a stated purpose.
+- [ ] Does every contact, payment, bank, and identity value come from the
+      source its purpose calls for, and are invented names and addresses
+      labeled fictional (rule 1)?
+- [ ] Does every rule behind a value come from a source, with unknown
+      ones marked (rule 2)?
+- [ ] Are related values consistent, and deliberate inconsistencies
+      labeled (rule 3)?
+- [ ] Is the test data marker present, named, and out of the way of what
+      each value tests (rule 4)?
+- [ ] Are date-dependent values relative to the test day, or given with
+      their reference date (Step 3)?
+- [ ] Do names, types, and formats match the source exactly (rule 8)?
+- [ ] Does each row or value have a stated purpose?
 - [ ] Every heading, table column header, label, and clarification marker
       is in the output language, unless the team conventions keep a term in
       English.
@@ -252,8 +253,11 @@ Go through the data and fix anything that fails:
 
 ## Step 5: Deliver
 
-Show the data to the user. Then offer what is available in the current
-environment:
+Show the data to the user. If the user named where it goes, deliver
+there as described below. Otherwise mention once, briefly, what else is
+possible here, such as a file; do not repeat the options in later
+replies. Beyond the open questions, add no further offers: delivered data
+is a complete answer.
 
 - **Save as a file** (for example CSV or JSON) if you can write files.
 - **Load into a system** (database, test environment, test management

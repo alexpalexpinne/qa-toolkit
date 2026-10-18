@@ -933,3 +933,10 @@ reading. Folders `tests/observations/codex-sol61-medium-rr-*-2026-10-16`.
 
 RR-07 misses on both versions and touches no changed text. RR-10 run 1
 was flagged by the checker only because it wrote "five" in words.
+
+## Editorial pass, recorded 2026-10-18 (Codex, gpt-6.1-sol, medium)
+
+The finding limit is a default the team conventions can change, and
+delivery mentions the other options once. Full suite, 26 scenarios × 2:
+all pass except the known RR-07 summary-line miss in run 1. Folder
+`observations/codex-sol61-medium-rr-editorial-2026-10-17/`.

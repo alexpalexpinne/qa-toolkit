@@ -291,8 +291,11 @@ Go through the draft and fix anything that fails:
 
 ## Step 6: Deliver
 
-Show the review to the user. Then offer what is available in the current
-environment:
+Show the review to the user. If the user named where it goes, deliver
+there as described below. Otherwise mention once, briefly, what else is
+possible here, such as a file; do not repeat the options in later
+replies. Beyond the open questions, add no further offers: a delivered
+review is a complete answer.
 
 - **Post to the tracker** as a comment on the item: only with a working
   integration, the confirmed item, and explicit approval of the exact text.
