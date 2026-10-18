@@ -125,8 +125,17 @@ kept data that a team rule forbids when the user asked for it, first for a
 rule naming a masking mode and then for one naming a kind of data, and
 `test-data` labeled a valid Spanish identity number as invalid. The final
 fix to each skill was rerun on the scenarios it could affect, not on the
-full set. Not yet tested on these versions: Claude Sonnet 5.5, and other
-assistants. Earlier versions were also run on GPT-5.6-Luna and Claude
+full set.
+
+On Claude Sonnet 5.5 in Claude Code (one run of all 176 scenarios,
+2026-10-18), no sensitive value leaked, nothing was filed or posted
+without a yes, and no test value was invented. Its misses were about
+judgment: two reviews of requirements that were already testable were too
+strict (HO-05, RR-02), it asked for approval to post a comment it could
+not post (HO-72), turned "today" into a date (HO-35), used the English
+`[TO CLARIFY: …]` marker in Norwegian and Finnish reports (HO-19, HO-49),
+and often put two questions in one numbered item, which exceeds the
+three-question limit. Not yet tested: other assistants. Earlier versions were also run on GPT-5.6-Luna and Claude
 Haiku 5.5. All scenarios, runners, checkers, and results are in
 [`tests/`](tests/); they are not part of the plugin packages.
 
