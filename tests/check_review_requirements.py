@@ -16,7 +16,7 @@ from check_test_cases import any_marker, has, has_all, lacks, last_only, no_line
 
 NEEDS = rx(r"Needs clarification before development")
 READY = rx(r"Verdict:?\**:?\s*\**\s*Ready\b")
-no_must = ("no Must clarify section", no_rx(r"(?m)^#+\s*Must clarify"))
+no_must = ("no Must clarify finding", no_rx(r"(?m)^#+\s*Must clarify\s*\n+\s*(?!None\b|Inga\b|Keine\b)\S"))
 no_gwt = ("no Given/When/Then", no_rx(r"(?m)^\s*[-*]?\s*\**Given\b", 0))
 not_posted = ("nothing claimed posted", no_line(r"\b(I('ve| have) (posted|added|commented)|(has|have) been posted|was posted|posted (it|the (review|comment)))\b",
                                               r"\b(no|not|nothing|cannot|can't|couldn't|never|unable)\b|n't"))
