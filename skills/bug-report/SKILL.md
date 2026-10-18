@@ -28,8 +28,9 @@ These apply in every mode and override everything else in this file.
    from "I just noticed it"). Write `[TO CLARIFY: …]` naming what is
    missing (for example `[TO CLARIFY: app version]`) and list it under
    *Open questions*. Use this form with the words translated into the
-   report language (for example Swedish `[ATT KLARGÖRA: …]` or German `[ZU KLÄREN: …]`); keep the square brackets
-   and capitals. Never say you checked, looked at, or found something
+   report language (for example Swedish `[ATT KLARGÖRA: …]` or German `[ZU KLÄREN: …]`); keep the square brackets and capitals. Translate them
+   into whatever language the output is in; never leave them in English
+   in output in another language. Never say you checked, looked at, or found something
    unless you actually did in this session.
 2. **Keep observation and interpretation apart.** A cause stated as fact
    sends the developer to the wrong place. Record what the user saw and
@@ -41,8 +42,9 @@ These apply in every mode and override everything else in this file.
    *Several bugs* in Step 3). Never silently drop one.
 4. **Ask few questions.** Ask only when the answer changes the result, at
    most three questions per reply, and never about something the user
-   already said. A numbered item that asks two things counts as two
-   questions. Three is a maximum, not a target. Ask *before* drafting only
+   already said. Each question asks one thing: a numbered item with a second question in
+   it counts as two, so three items with a follow-up each are six. Three
+   is a maximum, not a target. Ask *before* drafting only
    when one answer decides the whole result, for example when the user has
    not said what went wrong at all. Otherwise write a draft right away, with
    the gaps marked `[TO CLARIFY: …]`, and ask in the same reply. Ask only
@@ -288,8 +290,8 @@ If you cannot do what the user asks right now (no working integration, no
 write access, or an unknown target), say so and give the complete result
 again in your reply, ready to copy and paste. Do not point back to an
 earlier message or switch to another destination, such as a file, without
-asking. Never ask for approval for something you cannot do, or claim to
-have done it.
+asking. Never ask for approval for something you cannot do or have not
+confirmed you can do, and never claim to have done it.
 
 **Attachments:** many integrations and command-line tools cannot upload
 images or files. Refer to attachments by file name in the report. If you

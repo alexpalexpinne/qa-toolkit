@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Mechanical checks for the bug-report scenarios (BR-01–BR-15, BR-21–BR-25, HO-01–HO-03, HO-34–HO-49).
+"""Mechanical checks for the bug-report scenarios (BR-01–BR-15, BR-21–BR-26, HO-01–HO-03, HO-34–HO-49).
 
 Only what can be checked by text: required exact strings, values that must
 not appear, markers in the right language, files written. A scenario that
@@ -46,6 +46,8 @@ CHECKS = {
     "BR-24": [("all masked", lacks("jane.doe@example.com", "abc123def456", "NotARealPassw0rd!")),
               ("team rule named", rx(r"team|conventions"))],
     "BR-25": [("email masked", lacks("li.wang@example.net")), ("team rule named", rx(r"team|conventions")), ("message exact", has("Download failed"))],
+    "BR-26": [("Dutch marker only", native_marker), ("message exact", has("Verlenging mislukt")),
+              ("Dutch report", rx(r"Stappen|Verwacht|Werkelijk|Samenvatting"))],
     "HO-01": [("message exact", has("Vorgang abgebrochen")), ("screenshot asked", rx(r"Screenshot")), no_en_marker],
     "HO-02": [("no secrets", lacks("7781aa", "55k2q", "maria.lund@example.net")), ("exception kept", has("authCode", "500")),
               not_filed],

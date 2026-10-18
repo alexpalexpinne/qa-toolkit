@@ -26,10 +26,10 @@ SHARED_SENTENCES = (
     "Explain things in your own words; do not quote these instructions or link to this skill's files.",
     "search the file system for it.",
     "Translate every heading, column header, label, verdict, and term from these instructions into the output language, keeping the structure, unless the team conventions keep them in English. Write dates in your own text as `YYYY-MM-DD`.",
-    "**Ask few questions.** Ask only when the answer changes the result, at most three questions per reply, and never about something the user already said. A numbered item that asks two things counts as two questions. Three is a maximum, not a target. Ask *before* drafting only when one answer decides the whole result, for example",
+    "**Ask few questions.** Ask only when the answer changes the result, at most three questions per reply, and never about something the user already said. Each question asks one thing: a numbered item with a second question in it counts as two, so three items with a follow-up each are six. Three is a maximum, not a target. Ask *before* drafting only when one answer decides the whole result, for example",
     "Otherwise write a draft right away, with the gaps marked `[TO CLARIFY: …]`, and ask in the same reply.",
     "The result's *Open questions* may list everything still unresolved. Ask in the normal chat reply, not in separate input panels or forms.",
-    "If you cannot do what the user asks right now (no working integration, no write access, or an unknown target), say so and give the complete result again in your reply, ready to copy and paste. Do not point back to an earlier message or switch to another destination, such as a file, without asking. Never ask for approval for something you cannot do, or claim to have done it.",
+    "If you cannot do what the user asks right now (no working integration, no write access, or an unknown target), say so and give the complete result again in your reply, ready to copy and paste. Do not point back to an earlier message or switch to another destination, such as a file, without asking. Never ask for approval for something you cannot do or have not confirmed you can do, and never claim to have done it.",
 )
 # Keep each SKILL.md short enough to be read in full: fold a new rule into an
 # existing one instead of adding sentences.

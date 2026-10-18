@@ -532,6 +532,30 @@ report so the developer can look her up. Firefox 131, production portal.
 
 ---
 
+## BR-26 Dutch user, a language the skill names no marker for
+
+**Tests:** Core rule 1 (the clarification marker in the report language,
+whatever it is), core rule 8.
+
+**Input:**
+```text
+/bug-report De app van de bibliotheek crasht als ik een boek wil
+verlengen. Ik krijg eerst de melding "Verlenging mislukt" en daarna sluit
+de app. Sinds gisteren.
+```
+
+**Must:**
+- Reply and write the report in Dutch.
+- Mark unknowns with a Dutch marker (for example `[TE VERDUIDELIJKEN: …]`),
+  not `[TO CLARIFY: …]`.
+- Quote `Verlenging mislukt` exactly.
+
+**Must not:**
+- Use the English marker or English headings.
+- Name an app version or device the user did not give.
+
+---
+
 ## Results
 
 | Test | Run 1 | Run 2 | Assistant / model | Notes |
