@@ -98,7 +98,7 @@ drafts before you share them.
 
 ## Tested across models
 
-The skills are tested with 176 scenarios: 101 regular scenarios the skills
+The skills are tested with 177 scenarios: 102 regular scenarios the skills
 are improved against, and 75 *held-out* scenarios, kept apart from that
 work, that check whether the rules also work on cases they were not
 written for. A held-out scenario that ends up informing a fix is retired
@@ -108,15 +108,15 @@ tool exports, and requests that push the skill to round up a number or
 guess a value. Every run starts in a fresh session and is checked against
 the scenario's requirements, by script where possible and by reading.
 
-Results on GPT-6.1-Sol (medium effort) in Codex, 2026-10-16 and
-2026-10-17, two or more runs per scenario:
+Results on GPT-6.1-Sol (medium effort) in Codex, 2026-10-16 to
+2026-10-18, two runs per scenario of each skill's full suite:
 
 | Skill | Scenarios (regular + held-out) | Result |
 |-------|--------------------------------|--------|
 | `review-requirements` | 13 + 13 | All pass, except that RR-07 sometimes drops minor findings without the one-line summary |
 | `test-cases` | 22 + 23 | All pass, except that TC-02 recommends reviewing the requirement first in only about half the runs |
 | `test-data` | 14 + 17 | All pass; HO-54 sometimes asks before giving a draft |
-| `bug-report` | 20 + 19 | All pass |
+| `bug-report` | 21 + 19 | All pass |
 | `test-summary` | 17 + 3 | All pass |
 | `team-setup` | 15 | 14 pass; TM-12 fails: `bug-report` does not offer to save the team's rules after the report |
 
@@ -125,17 +125,21 @@ kept data that a team rule forbids when the user asked for it, first for a
 rule naming a masking mode and then for one naming a kind of data, and
 `test-data` labeled a valid Spanish identity number as invalid. The final
 fix to each skill was rerun on the scenarios it could affect, not on the
-full set.
+full set: the last one, four reworded rules shared by the skills, on 10
+scenarios.
 
-On Claude Sonnet 5.5 in Claude Code (one run of all 176 scenarios,
-2026-10-18), no sensitive value leaked, nothing was filed or posted
-without a yes, and no test value was invented. Its misses were about
-judgment: two reviews of requirements that were already testable were too
-strict (HO-05, RR-02), it asked for approval to post a comment it could
-not post (HO-72), turned "today" into a date (HO-35), used the English
-`[TO CLARIFY: …]` marker in Norwegian and Finnish reports (HO-19, HO-49),
-and often put two questions in one numbered item, which exceeds the
-three-question limit. Not yet tested: other assistants. Earlier versions were also run on GPT-5.6-Luna and Claude
+Claude Sonnet 5.5 in Claude Code ran all 176 scenarios once on an earlier
+build of this version (2026-10-18). No sensitive value leaked, nothing
+was filed or posted without a yes, and no test value was invented. Its
+misses were about judgment: reviews that were too strict for already
+testable requirements, a request to approve a post it could not make,
+"today" turned into a date (HO-35), the English `[TO CLARIFY: …]` marker
+in Norwegian and Finnish, and two questions in one numbered item. Four
+rules were reworded for these and checked on 10 scenarios with both
+models: Sonnet then passed RR-02, BR-01, BR-04, BR-26, and HO-49, half of
+HO-19 and HO-72, and still not HO-05; GPT-6.1-Sol was unchanged. The
+current build has not had a full Sonnet run. Not yet tested: other
+assistants. Earlier versions were also run on GPT-5.6-Luna and Claude
 Haiku 5.5. All scenarios, runners, checkers, and results are in
 [`tests/`](tests/); they are not part of the plugin packages.
 
