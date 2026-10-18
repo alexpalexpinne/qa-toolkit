@@ -507,3 +507,10 @@ no offer. Kept because TM-14 now drafts and writes the conventions file
 instead of saving the report as a file, and nothing else changed.
 Folders `observations/codex-sol61-medium-offer-2026-10-17/` and
 `observations/codex-sol61-medium-offer-v2-2026-10-17/`.
+
+## Editorial pass, recorded 2026-10-18 (Codex, gpt-6.1-sol, medium)
+
+TM-01–TM-15, 2 runs each, on the editorial versions of all skills. Same
+as before: all pass except TM-12 (no team-file offer, 0 of 2) and TM-14
+(1 of 2; run 1 saved the bug report as a file). Folder
+`observations/codex-sol61-medium-tm-editorial-2026-10-17/`.

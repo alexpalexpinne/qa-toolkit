@@ -709,3 +709,16 @@ GPT-6.1-Sol already kept the Safari failure without the rule, so this
 model does not show the difference; the change makes the skill say what
 it relied on. Folders `observations/codex-sol61-medium-ts17-old-2026-10-17/`
 and `observations/codex-sol61-medium-review-fixes-2026-10-17/`.
+
+## Editorial pass, recorded 2026-10-18 (Codex, gpt-6.1-sol, medium)
+
+Delivery mentions the other options once. Full suite, 20 scenarios × 2:
+all pass, except TS-14 run 1, which asked whether the duplicate SHOP-T103
+rows were separate executions before writing the report. The
+per-environment rule said to ask whenever a test had several results with
+no stated origin; it now says identical rows are one result, and asks
+(in the same reply as the report) only when the results differ. TS-14
+then passes 4 of 4, TS-15 and TS-17 2 of 2. TS-11 run 1 was flagged only
+by an over-narrow check. Folders
+`observations/codex-sol61-medium-ts-editorial-2026-10-17/` and
+`observations/codex-sol61-medium-ts-dedup-2026-10-18/`.
