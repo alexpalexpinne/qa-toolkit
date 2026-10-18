@@ -1,0 +1,13 @@
+Issue Key,Summary,Test Type,Priority,Status,Defects
+SHOP-T101,Login with valid credentials,Manual,P1,PASSED,
+SHOP-T102,Login with locked account,Manual,P1,FAILED,SHOP-901
+SHOP-T103,Add item to cart,Manual,P1,PASSED,
+SHOP-T104,Apply voucher at checkout,Manual,P1,FAILED,SHOP-905
+SHOP-T105,Pay with saved card,Manual,P1,BLOCKED,SHOP-907
+SHOP-T106,Pay with invoice,Manual,P2,TODO,
+SHOP-T107,Order confirmation email,Manual,P2,PASSED,
+SHOP-T108,Order history paging,Manual,P2,EXECUTING,
+SHOP-T109,Cancel order within 24h,Manual,P2,PASSED WITH REMARKS,
+SHOP-T110,Refund to original payment method,Manual,P1,ABORTED,
+SHOP-T103,Add item to cart,Manual,P1,PASSED,
+SHOP-T111,Guest checkout,Manual,P2,PASSED,

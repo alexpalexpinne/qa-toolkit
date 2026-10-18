@@ -1,0 +1,18 @@
+{
+  "name": "qa-toolkit",
+  "displayName": "QA Toolkit",
+  "version": "0.3.0",
+  "description": "Five software testing workflows: review requirements, design and review test cases, prepare test data, draft bug reports, and summarize results with gaps and unknowns made visible.",
+  "author": {
+    "name": "Alexander Danvall",
+    "url": "https://github.com/alexpalexpinne"
+  },
+  "homepage": "https://github.com/alexpalexpinne/qa-toolkit",
+  "repository": "https://github.com/alexpalexpinne/qa-toolkit",
+  "license": "MIT",
+  "keywords": ["qa", "software-testing", "requirements", "test-cases", "test-data", "bug-reports", "test-summary"],
+  "icon": "./assets/qa-toolkit-icon.svg",
+  "documentationUrl": "https://github.com/alexpalexpinne/qa-toolkit#readme",
+  "supportUrl": "https://github.com/alexpalexpinne/qa-toolkit/issues",
+  "privacyPolicyUrl": "https://github.com/alexpalexpinne/qa-toolkit/blob/main/PRIVACY.md"
+}
