@@ -14,5 +14,6 @@
   "icon": "./assets/qa-toolkit-icon.svg",
   "documentationUrl": "https://github.com/alexpalexpinne/qa-toolkit#readme",
   "supportUrl": "https://github.com/alexpalexpinne/qa-toolkit/issues",
-  "privacyPolicyUrl": "https://github.com/alexpalexpinne/qa-toolkit/blob/main/PRIVACY.md"
+  "privacyPolicyUrl": "https://github.com/alexpalexpinne/qa-toolkit/blob/main/PRIVACY.md",
+  "termsOfServiceUrl": "https://github.com/alexpalexpinne/qa-toolkit/blob/main/TERMS.md"
 }

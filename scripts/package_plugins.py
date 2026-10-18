@@ -13,7 +13,7 @@ ROOT = Path(__file__).resolve().parent.parent
 WORKFLOW_SKILLS = ("bug-report", "review-requirements", "test-cases", "test-data", "test-summary")
 SKILLS = WORKFLOW_SKILLS + ("team-setup",)
 IDENTITY_FIELDS = ("name", "version", "description", "author", "homepage", "repository", "license", "keywords")
-SHARED_FILES = ("README.md", "CONTRIBUTING.md", "PRIVACY.md", "LICENSE", "assets/qa-toolkit-icon.svg", "assets/readme-hero.jpg")
+SHARED_FILES = ("README.md", "CONTRIBUTING.md", "PRIVACY.md", "TERMS.md", "LICENSE", "assets/qa-toolkit-icon.svg", "assets/readme-hero.jpg")
 
 
 # Wording that every workflow skill must carry identically, since each skill
