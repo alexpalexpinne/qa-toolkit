@@ -26,27 +26,31 @@ These apply in every mode and override everything else in this file.
 
 1. **Expected results come from a source, never from you.** What the
    product should do is a decision the team makes; a test with a guessed
-   expected result passes or fails against something nobody decided. The
-   sources are the requirement, supporting material the user provided, the
-   existing test, the user, and the team conventions. Proposals nobody has
-   accepted, such as suggested criteria in a requirements review, are not
-   sources. Some decisions hide inside rules that look complete: how
-   separately stated rules combine (for example two rules that both change
-   one value), and how a time limit is measured (in which time zone, from
-   which moment). If the source does not say, that part of the result is
-   unknown, however obvious it looks. Where a source settles part of a result,
-   state that part and mark only the rest, for example "Free shipping is not applied; shipping
-   fee `[TO CLARIFY: shipping fee]`". A case whose expected result is
-   unknown, wholly or in part, is *Blocked: pending clarification*: it can
-   show a failure but not a pass, so it does not count as coverage. Its
-   question goes under *Open questions*. Block a case only for an
-   unknown expected result; a missing execution detail, such as which test
-   account to use, is an open question and the case stays *Ready*. *Ready*
-   means the case is fully designed, not that everything needed to run it
-   is at hand. Do not
-   present assumptions about the product as facts, and never say you
-   checked a system, file, or document unless you actually did in this
-   session.
+   expected result passes or fails against something nobody decided.
+   - **Sources:** the requirement, supporting material the user provided,
+     the existing test, the user, and the team conventions. Proposals
+     nobody has accepted, such as suggested criteria in a requirements
+     review, are not sources.
+   - **Hidden decisions:** some decisions hide inside rules that look
+     complete: how separately stated rules combine (for example two rules
+     that both change one value), and how a time limit is measured (in
+     which time zone, from which moment). If the source does not say, that
+     part of the result is unknown, however obvious it looks.
+   - **Unknown expected results:** where a source settles part of a
+     result, state that part and mark only the rest, for example "Free
+     shipping is not applied; shipping fee `[TO CLARIFY: shipping fee]`".
+     A case whose expected result is unknown, wholly or in part, is
+     *Blocked: pending clarification*: it can show a failure but not a
+     pass, so it does not count as coverage. Its question goes under
+     *Open questions*.
+   - **Execution details:** block a case only for an unknown expected
+     result. A missing execution detail, such as which test account to
+     use or test data removed by masking, is an open question and the
+     case stays *Ready*. *Ready* means the case is fully designed, not
+     that everything needed to run it is at hand.
+   - **Claims about checks:** do not present assumptions about the product
+     as facts, and never say you checked a system, file, or document
+     unless you actually did in this session.
 2. **Trace every case.** Each case names the criterion or requirement it
    covers, and criteria without cases are listed as uncovered, so gaps are
    visible instead of hidden.
@@ -91,9 +95,8 @@ These apply in every mode and override everything else in this file.
    them, identifiers, statuses, IDs, scripts, queries, payloads, and
    configuration. Never rewrite, shorten, or "fix" them; the only change
    allowed is masking under rule 5, disclosed by type. If masking removed a
-   value the test needs to run, put a `{{…}}` placeholder in its place and
-   ask for safe test data under *Open questions*; like any missing
-   execution detail, it does not block the case (rule 1). Keep three kinds
+   value the test needs to run, put a `{{…}}` placeholder in its place: it
+   is an execution detail (rule 1). Keep three kinds
    of placeholder apart:
    - `[TO CLARIFY: …]`: unknown; a person must provide it. Use this form
      with the words translated into the output language (for example Swedish `[ATT KLARGÖRA: …]` or German `[ZU KLÄREN: …]`);
@@ -207,10 +210,9 @@ limits.
   `review-requirements` skill, if the user has it). Then draft anyway (core
   rule 10).
 
-Ask only if it changes the result (core rule 10), for example which test
-level the cases are for, or which format the user wants. Without a
-preference, write manual tests in the step-table format from
-`references/test-case-template.md`.
+Ask only if it changes the result (core rule 10). Without a format from
+the user or the team conventions, write manual tests in the step-table
+format from `references/test-case-template.md`.
 
 ## Step 3: Find test conditions
 
@@ -286,24 +288,20 @@ Then add:
 
 ## Step 6: Check before delivering
 
-Read the draft as the tester who will run it, then check it against the
-core rules and fix anything that fails:
+Read the draft as the tester who will run it, and fix anything that
+fails one of these checks:
 
-- [ ] Every expected result has a source (rule 1). Unknown ones, and
-      unknown parts of partly known ones, are marked, listed under *Open
-      questions*, and their cases blocked; the known part is stated.
-- [ ] Every assumption, for example a unit, is listed under *Open
-      questions*.
-- [ ] Every case names what it covers, and the coverage summary matches
-      the cases.
-- [ ] Every case stands on its own (rule 4): no "works correctly", no
-      dependence on another case unless its preconditions say so, no
-      invented screens or buttons. A *Ready* case can be judged pass or
-      fail from what it says; a blocked one is complete except for its
-      marked parts.
-- [ ] No duplicates, and the limit from Step 4 is respected.
-- [ ] Exact text is exact, and the three kinds of placeholder are not
-      mixed up (rule 8).
+- [ ] Does every expected result have a source, and is every unknown part
+      marked and its case blocked (rule 1)?
+- [ ] Is every assumption, for example a unit, listed under *Open
+      questions*?
+- [ ] Does every case name what it covers, and does the coverage summary
+      match the cases (rule 2)?
+- [ ] Does every case stand on its own, and can every *Ready* case be
+      judged pass or fail from what it says (rule 4)?
+- [ ] No duplicates, and within the limits of Step 4?
+- [ ] Is exact text exact, with the three kinds of placeholder kept apart
+      (rule 8)?
 - [ ] Every heading, table column header, label, and clarification marker
       is in the output language, unless the team conventions keep a term in
       English.
@@ -313,8 +311,12 @@ core rules and fix anything that fails:
 
 ## Step 7: Deliver
 
-Show the test cases to the user. Then offer what is available in the
-current environment:
+Show the test cases to the user. If the user named where they go,
+deliver there as described below. Otherwise mention once, briefly, what
+else is possible here, such as a file or an import; do not repeat the
+options in later replies. Beyond the open questions (and, in Restructure
+mode, the check before the next batch), add no further offers or
+suggestions: a delivered result is a complete answer.
 
 - **Test management tool or tracker:** only with a working integration.
   Confirm the project or test suite, show exactly what will be created or
