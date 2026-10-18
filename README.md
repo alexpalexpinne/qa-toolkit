@@ -251,7 +251,8 @@ tool and the open defects, for example reports written with `bug-report`.
 ## Your data
 
 See the [privacy notice](PRIVACY.md) for processing, storage, and support
-disclosures.
+disclosures, and the [terms of use](TERMS.md) for the license, the lack of
+warranty, and your responsibility for reviewing outputs.
 
 The skills send nothing anywhere on their own; they only publish after your
 explicit yes. But everything you paste or attach, such as requirements,
