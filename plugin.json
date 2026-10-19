@@ -23,6 +23,7 @@
         "websiteURL": "https://github.com/alexpalexpinne/qa-toolkit",
         "supportURL": "https://github.com/alexpalexpinne/qa-toolkit/issues",
         "privacyPolicyURL": "https://github.com/alexpalexpinne/qa-toolkit/blob/main/PRIVACY.md",
+        "termsOfServiceURL": "https://github.com/alexpalexpinne/qa-toolkit/blob/main/TERMS.md",
         "defaultPrompt": [
           "Use review-requirements to find unclear or untestable acceptance criteria in this story.",
           "Use bug-report to turn my description into an actionable defect report.",
