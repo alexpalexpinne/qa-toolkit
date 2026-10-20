@@ -12,37 +12,64 @@ the UK. Fields: full name (1–50 characters), email, date of birth (must be
 
 ## What came back
 
-> Real output, unedited except that its headings are shifted down two levels to fit this page.
+> Real output, unedited except that Codex's one-line opening note is left out.
 
 ---
 
-Here is a safe, copy-pasteable set. The `test.signup` email prefix is the cleanup marker. Dates use `YYYY-MM-DD`; reference date is **2026-10-13**.
+Here’s a draft covering all three markets, name boundaries, and the age cutoff. No team conventions were found; I used the skill defaults. All names are fictional.
+
+**Baseline records**
+
+`TEST-` in `email` identifies the records without affecting name lengths. Sweden and Germany need documented test mobiles before these can become complete valid submissions.
 
 | Purpose | full name | email | date of birth | country | mobile number |
 |---|---|---|---|---|---|
-| Valid typical; Swedish character | `Åsa Solvind` | `test.signup.se.asa@example.org` | `1989-04-21` | `Sweden` | `+46701740635` |
-| Valid typical; German diacritic | `Mila Kovačević` | `test.signup.de.mila@example.org` | `1994-09-08` | `Germany` | `+4915228817386` |
-| Valid typical; apostrophe | `Rhys O'Harper` | `test.signup.uk.rhys@example.org` | `2000-12-31` | `United Kingdom` | `+447700900000` |
-| Full name empty, 0 characters — outside range; [TO CLARIFY: handling/message] | `""` | `test.signup.name-empty@example.org` | `1990-03-10` | `Sweden` | `+46701740636` |
-| Full name minimum, 1 character | `A` | `test.signup.name-min@example.org` | `1990-03-11` | `Sweden` | `+46701740637` |
-| Full name maximum, 50 characters | `Alexandra Elisabeth Kovačević van Linden-Sundström` | `test.signup.name-max@example.org` | `1982-01-12` | `Germany` | `+491713920001` |
-| Full name 51 characters — outside range; [TO CLARIFY: handling/message] | `Alexandra Elisabeth Kovačević van Linden-Sundströms` | `test.signup.name-over@example.org` | `1982-01-13` | `United Kingdom` | `+447700900001` |
-| Exactly 18 years old on reference date | `Linnea Varg` | `test.signup.age-exact18@example.org` | `2008-10-13` | `Sweden` | `+46701740638` |
-| Just inside age limit, 18 years + 1 day | `Emre Sommer` | `test.signup.age-inside@example.org` | `2008-10-12` | `Germany` | `+491713920002` |
-| Just outside age limit, 17 years 364 days — [TO CLARIFY: handling/message] | `Sana Mercer` | `test.signup.age-under18@example.org` | `2008-10-14` | `United Kingdom` | `+447700900002` |
-| Email format probe, missing `@` — [TO CLARIFY: validation/handling] | `Nora Faye` | `test.signup.invalid-email.example.org` | `1987-02-14` | `Germany` | `+4915228895456` |
-| Mobile format probe, contains a letter — [TO CLARIFY: validation/handling] | `Jonas Vale` | `test.signup.mobile-format@example.org` | `1988-05-05` | `Sweden` | `+4670174063X` |
+| Sweden; accented characters | Åsa Lindström | TEST-se01@example.com | 1990-04-12 | Sweden | [TO CLARIFY: Swedish test mobile] |
+| Germany; accented characters | Deniz Weiß | TEST-de01@example.com | 1992-08-23 | Germany | [TO CLARIFY: German test mobile] |
+| UK; hyphen and apostrophe | Amira-Jane O’Connell | TEST-uk01@example.com | 1994-11-05 | United Kingdom | +447700900001 |
 
-Special values are fictional/reserved: `example.org` is a documentation domain; Swedish numbers come from [PTS](https://www.pts.se/internet-och-telefoni/telefonnummer-och-adressering/telefonnummer-till-bocker-och-filmer/), German numbers from the [Bundesnetzagentur](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Nummerierung/DramaNumbers/artikel.html), and UK numbers from [Ofcom](https://www.ofcom.org.uk/phones-and-broadband/phone-numbers/numbers-for-drama).
+**Boundary and invalid-input cases**
 
-Assumptions: mobile numbers use E.164 format, and the country value is `United Kingdom` rather than `UK`. These numbers cannot receive SMS; use team/provider sandbox numbers for OTP tests.
+For each row, copy the UK baseline and replace the indicated field. Use a distinct email such as `TEST-b01@example.com` matching the case ID, except when testing email itself. Reusing the baseline mobile is intentional; run these as independent tests.
+
+Let **T** be the test date and **C = T minus 18 calendar years**.
+
+| Case | Field | Replacement value | Purpose |
+|---|---|---|---|
+| B01 | full name | `""` (empty string) | 0 characters; outside allowed range |
+| B02 | full name | `A` | 1 character; minimum |
+| B03 | full name | `Al` | 2 characters; just inside minimum |
+| B04 | full name | `AbcdefghijAbcdefghijAbcdefghijAbcdefghijAbcdefghi` | 49 characters |
+| B05 | full name | `AbcdefghijAbcdefghijAbcdefghijAbcdefghijAbcdefghij` | 50 characters; maximum |
+| B06 | full name | `AbcdefghijAbcdefghijAbcdefghijAbcdefghijAbcdefghijA` | 51 characters; outside allowed range |
+| B07 | date of birth | C minus 1 day | Turned 18 yesterday; meets age rule |
+| B08 | date of birth | C | Turns 18 today; meets age rule |
+| B09 | date of birth | C plus 1 day | Turns 18 tomorrow; outside allowed age range |
+| B10 | date of birth | `2000-02-30` | Impossible calendar date |
+| B11 | email | `TEST-b11.example.invalid` | Missing `@`; format-only invalid value |
+| B12 | mobile number | `+440` | Too short; format-only invalid value |
+
+On reference date **2026-10-19**, B07–B09 are respectively `2008-10-18`, `2008-10-19`, and `2008-10-20`. **Recalculate them for each test run.**
+
+**Sources of special values:** `example.com` and `.invalid` are reserved by RFC 2606/RFC 6761. The UK mobile comes from Ofcom’s drama range `07700 900000–07700 900999`; it cannot receive verification SMS. No Swedish or German mobile numbers were invented.
+
+**Assumptions:** dates use `YYYY-MM-DD`, countries use English display names, and mobile numbers use international notation. Character handling beyond the stated name length is unspecified.
+
+**Open questions**
+
+1. [TO CLARIFY: documented Swedish and German test mobiles] Which approved test numbers should these records use?
+2. [TO CLARIFY: validation contract] What required-field, name-character, email, country-value, and mobile-format rules apply?
+3. [TO CLARIFY: failure handling and age calculation] What should happen for invalid inputs, and which timezone and leap-day policy determine age?
+
+The tables are ready to copy; CSV or JSON text is also possible. Would you like a draft of the stated markets and form constraints for `.qa-toolkit/conventions.md`?
 
 ---
 
 ## What to notice
 
-- Email addresses use `example.org`, a domain reserved for documentation, and every phone number comes from a range the national regulator sets aside for films and books, with the source linked. None of it can reach a real person.
-- Boundaries at 0, 1, 50, and 51 characters and around the 18th birthday, with the reference date stated so the ages can be recalculated.
-- How the form should react to invalid values is marked `[TO CLARIFY: …]`, because the requirement does not say.
+- Email addresses use `example.com`, a domain reserved for documentation, and the UK mobile comes from Ofcom's range for drama, with the source named. The skill knows no documented range for Swedish or German mobiles, so it asks for approved test numbers instead of making up numbers that might reach a real person.
+- Boundaries at 0, 1, 2, 49, 50, and 51 characters and around the 18th birthday. The dates are given as a rule (test date minus 18 years) and worked out for a reference date, with a note to recalculate them for each run.
+- The `TEST-` marker sits in the email, so the names keep their exact lengths, and the names are labeled fictional.
+- Rules the requirement does not give (validation, error handling, the time zone of the age check) are open questions, not guesses.
 
-<sub>Codex, gpt-5.6-luna, reasoning effort max, 2026-10-13 (scenario TD-01). The skills have changed since some of these runs, so current output may differ in detail.</sub>
+<sub>Codex, gpt-6.1-sol, reasoning effort medium, 2026-10-19 (scenario TD-01, run 1 of the full test run on the released 0.3.0 skills).</sub>

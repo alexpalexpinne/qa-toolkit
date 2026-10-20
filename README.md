@@ -35,13 +35,12 @@ what management wants to see.
 
 The skill keeps the number, and the context that makes it honest:
 
-> Sprint 14 covered 50 of 80 planned tests: 47 passed and 3 failed, giving a
-> **94% pass rate** among the 50 tests run. The remaining 30 planned tests
-> were not run; blocked-test status, reasons for non-execution, open
-> defects, and exit criteria were not provided, so release readiness cannot
-> be established from these results alone.
+> Sprint 14 achieved a **94% pass rate among tests run: 47 of 50 passed**,
+> while 3 failed. Of 80 planned tests, 30 were not run, leaving 37.5% of the
+> planned test set unexecuted. Proposed next step: review the failures and
+> untested scope before making a release decision.
 
-<sub>Excerpt from a real run (Codex, gpt-5.6-luna, 2026-10-13).
+<sub>Excerpt from a real run (Codex, gpt-6.1-sol, 0.3.0 skills, 2026-10-20).
 [Full output](examples/test-summary.md)</sub>
 
 More real outputs, one per skill:
@@ -51,7 +50,7 @@ More real outputs, one per skill:
 | [Requirements review](examples/review-requirements.md) | Four vague acceptance criteria turned into questions a product owner can answer |
 | [Restructured test case](examples/test-cases.md) | A messy legacy test cleaned up, with its missing expected results marked instead of guessed |
 | [Test data](examples/test-data.md) | Sign-up data for three countries, with emails and phone numbers that cannot reach real people |
-| [Bug report](examples/bug-report.md) | Two short questions, then a report a developer can act on |
+| [Bug report](examples/bug-report.md) | A report a developer can act on right away, with only what is missing asked at the end |
 
 ## One skill for each step
 
@@ -131,8 +130,10 @@ keeps them because the user asks, in 3 of 6 runs on the released build
 and on every earlier revision tried. A regular scenario added after this
 run, BR-27, reproduces it in Swedish in 4 of 7 runs. Codex's own rule
 that a user's direct instructions beat instruction files seems to win
-here; two rewordings of the skill rule did not help. This is known and
-not yet fixed.
+here; three rewordings of the skill rule did not help. We treat it as a
+limit of what a skill can enforce against its host, not as something
+the next rewording will fix; see
+[Sensitive data in bug reports](#sensitive-data-in-bug-reports).
 
 Claude Sonnet 5.5 in Claude Code ran all 176 scenarios once on an earlier
 build of this version (2026-10-18). No sensitive value leaked, nothing
@@ -353,9 +354,14 @@ destination that is allowed to hold it, a report can instead use:
 
 Ask for a mode for a single report by saying so, or set it per destination
 in the team conventions (for example "Preserve in Jira SHOP"). A team can
-also turn either mode off, for example "Always redact"; that rule wins even
-over a request in the conversation. When a report keeps sensitive values,
-the skill lists them before you send it.
+also turn either mode off, for example "Always redact", or ban a kind of
+data, such as customer names; the skill is told to follow that rule even
+when the user asks to keep the data. This is an instruction, not a
+technical control: in testing, Codex sometimes let an explicit request in
+the conversation win over a ban on a kind of data. If
+your team must never have certain data in its tracker, enforce that in
+the tracker too. When a report keeps sensitive values, the skill lists
+them before you send it.
 
 There are no personal settings to configure. Rules you want every report to
 follow, such as the report language or tracker, go in the team conventions
