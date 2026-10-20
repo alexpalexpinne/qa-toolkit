@@ -48,7 +48,7 @@ FILL_CUSTOM = {"RR-13"}
 FILL_TEXT = {"TM-15": "Test cases are written in German."}
 # The project's .qa-toolkit/conventions.md: the block in the scenario's setup
 # (or the named scenario's), or the given text.
-PROJECT_FROM = {"BR-21": "BR-21", "BR-23": "BR-21", "BR-24": "BR-24", "BR-25": "BR-25",
+PROJECT_FROM = {"BR-21": "BR-21", "BR-23": "BR-21", "BR-24": "BR-24", "BR-25": "BR-25", "BR-27": "BR-27",
                 "TM-09": "TM-09", "TM-10": "TM-09", "TM-11": "TM-11", "HO-13": "HO-13",
                 "HO-41": "HO-41", "HO-46": "HO-46", "HO-61": "HO-61", "HO-77": "HO-77", "HO-79": "HO-79"}
 PROJECT_TEXT = {
