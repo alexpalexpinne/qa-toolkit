@@ -35,13 +35,12 @@ what management wants to see.
 
 The skill keeps the number, and the context that makes it honest:
 
-> Sprint 14 covered 50 of 80 planned tests: 47 passed and 3 failed, giving a
-> **94% pass rate** among the 50 tests run. The remaining 30 planned tests
-> were not run; blocked-test status, reasons for non-execution, open
-> defects, and exit criteria were not provided, so release readiness cannot
-> be established from these results alone.
+> Sprint 14 achieved a **94% pass rate among tests run: 47 of 50 passed**,
+> while 3 failed. Of 80 planned tests, 30 were not run, leaving 37.5% of the
+> planned test set unexecuted. Proposed next step: review the failures and
+> untested scope before making a release decision.
 
-<sub>Excerpt from a real run (Codex, gpt-5.6-luna, 2026-10-13).
+<sub>Excerpt from a real run (Codex, gpt-6.1-sol, 0.3.0 skills, 2026-10-20).
 [Full output](examples/test-summary.md)</sub>
 
 More real outputs, one per skill:
@@ -51,7 +50,7 @@ More real outputs, one per skill:
 | [Requirements review](examples/review-requirements.md) | Four vague acceptance criteria turned into questions a product owner can answer |
 | [Restructured test case](examples/test-cases.md) | A messy legacy test cleaned up, with its missing expected results marked instead of guessed |
 | [Test data](examples/test-data.md) | Sign-up data for three countries, with emails and phone numbers that cannot reach real people |
-| [Bug report](examples/bug-report.md) | Two short questions, then a report a developer can act on |
+| [Bug report](examples/bug-report.md) | A report a developer can act on right away, with only what is missing asked at the end |
 
 ## One skill for each step
 
@@ -98,7 +97,7 @@ drafts before you share them.
 
 ## Tested across models
 
-The skills are tested with 177 scenarios: 102 regular scenarios the skills
+The skills are tested with 178 scenarios: 103 regular scenarios the skills
 are improved against, and 75 *held-out* scenarios, kept apart from that
 work, that check whether the rules also work on cases they were not
 written for. A held-out scenario that ends up informing a fix is retired
@@ -108,25 +107,33 @@ tool exports, and requests that push the skill to round up a number or
 guess a value. Every run starts in a fresh session and is checked against
 the scenario's requirements, by script where possible and by reading.
 
-Results on GPT-6.1-Sol (medium effort) in Codex, 2026-10-16 to
-2026-10-18, two runs per scenario of each skill's full suite:
+Results on GPT-6.1-Sol (medium effort) in Codex, all 177 scenarios twice
+on the released 0.3.0 skills (2026-10-19 and 2026-10-20):
 
 | Skill | Scenarios (regular + held-out) | Result |
 |-------|--------------------------------|--------|
-| `review-requirements` | 13 + 13 | All pass, except that RR-07 sometimes drops minor findings without the one-line summary |
-| `test-cases` | 22 + 23 | All pass, except that TC-02 recommends reviewing the requirement first in only about half the runs |
-| `test-data` | 14 + 17 | All pass; HO-54 sometimes asks before giving a draft |
-| `bug-report` | 21 + 19 | All pass |
+| `review-requirements` | 13 + 13 | All pass, except that RR-07 drops minor findings without the one-line summary |
+| `test-cases` | 22 + 23 | All pass, except that TC-02 does not recommend reviewing the requirement first |
+| `test-data` | 14 + 17 | All pass |
+| `bug-report` | 21 + 19 | All pass except HO-79, see below; BR-09 left severity open once without naming the team's scale |
 | `test-summary` | 17 + 3 | All pass |
-| `team-setup` | 15 | 14 pass; TM-12 fails: `bug-report` does not offer to save the team's rules after the report |
+| `team-setup` | 15 | 13 pass; TM-12 fails: `bug-report` does not offer to save the team's rules after the report, and TM-14, which depends on that offer, fails too |
 
-Testing found three safety problems, all fixed and rerun: `bug-report`
-kept data that a team rule forbids when the user asked for it, first for a
-rule naming a masking mode and then for one naming a kind of data, and
-`test-data` labeled a valid Spanish identity number as invalid. The final
-fix to each skill was rerun on the scenarios it could affect, not on the
-full set: the last one, four reworded rules shared by the skills, on 10
-scenarios.
+Testing found three safety problems while the skills were developed:
+`bug-report` kept data that a team rule forbids when the user asked for
+it, first for a rule naming a masking mode and then for one naming a kind
+of data, and `test-data` labeled a valid Spanish identity number as
+invalid. The first and third are fixed. The second is fixed for emails
+but not for other kinds of data: in the held-out scenario HO-79 the team
+forbids customer names and numbers even on request, and `bug-report`
+keeps them because the user asks, in 3 of 6 runs on the released build
+and on every earlier revision tried. A regular scenario added after this
+run, BR-27, reproduces it in Swedish in 4 of 7 runs. Codex's own rule
+that a user's direct instructions beat instruction files seems to win
+here; three rewordings of the skill rule did not help. We treat it as a
+limit of what a skill can enforce against its host, not as something
+the next rewording will fix; see
+[Sensitive data in bug reports](#sensitive-data-in-bug-reports).
 
 Claude Sonnet 5.5 in Claude Code ran all 176 scenarios once on an earlier
 build of this version (2026-10-18). No sensitive value leaked, nothing
@@ -347,9 +354,14 @@ destination that is allowed to hold it, a report can instead use:
 
 Ask for a mode for a single report by saying so, or set it per destination
 in the team conventions (for example "Preserve in Jira SHOP"). A team can
-also turn either mode off, for example "Always redact"; that rule wins even
-over a request in the conversation. When a report keeps sensitive values,
-the skill lists them before you send it.
+also turn either mode off, for example "Always redact", or ban a kind of
+data, such as customer names; the skill is told to follow that rule even
+when the user asks to keep the data. This is an instruction, not a
+technical control: in testing, Codex sometimes let an explicit request in
+the conversation win over a ban on a kind of data. If
+your team must never have certain data in its tracker, enforce that in
+the tracker too. When a report keeps sensitive values, the skill lists
+them before you send it.
 
 There are no personal settings to configure. Rules you want every report to
 follow, such as the report language or tracker, go in the team conventions

@@ -1117,3 +1117,10 @@ TC-02 (no review recommendation, 2 of 2) and TC-05 run 2 (asks which
 moment counts, not the time zone). TC-15, HO-23, and HO-76 were flagged
 only by over-narrow checks, now fixed. Folder
 `observations/codex-sol61-medium-tc-editorial-2026-10-17/`.
+
+## Full run on the final 0.3.0 build, recorded 2026-10-20 (Codex, gpt-6.1-sol, medium)
+
+Full suite, 2 runs per scenario, revision `d81051e`. Folder
+`observations/codex-sol61-medium-full-0.3.0-2026-10-19/`; details in
+`README.md`. All pass except TC-02, 0 of 2 (no recommendation to review the
+requirement first).

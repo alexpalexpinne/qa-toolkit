@@ -641,3 +641,10 @@ options once. Full suite, 31 scenarios × 2: all pass. HO-08 run 1 and
 HO-50 ask for the team's test numbers instead of giving values, which the
 checker flags but the rule asks for. Folder
 `observations/codex-sol61-medium-td-editorial-2026-10-17/`.
+
+## Full run on the final 0.3.0 build, recorded 2026-10-20 (Codex, gpt-6.1-sol, medium)
+
+Full suite, 2 runs per scenario, revision `d81051e`. Folder
+`observations/codex-sol61-medium-full-0.3.0-2026-10-19/`; details in
+`README.md`. All pass. TD-01 run 2 was flagged by the checker only because it wrote
+"test date minus 18 calendar years".

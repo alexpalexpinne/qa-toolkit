@@ -18,54 +18,57 @@ Step 4: Check ORDERS.VOUCHER_CODE
 
 ## What came back
 
-> Real output, unedited except that its headings are shifted down two levels to fit this page.
+> Real output, unedited except that Codex's one-line opening note is left out.
 
 ---
 
-**Draft — CHK-031: Checkout with voucher – total reduced by 25%**
+Draft using the skill’s default format; no team conventions were found.
 
-**Purpose:** Check voucher application at checkout and inspect the stored voucher code after placing the order.  
+**CHK-031: Checkout with voucher**
+
+**Purpose:** Check the voucher discount and order-summary display, then place the order and inspect `ORDERS.VOUCHER_CODE`.  
 **Priority:** High  
-**Covers:** Original CHK-031, steps 1–4. No separate requirement or acceptance criterion supplied.  
+**Covers:** Original CHK-031, steps 1–4; no separate requirement provided.  
 **Status:** Blocked: pending clarification of expected results for original steps 3 and 4.
 
-**Preconditions** *(moved from original step 1)*:
+**Preconditions** *(setup from original step 1)*:
 
 - Logged in as a test user.
 - Cart contains 2 items: `SKU-1001` and `SKU-2002`.
 - Checkout is open.
 
-**Test data:** Voucher `WINTER25`.
+**Test data:** Voucher `WINTER25`. Use a test account and test data; production data should not be used.
 
 | # | Action | Data | Expected result | Original step |
 |---|---|---|---|---|
-| 1 | Enter the voucher and select 'Apply'. | `WINTER25` | Total is reduced by 25%. A voucher line is shown in the order summary. | 1, 2 |
-| 2 | Select 'Place order'. | — | [TO CLARIFY: expected result after selecting 'Place order'] | 3 |
-| 3 | Inspect the voucher code for the order placed in this test. | `ORDERS.VOUCHER_CODE` | [TO CLARIFY: expected value of ORDERS.VOUCHER_CODE] | 4 |
+| 1 | Enter the voucher and press 'Apply'. | `WINTER25` | Total is reduced by 25%. A voucher line is shown in the order summary. | 1, 2 |
+| 3 | Press 'Place order'. | — | [TO CLARIFY: expected result after pressing 'Place order'] | 3 |
+| 4 | Check `ORDERS.VOUCHER_CODE` for this order. | — | [TO CLARIFY: expected stored value] | 4 |
 
-**Scope recommendation:** Scope OK. The discount, summary display, and database check belong to one checkout transaction.
+**Scope recommendation:** Scope OK. The display and database checks belong to the same checkout transaction.
 
-**Change summary:** Moved the setup from original step 1 into preconditions. Merged the result-only original step 2 into the voucher application step. Preserved the ID, test data, button labels, database identifier, and execution order. Missing expected results remain unresolved.
+**Change summary:** Moved login, cart contents, and checkout setup into preconditions. Merged the expected-result-only step 2 into step 1. Preserved the remaining original step numbers, identifiers, and checks. Left the database expectation unspecified rather than assuming it equals the entered voucher.
 
-**Coverage:** Blocked pending clarification; this case does not count as confirmed coverage. Requirement coverage could not be assessed.
+**Coverage summary:**
+
+| Source | Case | Status |
+|---|---|---|
+| CHK-031, original steps 1–4 | CHK-031 | Blocked: expected results for steps 3 and 4 are missing. |
 
 **Open questions:**
 
-1. What observable result is expected after selecting 'Place order'?
-2. What value should `ORDERS.VOUCHER_CODE` contain?
-3. Which test user should be used, and how should the tester identify the relevant order record?
-4. Which requirement or acceptance criterion should this case link to?
+1. What observable result should follow pressing 'Place order'?
+2. What exact value should `ORDERS.VOUCHER_CODE` contain for this order?
+3. Which amount is the basis for the 25% reduction?
 
-Consistency with related tests was not checked because none were provided.
-
-This draft is ready to copy and paste; I can also save it as a Markdown file.
+Consistency with related cases was not checked because none were provided. This draft is ready to copy and paste; an import version would require the target tool’s format.
 
 ---
 
 ## What to notice
 
-- Setup moved to preconditions, the result-only step merged into the step it belongs to, and every new step names the original step it came from.
+- Setup moved to preconditions, the result-only step merged into the step it belongs to, and every step names the original step it came from. The steps keep their original numbers (1, 3, 4), so they still match the old test.
 - IDs, SKUs, the voucher code, button labels, and `ORDERS.VOUCHER_CODE` are kept exactly.
-- The two missing expected results are not filled in. It would be easy to write "`VOUCHER_CODE` is `WINTER25`"; the skill marks them `[TO CLARIFY: …]` and blocks the case instead, because a guessed expected result is worse than none.
+- The two missing expected results are not filled in. It would be easy to write "`VOUCHER_CODE` is `WINTER25`"; the skill says it did not assume that, marks both `[TO CLARIFY: …]`, and blocks the case, because a guessed expected result is worse than none.
 
-<sub>Codex, gpt-6.1-sol, reasoning effort xhigh, 2026-10-13 (scenario TC-11). The skills have changed since some of these runs, so current output may differ in detail.</sub>
+<sub>Codex, gpt-6.1-sol, reasoning effort medium, 2026-10-19 (scenario TC-11, run 1 of the full test run on the released 0.3.0 skills).</sub>

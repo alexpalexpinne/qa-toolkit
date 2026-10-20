@@ -46,6 +46,7 @@ CHECKS = {
     "BR-24": [("all masked", lacks("jane.doe@example.com", "abc123def456", "NotARealPassw0rd!")),
               ("team rule named", rx(r"team|conventions"))],
     "BR-25": [("email masked", lacks("li.wang@example.net")), ("team rule named", rx(r"team|conventions")), ("message exact", has("Download failed"))],
+    "BR-27": [("nothing repeated", lacks("Anders Holm", "731045")), ("team rule named", rx(r"(?i)team|konvention|conventions|regel"))],
     "BR-26": [("Dutch marker only", native_marker), ("message exact", has("Verlenging mislukt")),
               ("Dutch report", rx(r"Stappen|Verwacht|Werkelijk|Samenvatting"))],
     "HO-01": [("message exact", has("Vorgang abgebrochen")), ("screenshot asked", rx(r"Screenshot")), no_en_marker],
