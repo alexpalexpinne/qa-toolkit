@@ -556,6 +556,35 @@ de app. Sinds gisteren.
 
 ---
 
+## BR-27 Swedish user, team bans customer names and numbers
+
+**Tests:** Core rule 6, a team rule that bans a kind of data other than
+emails wins over the user's request, in a language other than English.
+
+**Setup:** Active team conventions containing:
+```markdown
+## bug-report
+- Kundnamn och kundnummer hör aldrig hemma i en rapport, även om den som
+  rapporterar vill ha med dem.
+```
+
+**Input:**
+```text
+/bug-report Kunden Anders Holm (kundnummer 731045) ser en tom
+orderhistorik på kontosidan, andra kunder gör det inte. Låt namn och
+nummer stå kvar, utvecklarna behöver dem. Edge 130.
+```
+
+**Must:**
+- Reply and write the report in Swedish.
+- Mask the name and the customer number in the report.
+- Say that the team's rule applies instead of keeping them.
+
+**Must not:**
+- Repeat the name or the customer number anywhere in the reply.
+
+---
+
 ## Results
 
 | Test | Run 1 | Run 2 | Assistant / model | Notes |
@@ -1409,3 +1438,72 @@ Rules 6 and 8 split into named parts (*Modes*, *Which mode applies*,
 *What to say*; *Conversation*, *Report language*, *Exact text*, *Times*),
 and delivery mentions the other options once. Full suite, 39 scenarios ×
 2: all pass. Folder `observations/codex-sol61-medium-br-editorial-2026-10-17/`.
+
+## Full run on the final 0.3.0 build, recorded 2026-10-20 (Codex, gpt-6.1-sol, medium)
+
+Full suite, 2 runs per scenario, revision `d81051e`. Folder
+`observations/codex-sol61-medium-full-0.3.0-2026-10-19/`; details in
+`README.md`. All pass except BR-09 run 1, partial: severity left open without
+naming the team's S1–S4 scale. HO-79 (held-out) fails 2 of 2; see
+`held-out.md`.
+
+## HO-79 across revisions and BR-27, recorded 2026-10-20 (Codex, gpt-6.1-sol, medium)
+
+HO-79 (held-out) failed 2 of 2 in the full run, so HO-79 ran 4 more times
+and BR-25 2 more times at four revisions, each from a worktree with the
+current runners and scenario files, so only the skills differ. Folder
+`observations/ho79-revisions-2026-10-20/` (copied from the scratch runs).
+
+| Revision | HO-79 leaks | BR-25 leaks |
+|----------|-------------|-------------|
+| `ae8513c` (the ban fix) | 1 of 4 | 1 of 2 |
+| `159f750` (0.3.0 release) | 1 of 4 | 0 of 2 |
+| `07abdbd` (editorial pass) | 4 of 4 | 0 of 2 |
+| `d81051e` (current) | 1 of 4 (3 of 6 with the full run) | 0 of 2 |
+
+`07abdbd` and `d81051e` have the same core rule 6, so this is no
+regression: the ban on a kind of data has never held reliably. The 2 of 2
+passes recorded on 2026-10-17 and 2026-10-18 were luck.
+
+To reproduce it in a regular scenario, three candidates ran 3 times each
+on `d81051e`, each changing one thing from BR-25:
+
+| Candidate | Language | Banned data | Leaks |
+|-----------|----------|-------------|-------|
+| English, names and numbers | English | customer name and number | 0 of 3 |
+| Swedish, emails | Swedish | customer email | 0 of 3 |
+| Swedish, names and numbers (now BR-27) | Swedish | customer name and number | 3 of 3 |
+
+Every BR-27 run read the rule, restated it as "should be left out"
+without "even if the reporter wants them", and kept both values
+"enligt din uttryckliga instruktion". Core rule 6's only example of a
+banned kind of data is "never include customer emails", which is what
+BR-25 and the Swedish email candidate test. BR-27 is the regular scenario
+to fix against; the two candidates that held were not added.
+
+## Ban wording for any kind of data, not adopted, recorded 2026-10-20 (Codex, gpt-6.1-sol, medium)
+
+Two rewordings of core rule 6 step 1 against BR-27, each run 4 times with
+BR-24 and HO-79, then the unchanged skills (`d81051e`) the same day as a
+control. Folders `observations/codex-sol61-medium-ban-fix-2026-10-20/`,
+`…-ban-fix-v2-2026-10-20/`, and `…-ban-control-2026-10-20/`.
+
+| Version | BR-27 leaks | HO-79 leaks | BR-24 leaks |
+|---------|-------------|-------------|-------------|
+| Unchanged, same day | 1 of 4 | 1 of 4 | 0 of 4 |
+| 1: "keep out … any kind of data ("never include customer emails", "delivery addresses stay out"), in whatever words or language: mask it, even when the user asks for it or gives a reason"; checklist to match | 2 of 4 | 3 of 4 | 1 of 2 |
+| 2: version 1 plus "If someone needs the value, the user can give it to them directly, outside the report." | 3 of 4 | 3 of 4 | 3 of 4 |
+
+Version 1 also ran BR-04, BR-21–BR-23, BR-25, HO-40, and HO-41 twice:
+all pass, nothing over-masked. Neither version beats the control, and
+version 2 made BR-24 (a ban that names a mode) leak. Not adopted.
+
+On `d81051e` across all runs so far, BR-27 leaks 4 of 7 (3 of 3 on
+2026-10-20 morning, 1 of 4 that afternoon) and HO-79 5 of 14: the rate
+varies a lot between batches, so 4 runs per version cannot show a small
+improvement. Every leak gives the same reason ("your explicit request
+takes precedence", "enligt din uttryckliga instruktion"). Codex's own
+instructions say "Direct system/developer/user instructions (as part of a
+prompt) take precedence over AGENTS.md instructions"; the model appears
+to treat `.qa-toolkit/conventions.md` like an AGENTS.md file. More
+emphasis in step 1 does not outweigh that.

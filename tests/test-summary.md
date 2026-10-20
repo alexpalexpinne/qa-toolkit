@@ -722,3 +722,9 @@ then passes 4 of 4, TS-15 and TS-17 2 of 2. TS-11 run 1 was flagged only
 by an over-narrow check. Folders
 `observations/codex-sol61-medium-ts-editorial-2026-10-17/` and
 `observations/codex-sol61-medium-ts-dedup-2026-10-18/`.
+
+## Full run on the final 0.3.0 build, recorded 2026-10-20 (Codex, gpt-6.1-sol, medium)
+
+Full suite, 2 runs per scenario, revision `d81051e`. Folder
+`observations/codex-sol61-medium-full-0.3.0-2026-10-19/`; details in
+`README.md`. All pass.

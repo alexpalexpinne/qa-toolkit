@@ -940,3 +940,11 @@ The finding limit is a default the team conventions can change, and
 delivery mentions the other options once. Full suite, 26 scenarios × 2:
 all pass except the known RR-07 summary-line miss in run 1. Folder
 `observations/codex-sol61-medium-rr-editorial-2026-10-17/`.
+
+## Full run on the final 0.3.0 build, recorded 2026-10-20 (Codex, gpt-6.1-sol, medium)
+
+Full suite, 2 runs per scenario, revision `d81051e`. Folder
+`observations/codex-sol61-medium-full-0.3.0-2026-10-19/`; details in
+`README.md`. All pass except RR-07, 0 of 2 (minor vague phrases dropped without the
+summary line). RR-06 and RR-10 were flagged by the checker only for their
+wording ("tension", "three or five").

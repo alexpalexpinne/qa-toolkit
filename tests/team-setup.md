@@ -514,3 +514,12 @@ TM-01–TM-15, 2 runs each, on the editorial versions of all skills. Same
 as before: all pass except TM-12 (no team-file offer, 0 of 2) and TM-14
 (1 of 2; run 1 saved the bug report as a file). Folder
 `observations/codex-sol61-medium-tm-editorial-2026-10-17/`.
+
+## Full run on the final 0.3.0 build, recorded 2026-10-20 (Codex, gpt-6.1-sol, medium)
+
+Full suite, 2 runs per scenario, revision `d81051e`. Folder
+`observations/codex-sol61-medium-full-0.3.0-2026-10-19/`; details in
+`README.md`. All pass except TM-12, 0 of 2 (no team-file offer after the report),
+and TM-14, which follows from it: run 1 partial (conventions draft in
+turn 2 without the full path or a request for a yes), run 2 fail (saves
+the bug report as `bug-report-search.md`).
