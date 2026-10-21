@@ -51,7 +51,7 @@ FILL_TEXT = {"TM-15": "Test cases are written in German."}
 PROJECT_FROM = {"BR-21": "BR-21", "BR-23": "BR-21", "BR-24": "BR-24", "BR-25": "BR-25", "BR-27": "BR-27",
                 "TM-09": "TM-09", "TM-10": "TM-09", "TM-11": "TM-11", "HO-13": "HO-13",
                 "HO-41": "HO-41", "HO-46": "HO-46", "HO-61": "HO-61", "HO-77": "HO-77", "HO-79": "HO-79",
-                "TM-16": "TM-16"}
+                "TM-16": "TM-16", "TS-18": "TS-18"}
 PROJECT_TEXT = {
     "TM-03": "## General\n- Reports are written in English.\n- Tracker: Jira, project SHOP.\n"
              "- Severity: S1, S2, S3, S4.\n\n## review-requirements\n\n## test-cases\n\n"

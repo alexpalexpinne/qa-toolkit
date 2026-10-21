@@ -650,3 +650,27 @@ shows the same. Claude Code with `CLAUDE.md` was not tested.
 summary** (new regular scenario, three runs, folder
 `observations/codex-sol61-medium-tm16-2026-10-21/run1-3`): all three pass;
 see `team-setup.md`. The README's lead example is run 2.
+
+## team-setup asks where test results come from (2026-10-21)
+
+`team-setup`'s *test-summary* round now asks first where results and open
+defects come from (for example an Xray test plan exported as CSV, or a
+Jira search) and which field holds severity; the question about
+recommendation terms is no longer a first-round question. The template's
+comment and *Example* section show a data-sources rule. New regular
+scenarios: TM-17 (setup asks about sources) and TS-18 (the conventions
+name the sources, no results given).
+
+Gate: all TS, TM, and held-out `test-summary` scenarios (37) twice on
+GPT-6.1-Sol (medium), folder
+`observations/codex-sol61-medium-datasources-2026-10-21/run1-2`. No leak;
+`check_test_summary.py` passes every TS and HO scenario in both runs; the
+CHECK flags match the 0.3.0 reference run (conventions lookups, TM-14's
+known missing offer). TM-01, TM-02, TM-03, TM-06, TM-07, TM-09, and TM-10
+read: unchanged. TM-17 passes 2 of 2, against 0 of 3 on the 0.3.0
+`team-setup` (`observations/codex-sol61-medium-tm17-control-2026-10-21/`).
+
+The gate ran with a second change, a `test-summary` paragraph asking for
+the exports the conventions name. It was dropped before merging because
+the unchanged skill already passes TS-18 4 of 4; see `test-summary.md`.
+`skills/test-summary/SKILL.md` is unchanged from 0.3.0.

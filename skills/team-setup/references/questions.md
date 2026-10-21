@@ -69,9 +69,12 @@ Ask at most three questions per reply, starting with the ones marked
 
 ## test-summary
 
+- **First:** Where do results and open defects come from (for example an
+  Xray test plan exported as CSV, a TestRail run, a Jira search), and which
+  field holds the defects' severity?
 - **First:** What are your exit criteria for a test round or release?
 - **First:** How do your test tool's statuses map to passed, failed,
   blocked, and not run?
-- **First:** Which recommendation terms do you use, and who decides?
+- Which recommendation terms do you use, and who decides?
 - How is each test counted when it was run more than once?
 - Who reads the reports, and where are they published?

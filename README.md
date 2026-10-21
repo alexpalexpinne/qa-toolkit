@@ -185,7 +185,7 @@ drafts before you share them.
 
 ## Tested across models
 
-The skills are tested with 179 scenarios: 104 regular scenarios the skills
+The skills are tested with 181 scenarios: 106 regular scenarios the skills
 are improved against, and 75 *held-out* scenarios, kept apart from that
 work, that check whether the rules also work on cases they were not
 written for. They cover vague and complete input, missing information,
@@ -374,7 +374,8 @@ Give the whole team the same rules with one file in your project,
 
 - **Run `team-setup`** (`/qa-toolkit:team-setup` with the plugin). It asks a
   few questions at a time, first about languages, tracker, and severity
-  scale, then only about the skills your team uses. It shows the whole file
+  scale, then only about the skills your team uses, for example where
+  your test results and open defects come from. It shows the whole file
   and writes it only after you say yes. Run it again to change something.
 - **Accept the offer while working.** When a skill notices you stating rules
   a team would decide once, such as the report language or severity scale,
