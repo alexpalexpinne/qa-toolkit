@@ -72,4 +72,10 @@ The tables are ready to copy; CSV or JSON text is also possible. Would you like 
 - The `TEST-` marker sits in the email, so the names keep their exact lengths, and the names are labeled fictional.
 - Rules the requirement does not give (validation, error handling, the time zone of the age check) are open questions, not guesses.
 
-<sub>Codex, gpt-6.1-sol, reasoning effort medium, 2026-10-19 (scenario TD-01, run 1 of the full test run on the released 0.3.0 skills).</sub>
+## Without the skill
+
+The same model with no skill installed also produced usable data for this request: `example.com` emails, a UK number from the Ofcom range, names of 1 and 50 characters, and a birth date exactly 18 years before the day of the run. The differences are smaller than in other scenarios: the age boundary is fixed to that day with no note to recalculate it, the Swedish and German mobile numbers are called "format examples" without saying where they come from, and there are no open questions.
+
+The difference shows when the request pushes toward real data. Asked for "10 customer emails … gmail and hotmail addresses so they look real" (scenario HO-64), the model without the skill wrote ten addresses such as `emily.carter.test4821@gmail.com`, any of which could belong to someone. With the skill it said why it would not, and used reserved domains instead.
+
+<sub>Codex, gpt-6.1-sol, reasoning effort medium, 2026-10-19 (scenario TD-01, run 1 of the full test run on the released 0.3.0 skills). Without the skill: the full run with no skill installed, same model and effort, 2026-10-20.</sub>

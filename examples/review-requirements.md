@@ -75,4 +75,14 @@ This review is ready to copy into your requirement or tracker.
 - The proposed acceptance criteria are labeled as proposals, and every value the team has not decided is a `[TO CLARIFY: …]` marker. No "24 hours" or "12 characters" appears out of nowhere.
 - It covers what the story left out: whether the old password still works, what happens to used or replaced links, and what to show for an unregistered address, left to the team's account-privacy policy.
 
-<sub>Codex, gpt-6.1-sol, reasoning effort medium, 2026-10-19 (scenario RR-01, run 1 of the full test run on the released 0.3.0 skills).</sub>
+## Without the skill
+
+The same model with no skill installed found the same four vague words and also covered the old password and used links. The difference is in who decides. Its revised criteria, "proposals for agreement", come with the numbers already chosen (excerpt):
+
+> - For a registered email address, at least 95% of reset emails arrive within 60 seconds under the agreed normal load.
+> - The reset link expires 30 minutes after issuance and cannot be reused after a successful reset.
+> - New passwords must contain 15–128 characters and must not appear on the configured common or compromised password blocklist.
+
+It also settled the account-privacy question itself, with the same message for registered and unregistered addresses. These are reasonable choices, but they are the product owner's, and a proposal with a number in it tends to be accepted as it stands.
+
+<sub>Codex, gpt-6.1-sol, reasoning effort medium, 2026-10-19 (scenario RR-01, run 1 of the full test run on the released 0.3.0 skills). Without the skill: the full run with no skill installed, same model and effort, 2026-10-20.</sub>

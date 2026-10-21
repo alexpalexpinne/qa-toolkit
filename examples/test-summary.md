@@ -73,4 +73,14 @@ Also unresolved: omitted scope and reasons, defect details, and applicable exit 
 - Passed, failed, blocked, and not run are reported separately, and the figures are checked to add up.
 - The recommendation is labeled as a proposal for the responsible person to confirm, and everything the input did not say (period, data date, defects, exit criteria) is marked instead of filled in.
 
-<sub>Codex, gpt-6.1-sol, reasoning effort medium, 2026-10-20 (scenario TS-02, run 2 of the full test run on the released 0.3.0 skills).</sub>
+## Without the skill
+
+The same model with no skill installed did about as well here. Its summary:
+
+> **Summary:** Testing achieved a **94% pass rate** among the 50 tests executed. Of 80 planned tests, 30 remain unexecuted, so testing is incomplete.
+
+It added a table of the counts and said the results "alone do not establish release readiness". It did not ask about the period, build, defects, or how many of the 30 were blocked rather than not run.
+
+On a strong model, the skill matters less for a request like this than for one with nothing to report from: asked for a summary of a sprint where "everything went fine", the same model without the skill wrote that testing "went smoothly" (scenario TS-07, see the [README](../README.md#see-it-in-action)).
+
+<sub>Codex, gpt-6.1-sol, reasoning effort medium, 2026-10-20 (scenario TS-02, run 2 of the full test run on the released 0.3.0 skills). Without the skill: the full run with no skill installed, same model and effort, 2026-10-20.</sub>
