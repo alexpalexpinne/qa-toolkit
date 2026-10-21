@@ -376,7 +376,10 @@ Give the whole team the same rules with one file in your project,
   few questions at a time, first about languages, tracker, and severity
   scale, then only about the skills your team uses, for example where
   your test results and open defects come from. It shows the whole file
-  and writes it only after you say yes. Run it again to change something.
+  and writes it only after you say yes. For a rule that must never be
+  broken, it also suggests a line for `AGENTS.md` or `CLAUDE.md` (see
+  [Sensitive data](#sensitive-data-in-bug-reports)). Run it again to
+  change something.
 - **Accept the offer while working.** When a skill notices you stating rules
   a team would decide once, such as the report language or severity scale,
   it offers once, after its result, to save them for the team.
@@ -419,7 +422,7 @@ exception is a rule that must never be broken; see the next section.
 | In a project repository | Commit `.qa-toolkit/conventions.md`. Everyone who pulls has it, and changes go through review like any other change. |
 | Without a code repository | Keep the file in a shared team folder, for example `qa-team/.qa-toolkit/conventions.md`, and start your assistant in that folder. |
 | claude.ai chat or Cowork | Paste the conventions into a shared claude.ai Project's instructions, or attach the file to the conversation. |
-| The whole organization | Fork the plugin, fill in each skill's own `references/team-conventions.md`, and distribute the fork through your organization's marketplace. |
+| The whole organization | Fork the plugin, fill in each skill's own `references/team-conventions.md`, and distribute the fork through your organization's marketplace. These are defaults, not a layer under the project's rules: a project with its own `.qa-toolkit/conventions.md` uses only that file, so copy into it any organization rule the project must keep. |
 
 **If you maintain your own copy of the skills,** you can instead edit each
 skill's `references/team-conventions.md`, and replace
@@ -448,7 +451,8 @@ the conversation win over a ban on a kind of data (7 of 13 runs).
 For a rule like that, also put it in the instructions file your assistant
 loads on its own, `AGENTS.md` for Codex or `CLAUDE.md` for Claude Code,
 for example "Bug reports never contain customer names or customer numbers,
-even if the reporter asks." With the same ban in `AGENTS.md` as well,
+even if the reporter asks." `team-setup` suggests that line when you
+give it such a rule. With the same ban in `AGENTS.md` as well,
 Codex kept it in all 10 runs; `CLAUDE.md` has not been tested. If your
 team must never have certain data in its tracker, enforce that in the
 tracker too. When a report keeps sensitive values, the skill lists
@@ -495,8 +499,8 @@ the standard library:
 python3 scripts/package_plugins.py
 ```
 
-It creates `dist/qa-toolkit-0.3.1-openai.zip`,
-`dist/qa-toolkit-0.3.1-claude.zip`, and `dist/SHA256SUMS`. Each archive
+It creates `dist/qa-toolkit-0.3.2-openai.zip`,
+`dist/qa-toolkit-0.3.2-claude.zip`, and `dist/SHA256SUMS`. Each archive
 contains all six self-contained skills, their references and licenses,
 listing assets, documentation, and examples. The helper excludes local
 settings, evaluation files, marketplaces, and repository tooling.

@@ -35,8 +35,10 @@ These apply in every step and override everything else in this file.
    write only after an explicit "yes". When updating an existing file,
    change only what the user asked for and show what changes.
 3. **One file, one place.** Write only `.qa-toolkit/conventions.md`, only at
-   the location the user confirmed. Never change any skill's files, and
-   never commit, push, or share the file yourself.
+   the location the user confirmed. The one exception is the line for a
+   rule that must never be broken (Step 3), and only after the user says
+   yes to it. Never change any skill's files, and never commit, push, or
+   share anything yourself.
 4. **No sensitive values.** The file is shared with the whole team. Never
    put passwords, tokens, API keys, or real customer data in it. Where the
    team needs credentials, record where they are kept (for example "the
@@ -70,7 +72,9 @@ These apply in every step and override everything else in this file.
 3. **Is there already a `.qa-toolkit/conventions.md`** at the project root?
    Open it by that exact path; do not search for it. If so, read it and work in
    update mode: ask what the user wants to change, change only that, and
-   keep everything else exactly as it is.
+   keep everything else exactly as it is. If a section heading differs
+   from the names in core rule 5 (for example `## Bug report`), say that
+   the skills look for the exact name and offer to fix it in this update.
 
 If the user started with specific rules in their message (for example
 "Set up our team: English reports, Jira project SHOP"), use them and show
@@ -115,14 +119,30 @@ write files, present the draft as the text to save and say where it can go
 (Step 1 point 1). If the user is not the person who decides the team's
 rules, suggest they share the draft with that person first.
 
+**Rules that must never be broken.** If the user states a rule that must
+hold even when someone asks otherwise (for example "Always redact", or
+"bug reports never contain customer names"), put it in its section as
+usual. After the draft, also suggest the same rule as one line for the
+instructions file the assistant loads on its own in this project:
+`AGENTS.md` for Codex, `CLAUDE.md` for Claude Code, at the project root
+(name both if you are not sure which assistant this is). Say why in one
+sentence: the assistant weighs that file above a file a skill reads, so
+a request in the conversation is less likely to override the rule. Show
+the exact line, and say that "yes" writes the conventions file only,
+while "yes, both" also adds the line.
+
 ## Step 4: Write and hand over
 
 1. Write the file at the confirmed path, creating the `.qa-toolkit` folder
    if needed.
 2. Read it back and state its actual path.
-3. Tell the user how the team gets it: commit the file to the project's
-   repository, or, without a repository, keep it in a folder the team
-   shares and start the assistant there. In a shared claude.ai Project, the
+3. If the user said yes to the line for a rule that must never be broken
+   (Step 3), add it at the end of that instructions file, creating the
+   file if it does not exist and changing nothing else in it. Read it back.
+4. Tell the user how the team gets it: commit the file (and the
+   instructions file, if you added the line) to the project's repository,
+   or, without a repository, keep it in a folder the team shares and start
+   the assistant there. In a shared claude.ai Project, the
    same text goes in the project's instructions.
 
 If writing fails, say so, give the file's text and the intended path, and

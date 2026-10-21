@@ -674,3 +674,35 @@ The gate ran with a second change, a `test-summary` paragraph asking for
 the exports the conventions name. It was dropped before merging because
 the unchanged skill already passes TS-18 4 of 4; see `test-summary.md`.
 `skills/test-summary/SKILL.md` is unchanged from 0.3.0.
+
+## Bans in the instructions file, and misspelled headings (2026-10-21)
+
+Two changes after a review of `team-setup`:
+
+- **`team-setup` suggests a line for `AGENTS.md` or `CLAUDE.md`** when the
+  user states a rule that must never be broken, says why, and adds it to
+  the end of that file only on "yes, both". This follows the ban result
+  above. New scenario TM-18 (with an existing `AGENTS.md` that must be
+  kept): 2 of 2, against 0 of 3 on the 0.3.1 `team-setup`.
+- **Every workflow skill reads a heading clearly meant as its section**
+  (for example `## Bug report`) as that section and tells the user to
+  rename it. New scenario TM-19: 2 of 2. The control on 0.3.1 shows the
+  old skills already applied such a section on this model (3 of 3); what
+  is new is the rename notice (0 of 3 before). `team-setup` in update mode
+  also offers to fix such a heading.
+
+The README also says now that a fork's own `references/team-conventions.md`
+is not combined with a project's file.
+
+Gate: all TM scenarios and every scenario that reads team conventions
+(38) twice on GPT-6.1-Sol (medium), folder
+`observations/codex-sol61-medium-followups-2026-10-21/run1-2`; controls in
+`observations/codex-sol61-medium-followups-control-2026-10-21/run1-3`. No
+scenario without a ban got the `AGENTS.md` suggestion, and no scenario with
+correct headings got a rename notice. Only TM-18 wrote a file other than the
+conventions file. The checkers pass every scenario except the known ban
+leaks with the ban only in the conventions file: HO-79 run 1 (2 of 3) and
+the retired HO-77 run 1 (2 of 3; it also leaked on 2026-10-17). TM-12 still
+makes no team-file offer; TM-14 drafts and writes the file in both runs.
+The CHECK flags are the ones in the reference runs: Codex's own search for
+`AGENTS.md`, template searches, and English markers in BR-09 and HO-13.

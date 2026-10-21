@@ -1,7 +1,7 @@
 {
   "name": "qa-toolkit",
   "displayName": "QA Toolkit",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Five software testing workflows: review requirements, design and review test cases, prepare test data, draft bug reports, and summarize results with gaps and unknowns made visible.",
   "author": {
     "name": "Alexander Danvall",

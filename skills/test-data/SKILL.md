@@ -139,6 +139,10 @@ exists; do not combine them, and do not search anywhere else:
    work in a repository, open it at the repository root. Do not list
    folders, search, or walk up parent folders to find it. Read its *General* section and its *test-data*
    section; ignore the sections for other skills and its *Example* section.
+   If a heading is clearly meant as one of these two but spelled
+   differently (for example `## Test data` or `## Allgemein`), read it as
+   that section and tell the user, in one sentence, to rename it to the
+   exact name (`## General` or `## test-data`) so every skill finds it.
    Never look in neighboring projects.
 2. **Conventions supplied to you:** team conventions the user pasted or
    attached, or that the workspace's own instructions contain (for example

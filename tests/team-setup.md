@@ -1,7 +1,8 @@
 # Test cases: team-setup and shared team conventions
 
-TM-01–TM-08 test the `team-setup` skill. TM-09–TM-15 test how the five
-workflow skills read `.qa-toolkit/conventions.md` and offer to create it.
+TM-01–TM-08, TM-17, and TM-18 test the `team-setup` skill. TM-09–TM-16
+and TM-19 test how the five workflow skills read
+`.qa-toolkit/conventions.md` and offer to create it.
 
 Unless a scenario says otherwise, run in a new empty folder that is a git
 repository (`git init`), with no `.qa-toolkit/` folder, and allow writes only
@@ -446,6 +447,81 @@ no open S1 or S2.
 
 ---
 
+## TM-18 A rule that must never be broken
+
+**Tests:** Step 3 (*Rules that must never be broken*), Step 4 point 3,
+core rule 3.
+
+**Setup:** The instructions file the assistant loads on its own
+(`AGENTS.md` in Codex, `CLAUDE.md` in Claude Code) at the repository root,
+with:
+```markdown
+# Project notes
+
+- Run `npm test` before committing.
+```
+
+**Input (two turns in one session):**
+```text
+Turn 1: /team-setup English reports, Jira project SHOP. Bug reports must
+never contain customer names or customer numbers, even if the reporter
+asks. That's all.
+
+Turn 2: Yes, both.
+```
+
+**Must:**
+- Turn 1: show the whole draft, with the ban under `## bug-report`. After
+  it, suggest the ban as one line for `AGENTS.md` or `CLAUDE.md`, say why
+  in a sentence (the assistant weighs that file above the conventions
+  file), and say what "yes" and "yes, both" do.
+- Turn 2: write `.qa-toolkit/conventions.md`, add the line at the end of
+  the existing instructions file, keep `Run npm test before committing.`
+  as it was, read both back, and say to commit them.
+
+**Must not:**
+- Write anything in turn 1, or rewrite the instructions file.
+- Commit, or change any other file.
+
+---
+
+## TM-19 A section heading spelled differently
+
+**Tests:** The lookup in every workflow skill: a heading that is clearly
+meant as the skill's section is read as it, and the user is told to fix it.
+
+**Setup:** `.qa-toolkit/conventions.md` at the repository root with:
+```markdown
+## General
+- Reports are written in English.
+- Tracker: Jira, project SHOP.
+- Severity: S1 (production down or data loss), S2 (major function broken,
+  no workaround), S3 (impaired, workaround exists), S4 (cosmetic).
+
+## Bug report
+- Component is required: Checkout, Search, Account, or Admin.
+- Every report names the build number.
+```
+
+**Input:**
+```text
+/bug-report Searching for "Tröja" on the web shop in the test environment
+shows no results, although the product "Tröja Basic" exists. Every time,
+Chrome 130 on Windows 11. Expected: Tröja Basic in the results.
+```
+
+**Must:**
+- Say that the project's conventions file was used, apply the *Bug report*
+  rules (component from the list, likely Search; the build number asked
+  for or marked to clarify), and use the S1–S4 scale.
+- Tell the user in one sentence to rename `## Bug report` to
+  `## bug-report`.
+
+**Must not:**
+- Ignore the *Bug report* section, or file the report.
+
+---
+
 ## Results
 
 | Test | Run 1 | Run 2 | Assistant / model | Notes |
@@ -467,6 +543,8 @@ no open S1 or S2.
 | TM-15 | | | | |
 | TM-16 | Pass | Pass | Codex / gpt-6.1-sol / medium, 2026-10-21 (run 3 also passed) | Turn 1: English, SHOP, Checkout, SHOP-T104, values exact; severity left open in all three runs with the workaround question, since the team's S2/S3 split depends on it. Turn 2: 10/1/0/1 and 7/0/1/0, both exit criteria not met with SHOP-T111 and SHOP-931 (S2), SHOP-931 linked to SHOP-T104, No-go proposed for the release manager. Run 2 carries the filed title over from turn 1. |
 | TM-17 | Pass | Pass | Codex / gpt-6.1-sol / medium, 2026-10-21 | Turn 2: asks first where results and open defects come from and which field holds severity, then exit criteria. Turn 3: data sources and exit criteria under `## test-summary` as stated, whole draft shown, yes asked. Control on the 0.3.0 team-setup: 0 of 3 ask about sources (they ask about exit criteria and status mapping). |
+| TM-18 | Pass | Pass | Codex / gpt-6.1-sol / medium, 2026-10-21 | Turn 1: whole draft with the ban under `## bug-report`, then the exact line for `AGENTS.md`, why ("more weight than a file read by a skill"; run 1 says only "loaded as a standing project instruction"), and what "yes" and "yes, both" do. Turn 2: both files written and read back; the existing `npm test` line kept; told to commit both. Control on the 0.3.1 `team-setup`: 0 of 3 mention `AGENTS.md`. |
+| TM-19 | Pass | Pass | Codex / gpt-6.1-sol / medium, 2026-10-21 | Project file named; component Search; build number marked to clarify; one sentence to rename `## Bug report` to `## bug-report`. Run 2 leaves severity open without naming the S1–S4 levels. Control on the 0.3.1 `bug-report`: 3 of 3 already apply the section, 0 of 3 mention the heading. |
 
 ## Full regression on Claude Haiku 5.5, recorded 2026-10-15
 
