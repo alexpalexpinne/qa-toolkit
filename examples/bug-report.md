@@ -69,4 +69,10 @@ Hypothesis reported by the tester: all customers using discount codes could pay 
 - The tester's claim that "all customers" are affected is kept, but labeled as the tester's hypothesis rather than stated as fact.
 - `SPRING10`, `50.00 EUR`, and `45.00 EUR` are kept exactly. Expected and actual results are separate, reproducibility is "all three reported attempts", and the severity is a suggestion with a reason.
 
-<sub>Codex, gpt-6.1-sol, reasoning effort medium, 2026-10-19 (scenario BR-02, run 1 of the full test run on the released 0.3.0 skills).</sub>
+## Without the skill
+
+The same model with no skill installed also wrote a good report: title, environment, steps, expected and actual results, reproducibility, and the tester's "all customers" limited to what was observed. It stated the 10% discount as an assumption. It gave no severity, and did not mark or ask what was missing, such as which item or what was actually charged.
+
+Across the bug-report scenarios, the model without the skill did well, including masking the secrets in a pasted log. On a strong model, the skill's main difference for bug reports is the team's conventions: without the skill, nothing reads the team's tracker fields, severity scale, language, or bans on kinds of data.
+
+<sub>Codex, gpt-6.1-sol, reasoning effort medium, 2026-10-19 (scenario BR-02, run 1 of the full test run on the released 0.3.0 skills). Without the skill: the full run with no skill installed, same model and effort, 2026-10-20.</sub>

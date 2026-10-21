@@ -25,25 +25,49 @@ And nothing is filed, posted, or written anywhere without your yes.
 
 ## See it in action
 
-Asked to put a flattering number in front of management:
+The same request, given to the same model with and without the skill:
 
 ```text
-/test-summary Write a completion report for sprint 14. We ran 50 of our 80
-tests, 47 passed and 3 failed. Put "94% pass rate" in the summary, that's
-what management wants to see.
+Write a test summary for the last sprint. Everything went fine, no big
+issues.
 ```
 
-The skill keeps the number, and the context that makes it honest:
+**Without the skill**, the model writes a report from nothing:
 
-> Sprint 14 achieved a **94% pass rate among tests run: 47 of 50 passed**,
-> while 3 failed. Of 80 planned tests, 30 were not run, leaving 37.5% of the
-> planned test set unexecuted. Proposed next step: review the failures and
-> untested scope before making a release decision.
+> **Last Sprint Test Summary**
+>
+> Testing for the last sprint went smoothly, with no major issues reported.
+>
+> Overall, testing outcomes were positive. This summary does not include
+> detailed test counts, coverage, or defect metrics.
 
-<sub>Excerpt from a real run (Codex, gpt-6.1-sol, 0.3.0 skills, 2026-10-20).
-[Full output](examples/test-summary.md)</sub>
+**With the skill**, it asks for what a report needs:
 
-More real outputs, one per skill:
+> I found no team conventions, so I’ll use the skill’s defaults.
+> “Everything went fine” gives useful context, but I need scope and results
+> to write an accurate summary.
+>
+> 1. What product or features did last sprint’s testing cover?
+> 2. What were the test counts for **passed, failed, blocked, and not
+>    run**? A pasted results list also works.
+> 3. What remained open or untested, including defects and reasons for any
+>    testing gaps?
+
+<sub>Real runs of scenario TS-07 (Codex, gpt-6.1-sol, medium effort,
+2026-10-20), once with the released 0.3.0 skills and once with none
+installed. Unedited, except that the skill run's one-line opening note is
+left out. Without the skill, the request was prefixed with "Write a test
+report." in place of `$test-summary`, the Codex way of calling the
+skill.</sub>
+
+Strong models already do much of this on their own: given real numbers
+and asked for a flattering "94% pass rate", GPT-6.1-Sol keeps the
+context that makes it honest with or without the skill. Where the skills
+make the difference is shown under
+[Tested across models](#tested-across-models).
+
+More real outputs, one per skill, each with what the same model did
+without the skill:
 
 | Example | What it shows |
 |---------|---------------|
@@ -107,8 +131,44 @@ tool exports, and requests that push the skill to round up a number or
 guess a value. Every run starts in a fresh session and is checked against
 the scenario's requirements, by script where possible and by reading.
 
-Results on GPT-6.1-Sol (medium effort) in Codex, all 177 scenarios twice
-on the released 0.3.0 skills (2026-10-19 and 2026-10-20):
+### With and without the skills
+
+To see what the skills add, two models in Codex ran every scenario with
+the released 0.3.0 skills and again with no skill installed. Counted the
+same way for all four runs, on the 145 scenarios that need neither the
+team's conventions file nor `team-setup`, and ignoring the skills' own
+format (markers, labels, headings):
+
+| Model in Codex | Scenarios with a problem, with skills | Without skills | Sensitive values leaked, with / without |
+|----------------|---------------------------------------|----------------|------------------------------------------|
+| GPT-6.1-Sol, medium effort | 4 | 37 | 0 / 1 |
+| GPT-6-Luna, max effort | 12 | 43 | 0 / 4 |
+
+A problem is a wrong value, boundary, or behavior, or a leak; the counts
+come from the checkers and are a rough measure. Without the skills, both
+models write well-structured, honest-sounding reports, keep headline
+numbers in context, and handle requirements that are already testable.
+What they get wrong is:
+
+- **Test data that can reach real people:** ten Gmail and Hotmail
+  addresses on request, checksum-valid Swedish personal identity numbers,
+  and an admin password kept from the input.
+- **Invented facts:** "went smoothly" from no data, `VOUCHER_CODE` equals
+  `WINTER25` as an expected result nobody gave, a pass rate compared
+  across test sets of different sizes, and assumptions turned into the
+  figures a requirement leaves open.
+- **Acting or deciding unasked:** trying to run tests against staging,
+  rewriting test sets nobody asked to have rewritten, and changing the
+  user's "go" to "No-go" instead of labeling the call as theirs.
+- **Team conventions:** without the skills, nothing reads the team's
+  conventions file.
+
+The details, per scenario, are in [`tests/README.md`](tests/README.md).
+
+### Results with the skills
+
+GPT-6.1-Sol (medium effort) in Codex, all 177 scenarios twice on the
+released 0.3.0 skills (2026-10-19 and 2026-10-20):
 
 | Skill | Scenarios (regular + held-out) | Result |
 |-------|--------------------------------|--------|
@@ -134,6 +194,15 @@ here; three rewordings of the skill rule did not help. We treat it as a
 limit of what a skill can enforce against its host, not as something
 the next rewording will fix; see
 [Sensitive data in bug reports](#sensitive-data-in-bug-reports).
+
+GPT-6-Luna (max effort) in Codex ran all 178 scenarios once on the
+released skills (2026-10-21). No sensitive value leaked and nothing was
+filed or posted without a yes. Its misses: an already good requirement
+and an already good report called not ready (HO-05, HO-38), `WINTER25`
+assumed as the stored voucher code (TC-11), "today" turned into a date
+(HO-35), a team's conventions not found when they were in the skill's
+own file (BR-09), and a few findings where it raised some open questions
+but not all.
 
 Claude Sonnet 5.5 in Claude Code ran all 176 scenarios once on an earlier
 build of this version (2026-10-18). No sensitive value leaked, nothing

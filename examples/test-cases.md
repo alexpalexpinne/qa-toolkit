@@ -71,4 +71,15 @@ Consistency with related cases was not checked because none were provided. This 
 - IDs, SKUs, the voucher code, button labels, and `ORDERS.VOUCHER_CODE` are kept exactly.
 - The two missing expected results are not filled in. It would be easy to write "`VOUCHER_CODE` is `WINTER25`"; the skill says it did not assume that, marks both `[TO CLARIFY: …]`, and blocks the case, because a guessed expected result is worse than none.
 
-<sub>Codex, gpt-6.1-sol, reasoning effort medium, 2026-10-19 (scenario TC-11, run 1 of the full test run on the released 0.3.0 skills).</sub>
+## Without the skill
+
+The same model with no skill installed wrote a clean five-step case, and filled in both missing expected results:
+
+> | Step | Action | Expected result |
+> |---|---|---|
+> | 4 | Click **Place order**. | The order is created successfully with the discounted total. Record the order ID. |
+> | 5 | Find the created order in `ORDERS` using the recorded order ID. Check `VOUCHER_CODE`. | `ORDERS.VOUCHER_CODE` equals `WINTER25`. |
+
+Neither result is in the original test, and nothing marks them as added. It also renumbered the steps, so they no longer match the old test, and asked one question: what the 25% applies to.
+
+<sub>Codex, gpt-6.1-sol, reasoning effort medium, 2026-10-19 (scenario TC-11, run 1 of the full test run on the released 0.3.0 skills). Without the skill: the full run with no skill installed, same model and effort, 2026-10-20.</sub>
