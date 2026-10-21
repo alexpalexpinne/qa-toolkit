@@ -612,3 +612,41 @@ the skills) counted the skills' own format as failures, so it cannot be
 compared with these counts. Measured the same way here, GPT-6-Luna
 without the skills is only a little worse than GPT-6.1-Sol without them,
 and the skills remove most of the problems on both, and every leak.
+
+## Team rules in AGENTS.md, and one file across skills (2026-10-21)
+
+Three small runs on GPT-6.1-Sol (medium), to see what the team conventions
+add over rules a team writes where the host reads them anyway.
+`run_codex.py --agents-md` writes the scenario's team conventions to
+`AGENTS.md` in the working folder; with `--baseline` no skill is installed
+and `AGENTS.md` replaces the conventions file.
+
+**Plain Sol with the rules in AGENTS.md** (`--baseline --agents-md`, the
+18 conventions scenarios once, folder
+`observations/codex-sol61-medium-agentsmd-2026-10-21/`). It applied the
+team's rules in 16 of 18: severity scales, ID and title patterns, priority
+scales, semicolon CSV with markers, review language, Preserve for Jira
+only, Always redact, the bans in BR-25, BR-27, HO-41, and HO-77, and the
+exit criteria and outcome mapping in TS-06 and TS-15. Misses: RR-05 asks
+what "kann" means although the rules define it, and HO-79 keeps the banned
+customer name and number. Outside the team's rules, HO-61 gives VAT
+numbers without saying they are format-only, and BR-09, HO-13, and HO-46
+answer only in the report's language. So for following a team's rules, a
+well-written `AGENTS.md` does about as well as the conventions file; the
+skills' own rules (safe test data, no invented results) are not in it.
+
+**Skills plus the ban in AGENTS.md** (`--agents-md` with the skills and
+the conventions file, BR-27 and HO-79 five times each, folder
+`observations/codex-sol61-medium-bans-agentsmd-2026-10-21/run1-5`): no
+banned value in any of the 10 answers. With the conventions file alone,
+the same build leaked in BR-27 4 of 7 and HO-79 3 of 6 (Fisher p ≈ 0.007
+for 0 of 10 against 7 of 13). This fits the host-precedence explanation in
+`bug-report.md`: Codex weighs its own instruction file above a file a
+skill reads. The README now recommends putting must-never rules in
+`AGENTS.md` too. HO-79 is held out; no skill was changed for it, and BR-27
+shows the same. Claude Code with `CLAUDE.md` was not tested.
+
+**TM-16, one conventions file for a bug report and then the release
+summary** (new regular scenario, three runs, folder
+`observations/codex-sol61-medium-tm16-2026-10-21/run1-3`): all three pass;
+see `team-setup.md`. The README's lead example is run 2.

@@ -39,7 +39,7 @@ BASELINE_REQUEST = {"bug-report": "Help me write a bug report.",
 # The skill a TM scenario exercises, where it is not team-setup itself.
 TM_SKILL = {"TM-09": "test-summary", "TM-10": "test-summary", "TM-11": "test-data",
             "TM-12": "bug-report", "TM-13": "test-data", "TM-14": "bug-report",
-            "TM-15": "test-cases"}
+            "TM-15": "test-cases", "TM-16": "bug-report"}
 
 # The skill's own references/team-conventions.md: filled with its example, or
 # with the block in the scenario's setup.
@@ -50,7 +50,8 @@ FILL_TEXT = {"TM-15": "Test cases are written in German."}
 # (or the named scenario's), or the given text.
 PROJECT_FROM = {"BR-21": "BR-21", "BR-23": "BR-21", "BR-24": "BR-24", "BR-25": "BR-25", "BR-27": "BR-27",
                 "TM-09": "TM-09", "TM-10": "TM-09", "TM-11": "TM-11", "HO-13": "HO-13",
-                "HO-41": "HO-41", "HO-46": "HO-46", "HO-61": "HO-61", "HO-77": "HO-77", "HO-79": "HO-79"}
+                "HO-41": "HO-41", "HO-46": "HO-46", "HO-61": "HO-61", "HO-77": "HO-77", "HO-79": "HO-79",
+                "TM-16": "TM-16"}
 PROJECT_TEXT = {
     "TM-03": "## General\n- Reports are written in English.\n- Tracker: Jira, project SHOP.\n"
              "- Severity: S1, S2, S3, S4.\n\n## review-requirements\n\n## test-cases\n\n"
@@ -193,6 +194,16 @@ def prepare(sid, base, baseline=False, skills_dir=".claude/skills"):
     cwd = f"{work}/{SUBFOLDER[sid]}" if sid in SUBFOLDER else work
     os.makedirs(cwd, exist_ok=True)
     return home, work, cwd
+
+
+def team_rules(sid):
+    """The scenario's team conventions as plain text (what prepare() writes), or None."""
+    if sid in FILL_EXAMPLE:
+        with open(f"{REPO}/skills/{tested_skill(sid)}/references/team-conventions.md", encoding="utf-8") as f:
+            return re.search(r"```markdown\n(.*?)\n```", f.read(), re.S).group(1)
+    if sid in FILL_CUSTOM or sid in FILL_TEXT:
+        return FILL_TEXT.get(sid) or setup_block(sid)
+    return PROJECT_TEXT.get(sid) or (setup_block(PROJECT_FROM[sid]) if sid in PROJECT_FROM else None)
 
 
 def snapshot(root, skip):
