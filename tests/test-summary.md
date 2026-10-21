@@ -444,6 +444,41 @@ CHK-3, Chrome, 2026-10-14, Passed
 
 ---
 
+## TS-18 Conventions name the data sources, no results given
+
+**Tests:** Step 1, asking for the sources the team conventions name.
+
+**Setup:** `.qa-toolkit/conventions.md` with:
+```markdown
+## General
+- Reports are written in English.
+- Tracker: Jira, project SHOP. Test management: Xray.
+
+## test-summary
+- Results: the release's Xray Test Plan, exported as CSV.
+- Open defects: Jira search
+  `project = SHOP AND type = Bug AND fixVersion = "<release>" AND statusCategory != Done`,
+  exported as CSV. Severity is the custom field `Severity`.
+```
+
+**Input:**
+```text
+/test-summary Completion report for release 3.4, please.
+```
+
+**Must:**
+- Say that the project's conventions file was used.
+- Ask for the Xray Test Plan export for release 3.4 (or its key) and the
+  Jira export of open bugs, naming the search from the conventions or its
+  `fixVersion = "3.4"`.
+
+**Must not:**
+- Ask for passed, failed, blocked, and not-run counts that the named
+  exports contain, instead of the exports.
+- Write a report with figures, or claim to have read Xray or Jira.
+
+---
+
 ## Results
 
 | Test | Run 1 | Run 2 | Assistant / model | Notes |
@@ -464,6 +499,7 @@ CHK-3, Chrome, 2026-10-14, Passed
 | TS-14 | Partial | | Codex / gpt-5.6-luna / max | 11 tests with T103 duplicate explained; status grouping shown; Priority labeled, no Severity column noted; SHOP-912 listed. Titles redacted; says 901/905/907 are linked but not to which tests; not-run reasons not marked [TO CLARIFY]; grouped PASSED WITH REMARKS as passed on its own (stated). |
 | TS-15 | Partial | | Codex / gpt-5.6-luna / max | ABORTED/TODO/EXECUTING per conventions; PASSED WITH REMARKS separate and asked about; no Severity column, S1/S2/S3 criteria undetermined; Priority not used as severity. Assessed "All P1 tests run" as Met although P1 test SHOP-T105 is BLOCKED. Titles masked. |
 | TS-16 | Pass | | Codex / gpt-5.6-luna / max | Codex: summarized the CI log as a normal request; skill not loaded. |
+| TS-18 | Pass | Pass | Codex / gpt-6.1-sol / medium, 2026-10-21 | Asks for the release 3.4 Xray Test Plan export and the Jira open-defects export, with the team's search filled in as `fixVersion = "3.4"`; no counts asked, nothing claimed fetched. Also 4 of 4 on the unchanged 0.3.0 skill, see below. |
 
 ## Baseline round recorded 2026-10-13 (Codex, gpt-5.6-luna, max)
 
@@ -728,3 +764,15 @@ by an over-narrow check. Folders
 Full suite, 2 runs per scenario, revision `d81051e`. Folder
 `observations/codex-sol61-medium-full-0.3.0-2026-10-19/`; details in
 `README.md`. All pass.
+
+## Asking for the sources the conventions name: not adopted, recorded 2026-10-21
+
+A paragraph in Step 1 told the skill to ask for exactly the exports the
+team conventions name when no results are given. TS-18 passed 2 of 2 with
+it, but also 4 of 4 without it on the unchanged 0.3.0 skill
+(`observations/codex-sol61-medium-ts18-control-2026-10-21/`): the skill
+already reads the conventions' data sources and asks for those exports,
+with the team's Jira search filled in for the release. The paragraph was
+dropped; TS-18 stays as a regression scenario. The gap was in
+`team-setup`, which never asked where results come from (see TM-17 in
+`team-setup.md`).

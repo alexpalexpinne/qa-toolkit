@@ -46,8 +46,9 @@ in Jira SHOP"), where to find versions and logs. -->
 
 ## test-summary
 
-<!-- Exit criteria, outcome names in your test tool, counting rule,
-recommendation terms, audience, where reports are published. -->
+<!-- Where results and defects come from, exit criteria, outcome names in
+your test tool, counting rule, recommendation terms, audience, where reports
+are published. -->
 
 ---
 
@@ -86,6 +87,10 @@ recommendation terms, audience, where reports are published. -->
 - Always redact. Preserve and Include all are not allowed, even on request.
 
 ## test-summary
+- Results: the release's Xray Test Plan, exported as CSV. Open defects:
+  Jira search `project = SHOP AND type = Bug AND fixVersion = "<release>"
+  AND statusCategory != Done`. Severity is the custom field `Severity`;
+  `Priority` is not severity.
 - Exit criteria for release testing: all P1 tests run; at least 95 % of P1
   tests passed; no open S1 or S2 defects.
 - Xray outcomes: PASSED → passed; FAILED, ABORTED → failed; BLOCKED →

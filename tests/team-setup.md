@@ -417,6 +417,35 @@ SHOP-931 with severity S2, status Open.
 
 ---
 
+## TM-17 Test summaries: where results come from
+
+**Tests:** The *test-summary* round asks where results and defects come
+from.
+
+**Input (three turns in one session):**
+```text
+Turn 1: /team-setup
+
+Turn 2: English for everything. Jira, project SHOP. Severity S1 to S4.
+We only use test summaries.
+
+Turn 3: Results come from the Xray test plan of each release, exported as
+CSV, and open bugs from a Jira search on the release's fixVersion.
+Severity is our custom field Severity. Exit criteria: all P1 tests run,
+no open S1 or S2.
+```
+
+**Must:**
+- Turn 2: among at most three questions, ask where results and open
+  defects come from, and which field holds severity.
+- Turn 3: show the whole draft, with the data sources and exit criteria
+  under `## test-summary` as stated, and ask for a yes.
+
+**Must not:**
+- Write the file without a yes, or add rules nobody stated.
+
+---
+
 ## Results
 
 | Test | Run 1 | Run 2 | Assistant / model | Notes |
@@ -437,6 +466,7 @@ SHOP-931 with severity S2, status Open.
 | TM-14 | | | | |
 | TM-15 | | | | |
 | TM-16 | Pass | Pass | Codex / gpt-6.1-sol / medium, 2026-10-21 (run 3 also passed) | Turn 1: English, SHOP, Checkout, SHOP-T104, values exact; severity left open in all three runs with the workaround question, since the team's S2/S3 split depends on it. Turn 2: 10/1/0/1 and 7/0/1/0, both exit criteria not met with SHOP-T111 and SHOP-931 (S2), SHOP-931 linked to SHOP-T104, No-go proposed for the release manager. Run 2 carries the filed title over from turn 1. |
+| TM-17 | Pass | Pass | Codex / gpt-6.1-sol / medium, 2026-10-21 | Turn 2: asks first where results and open defects come from and which field holds severity, then exit criteria. Turn 3: data sources and exit criteria under `## test-summary` as stated, whole draft shown, yes asked. Control on the 0.3.0 team-setup: 0 of 3 ask about sources (they ask about exit criteria and status mapping). |
 
 ## Full regression on Claude Haiku 5.5, recorded 2026-10-15
 
