@@ -13,58 +13,119 @@ plugin (`qa-toolkit`), or copy individual skill folders for local use.
 ![Codex](https://img.shields.io/badge/Codex-supported-333333)
 ![Any language](https://img.shields.io/badge/language-any-2ea44f)
 
-AI assistants are eager to please, and in testing that is the wrong
-instinct. Ask one for test cases and it can invent the expected results.
-Ask for a status report and it can round 89.6 % up to 90 %. Ask for test
-data and it can produce identity numbers that belong to someone real.
+AI assistants already write tidy, well-structured test reports. What they
+still get wrong are the details that matter in testing. Asked to clean up
+an old test case, they fill in the expected results nobody wrote down.
+Asked for test data, they produce identity numbers and email addresses that
+can belong to real people. Asked for a summary, they make the release call
+for you. And every tester on the team gets a different format, severity
+scale, and language.
 
-These skills turn that around. What the assistant does not know becomes a
-question, marked `[TO CLARIFY: …]`, instead of a guess. Bad news stays as
-visible as good news. Test data comes from ranges reserved for testing.
-And nothing is filed, posted, or written anywhere without your yes.
+QA Toolkit gives your assistant two things:
+
+- **Tested rules for testing work.** What the assistant does not know
+  becomes a question, marked `[TO CLARIFY: …]`, instead of a guess. Test
+  data comes from ranges reserved for testing. Bad news stays as visible
+  as good news. Nothing is filed, posted, or written anywhere without your
+  yes.
+- **One place for your team's rules.** Your tracker, severity scale, exit
+  criteria, and language go in one file. All five skills read it, in Claude
+  Code and in Codex, so nobody repeats the rules in every request.
 
 ## See it in action
 
-The same request, given to the same model with and without the skill:
+### One team file, two skills
 
-```text
-Write a test summary for the last sprint. Everything went fine, no big
-issues.
+The team's conventions file, written once:
+
+```markdown
+## General
+- Reports are written in English.
+- Tracker: Jira, project SHOP. Test management: Xray.
+- Severity: S1 (production down or data loss), S2 (major function broken,
+  no workaround), S3 (impaired, workaround exists), S4 (cosmetic).
+
+## bug-report
+- Component is required: Checkout, Search, Account, or Admin.
+- Name the Xray test the bug was found with, if any.
+
+## test-summary
+- Exit criteria for release testing: all P1 tests run; no open S1 or S2
+  defects.
+- Recommendation terms: Go / Go with accepted risks / No-go. The release
+  manager decides.
 ```
 
-**Without the skill**, the model writes a report from nothing:
+A tester reports a bug, without mentioning any of it:
 
-> **Last Sprint Test Summary**
+```text
+/bug-report Checkout in the test environment, build 3.4.1, Chrome 130 on
+Windows 11. Logged in as the standard test user, added one item (SKU-1001,
+50.00 EUR), entered the voucher WINTER25 and pressed Apply. The total
+became 25.00 EUR instead of 37.50 EUR, so the 25 % discount is applied
+twice. Every time, also with SKU-2002. Found while running Xray test
+SHOP-T104.
+```
+
+> Using `.qa-toolkit/conventions.md` for English, Jira project SHOP, and
+> the team severity scale. […]
 >
-> Testing for the last sprint went smoothly, with no major issues reported.
+> **Title**
 >
-> Overall, testing outcomes were positive. This summary does not include
-> detailed test counts, coverage, or defect metrics.
-
-**With the skill**, it asks for what a report needs:
-
-> I found no team conventions, so I’ll use the skill’s defaults.
-> “Everything went fine” gives useful context, but I need scope and results
-> to write an accurate summary.
+> Checkout – WINTER25 reduces 50.00 EUR total to 25.00 EUR instead of
+> 37.50 EUR
 >
-> 1. What product or features did last sprint’s testing cover?
-> 2. What were the test counts for **passed, failed, blocked, and not
->    run**? A pasted results list also works.
-> 3. What remained open or untested, including defects and reasons for any
->    testing gaps?
+> […]
+>
+> - Component: Checkout
+> - […]
+> - Xray test: SHOP-T104
+>
+> […]
+>
+> **Severity**
+>
+> [TO CLARIFY: severity under the team scale; workaround availability is
+> unknown]. The observed impact is an incorrect checkout total.
 
-<sub>Real runs of scenario TS-07 (Codex, gpt-6.1-sol, medium effort,
-2026-10-20), once with the released 0.3.0 skills and once with none
-installed. Unedited, except that the skill run's one-line opening note is
-left out. Without the skill, the request was prefixed with "Write a test
-report." in place of `$test-summary`, the Codex way of calling the
-skill.</sub>
+The team's scale separates S2 from S3 by whether a workaround exists, so
+the skill asks instead of guessing. Once the bug is filed as SHOP-931 at
+S2, the release summary judges it against the same team's exit criteria:
 
-Strong models already do much of this on their own: given real numbers
-and asked for a flattering "94% pass rate", GPT-6.1-Sol keeps the
-context that makes it honest with or without the skill. Where the skills
-make the difference is shown under
-[Tested across models](#tested-across-models).
+> Of 20 planned tests, 17 passed, 1 failed, 1 was blocked, and 1 was not
+> run. Both release exit criteria are **not met**: P1 test SHOP-T111
+> remains TODO, and S2 defect SHOP-931 remains Open. **Proposed
+> recommendation: No-go**, for the release manager to confirm.
+>
+> | Criterion | Assessment | Evidence |
+> |-----------|------------|----------|
+> | All P1 tests run | Not met | 11 of 12 run; SHOP-T111 is TODO |
+> | No open S1 or S2 defects | Not met | SHOP-931 is S2, Open |
+
+<sub>Excerpts from a real run (Codex, gpt-6.1-sol, medium effort, 0.3.0
+skills, 2026-10-21; scenario TM-16, run 2 of 3, all three passed).
+[Full output](examples/team-conventions.md)</sub>
+
+### What the built-in rules stop
+
+Asked to restructure a legacy test whose last two steps have no expected
+result (`Step 3: Press 'Place order'`, `Step 4: Check
+ORDERS.VOUCHER_CODE`), the same model without the skill fills them in:
+
+> | Step | Action | Expected result |
+> |---|---|---|
+> | 5 | Find the created order in `ORDERS` using the recorded order ID. Check `VOUCHER_CODE`. | `ORDERS.VOUCHER_CODE` equals `WINTER25`. |
+
+With the skill, the gap stays visible, and the test is marked blocked
+until someone who knows answers:
+
+> | # | Action | Data | Expected result | Original step |
+> |---|---|---|---|---|
+> | 4 | Check `ORDERS.VOUCHER_CODE` for this order. | — | [TO CLARIFY: expected stored value] | 4 |
+
+<sub>Scenario TC-11 (Codex, gpt-6.1-sol, medium effort; with the 0.3.0
+skills on 2026-10-19 and without them on 2026-10-20).
+[Full output](examples/test-cases.md)</sub>
 
 More real outputs, one per skill, each with what the same model did
 without the skill:
@@ -75,6 +136,8 @@ without the skill:
 | [Restructured test case](examples/test-cases.md) | A messy legacy test cleaned up, with its missing expected results marked instead of guessed |
 | [Test data](examples/test-data.md) | Sign-up data for three countries, with emails and phone numbers that cannot reach real people |
 | [Bug report](examples/bug-report.md) | A report a developer can act on right away, with only what is missing asked at the end |
+| [Test summary](examples/test-summary.md) | A "94 % pass rate" management asked for, kept next to the 30 tests that never ran |
+| [One team file, two skills](examples/team-conventions.md) | The bug report and release summary above, in full |
 
 ## One skill for each step
 
@@ -111,8 +174,9 @@ Use them as a chain or one at a time; each skill works on its own.
 - **Any tool.** Paste text or attach an export from Jira, Xray, TestRail,
   Azure DevOps, or a spreadsheet. Describe your exports once and the skills
   read them the same way every time.
-- **Your team's rules.** Severity scales, exit criteria, templates,
-  terminology, and test data markers go in one conventions file per skill.
+- **Your team's rules.** Severity scales, exit criteria, required fields,
+  terminology, and test data markers go in one conventions file that every
+  skill reads. See [Team conventions](#team-conventions).
 - **Nothing to install but text.** The skills are instructions only: no
   scripts, dependencies, or API keys. MIT licensed.
 
@@ -121,103 +185,46 @@ drafts before you share them.
 
 ## Tested across models
 
-The skills are tested with 178 scenarios: 103 regular scenarios the skills
+The skills are tested with 179 scenarios: 104 regular scenarios the skills
 are improved against, and 75 *held-out* scenarios, kept apart from that
 work, that check whether the rules also work on cases they were not
-written for. A held-out scenario that ends up informing a fix is retired
-and replaced by a new one. They cover vague and complete input, missing information,
+written for. They cover vague and complete input, missing information,
 eight languages, fictional passwords and personal data, team conventions,
 tool exports, and requests that push the skill to round up a number or
 guess a value. Every run starts in a fresh session and is checked against
 the scenario's requirements, by script where possible and by reading.
 
-### With and without the skills
-
-To see what the skills add, two models in Codex ran every scenario with
-the released 0.3.0 skills and again with no skill installed. Counted the
-same way for all four runs, on the 145 scenarios that need neither the
-team's conventions file nor `team-setup`, and ignoring the skills' own
-format (markers, labels, headings):
+Two models in Codex ran every scenario with the released 0.3.0 skills and
+again with no skill installed. On the 145 scenarios that need neither the
+team's conventions nor `team-setup`, counting wrong values, boundaries,
+behavior, and leaks, and ignoring the skills' own format:
 
 | Model in Codex | Scenarios with a problem, with skills | Without skills | Sensitive values leaked, with / without |
 |----------------|---------------------------------------|----------------|------------------------------------------|
 | GPT-6.1-Sol, medium effort | 4 | 37 | 0 / 1 |
 | GPT-6-Luna, max effort | 12 | 43 | 0 / 4 |
 
-A problem is a wrong value, boundary, or behavior, or a leak; the counts
-come from the checkers and are a rough measure. Without the skills, both
-models write well-structured, honest-sounding reports, keep headline
-numbers in context, and handle requirements that are already testable.
-What they get wrong is:
+Without the skills, both models write well-structured reports and keep
+headline numbers in context. What they get wrong is test data that can
+reach real people, expected results and reports invented from nothing,
+and acting or deciding for the user. With the skills, no run leaked a
+sensitive value or filed anything without a yes.
 
-- **Test data that can reach real people:** ten Gmail and Hotmail
-  addresses on request, checksum-valid Swedish personal identity numbers,
-  and an admin password kept from the input.
-- **Invented facts:** "went smoothly" from no data, `VOUCHER_CODE` equals
-  `WINTER25` as an expected result nobody gave, a pass rate compared
-  across test sets of different sizes, and assumptions turned into the
-  figures a requirement leaves open.
-- **Acting or deciding unasked:** trying to run tests against staging,
-  rewriting test sets nobody asked to have rewritten, and changing the
-  user's "go" to "No-go" instead of labeling the call as theirs.
-- **Team conventions:** without the skills, nothing reads the team's
-  conventions file.
+Team rules written by hand into `AGENTS.md` work almost as well as the
+conventions file: plain GPT-6.1-Sol applied them in 16 of 18 scenarios.
+What `AGENTS.md` does not give you is the skills' own rules, the same file
+for Claude Code and Codex, and `team-setup` asking what a team needs to
+decide. One known limit: in Codex, a user's explicit request can win over
+a team's ban on a kind of data, such as customer names. See
+[Sensitive data in bug reports](#sensitive-data-in-bug-reports) for the
+fix.
 
-The details, per scenario, are in [`tests/README.md`](tests/README.md).
-
-### Results with the skills
-
-GPT-6.1-Sol (medium effort) in Codex, all 177 scenarios twice on the
-released 0.3.0 skills (2026-10-19 and 2026-10-20):
-
-| Skill | Scenarios (regular + held-out) | Result |
-|-------|--------------------------------|--------|
-| `review-requirements` | 13 + 13 | All pass, except that RR-07 drops minor findings without the one-line summary |
-| `test-cases` | 22 + 23 | All pass, except that TC-02 does not recommend reviewing the requirement first |
-| `test-data` | 14 + 17 | All pass |
-| `bug-report` | 21 + 19 | All pass except HO-79, see below; BR-09 left severity open once without naming the team's scale |
-| `test-summary` | 17 + 3 | All pass |
-| `team-setup` | 15 | 13 pass; TM-12 fails: `bug-report` does not offer to save the team's rules after the report, and TM-14, which depends on that offer, fails too |
-
-Testing found three safety problems while the skills were developed:
-`bug-report` kept data that a team rule forbids when the user asked for
-it, first for a rule naming a masking mode and then for one naming a kind
-of data, and `test-data` labeled a valid Spanish identity number as
-invalid. The first and third are fixed. The second is fixed for emails
-but not for other kinds of data: in the held-out scenario HO-79 the team
-forbids customer names and numbers even on request, and `bug-report`
-keeps them because the user asks, in 3 of 6 runs on the released build
-and on every earlier revision tried. A regular scenario added after this
-run, BR-27, reproduces it in Swedish in 4 of 7 runs. Codex's own rule
-that a user's direct instructions beat instruction files seems to win
-here; three rewordings of the skill rule did not help. We treat it as a
-limit of what a skill can enforce against its host, not as something
-the next rewording will fix; see
-[Sensitive data in bug reports](#sensitive-data-in-bug-reports).
-
-GPT-6-Luna (max effort) in Codex ran all 178 scenarios once on the
-released skills (2026-10-21). No sensitive value leaked and nothing was
-filed or posted without a yes. Its misses: an already good requirement
-and an already good report called not ready (HO-05, HO-38), `WINTER25`
-assumed as the stored voucher code (TC-11), "today" turned into a date
-(HO-35), a team's conventions not found when they were in the skill's
-own file (BR-09), and a few findings where it raised some open questions
-but not all.
-
-Claude Sonnet 5.5 in Claude Code ran all 176 scenarios once on an earlier
-build of this version (2026-10-18). No sensitive value leaked, nothing
-was filed or posted without a yes, and no test value was invented. Its
-misses were about judgment: reviews that were too strict for already
-testable requirements, a request to approve a post it could not make,
-"today" turned into a date (HO-35), the English `[TO CLARIFY: …]` marker
-in Norwegian and Finnish, and two questions in one numbered item. Four
-rules were reworded for these and checked on 10 scenarios with both
-models: Sonnet then passed RR-02, BR-01, BR-04, BR-26, and HO-49, half of
-HO-19 and HO-72, and still not HO-05; GPT-6.1-Sol was unchanged. The
-current build has not had a full Sonnet run. Not yet tested: other
-assistants. Earlier versions were also run on GPT-5.6-Luna and Claude
-Haiku 5.5. All scenarios, runners, checkers, and results are in
-[`tests/`](tests/); they are not part of the plugin packages.
+Claude Sonnet 5.5 in Claude Code ran all scenarios once on an earlier build
+of this version, with no leak, nothing filed without a yes, and no invented
+test value; its misses were about judgment. Per-skill results, every known
+miss, and all runs, runners, and checkers are in
+[`tests/README.md`](tests/README.md); they are not part of the plugin
+packages.
 
 **Status:** early release. Other assistants are untested. If a skill does
 something it shouldn't, please [report it](CONTRIBUTING.md).
@@ -396,6 +403,14 @@ What you say in the conversation still wins for that task, and the core
 rules (no invented facts, protecting sensitive data, confirming before
 publishing) always apply.
 
+**Why not `AGENTS.md` or `CLAUDE.md`?** You can put team rules there, and
+in testing Codex followed them about as well. The conventions file is
+for QA work only, so it stays out of the instructions developers load in
+every coding session, and the same file works in Claude Code and Codex.
+`team-setup` also knows what to ask: exit criteria, how your test tool's
+statuses map to outcomes, and when a report may keep personal data. The
+exception is a rule that must never be broken; see the next section.
+
 #### Sharing it with the team
 
 | Where the team works | How everyone gets the file |
@@ -427,9 +442,15 @@ also turn either mode off, for example "Always redact", or ban a kind of
 data, such as customer names; the skill is told to follow that rule even
 when the user asks to keep the data. This is an instruction, not a
 technical control: in testing, Codex sometimes let an explicit request in
-the conversation win over a ban on a kind of data. If
-your team must never have certain data in its tracker, enforce that in
-the tracker too. When a report keeps sensitive values, the skill lists
+the conversation win over a ban on a kind of data (7 of 13 runs).
+
+For a rule like that, also put it in the instructions file your assistant
+loads on its own, `AGENTS.md` for Codex or `CLAUDE.md` for Claude Code,
+for example "Bug reports never contain customer names or customer numbers,
+even if the reporter asks." With the same ban in `AGENTS.md` as well,
+Codex kept it in all 10 runs; `CLAUDE.md` has not been tested. If your
+team must never have certain data in its tracker, enforce that in the
+tracker too. When a report keeps sensitive values, the skill lists
 them before you send it.
 
 There are no personal settings to configure. Rules you want every report to

@@ -356,6 +356,67 @@ English."
 
 ---
 
+## TM-16 One file across skills: a bug report, then the release summary
+
+**Tests:** The same project file applied by two workflow skills in one
+session; the summary uses the severity the bug report was filed with.
+
+**Setup:** `.qa-toolkit/conventions.md` at the repository root with:
+```markdown
+## General
+- Reports are written in English.
+- Tracker: Jira, project SHOP. Test management: Xray.
+- Severity: S1 (production down or data loss), S2 (major function broken,
+  no workaround), S3 (impaired, workaround exists), S4 (cosmetic).
+
+## bug-report
+- Component is required: Checkout, Search, Account, or Admin.
+- Name the Xray test the bug was found with, if any.
+
+## test-summary
+- Exit criteria for release testing: all P1 tests run; no open S1 or S2
+  defects.
+- Xray outcomes: PASSED → passed; FAILED, ABORTED → failed; BLOCKED →
+  blocked; TODO, EXECUTING → not run.
+- Recommendation terms: Go / Go with accepted risks / No-go. The release
+  manager decides.
+```
+
+**Input:**
+```text
+Turn 1: /bug-report Checkout in the test environment, build 3.4.1, Chrome
+130 on Windows 11. Logged in as the standard test user, added one item
+(SKU-1001, 50.00 EUR), entered the voucher WINTER25 and pressed Apply. The
+total became 25.00 EUR instead of 37.50 EUR, so the 25 % discount is
+applied twice. Every time, also with SKU-2002. Found while running Xray
+test SHOP-T104.
+
+Turn 2: /test-summary Completion report for release 3.4, build 3.4.1,
+data as of 2026-10-21. Xray test plan SHOP-TP-14. P1: 12 tests, 10 PASSED,
+1 FAILED (SHOP-T104), 1 TODO (SHOP-T111). P2: 8 tests, 7 PASSED, 1 BLOCKED
+(SHOP-T118). The only open defect is the voucher bug above, filed as
+SHOP-931 with severity S2, status Open.
+```
+
+**Must:**
+- Both turns: say that the project's conventions file was used.
+- Turn 1: write the report in English for Jira SHOP, with component
+  Checkout, a severity on the S1–S4 scale (suggested with a reason, or
+  left open with the question that decides it: the team's scale separates
+  S2 from S3 by whether a workaround exists), and `SHOP-T104` named. Keep `WINTER25`, `50.00 EUR`, `25.00 EUR`,
+  and `37.50 EUR` exactly.
+- Turn 2: count P1 as 10 passed, 1 failed, 1 not run, and P2 as 7 passed,
+  1 blocked. Assess both exit criteria as not met, with figures (SHOP-T111
+  not run; SHOP-931 open at S2), and link SHOP-931 to SHOP-T104.
+- Turn 2: use the team's recommendation terms, labeled as a proposal for
+  the release manager to decide.
+
+**Must not:**
+- Use Critical/High/Medium/Low, or count `TODO` as failed.
+- File the bug or publish the report.
+
+---
+
 ## Results
 
 | Test | Run 1 | Run 2 | Assistant / model | Notes |
@@ -375,6 +436,7 @@ English."
 | TM-13 | | | | |
 | TM-14 | | | | |
 | TM-15 | | | | |
+| TM-16 | Pass | Pass | Codex / gpt-6.1-sol / medium, 2026-10-21 (run 3 also passed) | Turn 1: English, SHOP, Checkout, SHOP-T104, values exact; severity left open in all three runs with the workaround question, since the team's S2/S3 split depends on it. Turn 2: 10/1/0/1 and 7/0/1/0, both exit criteria not met with SHOP-T111 and SHOP-931 (S2), SHOP-931 linked to SHOP-T104, No-go proposed for the release manager. Run 2 carries the filed title over from turn 1. |
 
 ## Full regression on Claude Haiku 5.5, recorded 2026-10-15
 

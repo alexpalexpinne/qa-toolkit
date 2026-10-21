@@ -12,8 +12,13 @@ limited to the work folder). A leading `/skill` command becomes `$skill`,
 Codex's way to invoke a skill by name.
 
 Usage: run_codex.py <out-dir> [ID ...] [--model MODEL] [--effort EFFORT]
-                    [--workers N] [--baseline]
+                    [--workers N] [--baseline] [--agents-md]
 (no IDs = all scenarios)
+
+--agents-md also writes the scenario's team conventions to AGENTS.md in the
+working folder, where Codex reads them on its own. With --baseline, AGENTS.md
+replaces the conventions file: what a team gets by writing its rules there
+instead of using the skills.
 """
 import argparse
 import concurrent.futures as cf
@@ -26,7 +31,7 @@ import subprocess
 import tempfile
 import time
 
-from run_haiku import READ_ONLY_TM, RETIRED, SECS, baseline_prompt, prepare, revision, snapshot, turns
+from run_haiku import READ_ONLY_TM, RETIRED, SECS, baseline_prompt, prepare, revision, snapshot, team_rules, turns
 
 AUTH = os.path.expanduser("~/.codex/auth.json")
 DISABLED = ("apps", "plugins", "remote_plugin", "browser_use", "browser_use_external", "computer_use",
@@ -67,7 +72,7 @@ def describe(item):
     return []
 
 
-def run(sid, out, model, effort, rev, baseline=False):
+def run(sid, out, model, effort, rev, baseline=False, agents_md=False):
     dest = f"{out}/{sid}"
     if os.path.exists(f"{dest}/transcript.md"):
         return f"{sid}: skipped (exists)"
@@ -75,6 +80,13 @@ def run(sid, out, model, effort, rev, baseline=False):
     shutil.rmtree(dest, ignore_errors=True)
     base = tempfile.mkdtemp(prefix=f"qa-{sid}-")
     home, work, cwd = prepare(sid, base, baseline, skills_dir=".agents/skills")
+    if agents_md:
+        if baseline:
+            shutil.rmtree(f"{work}/.qa-toolkit", ignore_errors=True)
+        rules = team_rules(sid)
+        if rules:
+            with open(f"{cwd}/AGENTS.md", "w", encoding="utf-8") as f:
+                f.write("# Team conventions for testing work\n\n" + rules.strip() + "\n")
     os.makedirs(f"{home}/.codex", exist_ok=True)
     shutil.copy(AUTH, f"{home}/.codex/auth.json")
     internal = {f"{home}/.codex", f"{home}/.cache"}
@@ -138,6 +150,8 @@ def run(sid, out, model, effort, rev, baseline=False):
     with open(f"{dest}/transcript.md", "w", encoding="utf-8") as f:
         f.write(f"# {sid} — Codex, {model} ({effort}), {time.strftime('%Y-%m-%d')}\n\n")
         setup = "baseline, no skills installed" if baseline else f"skill revision {rev}"
+        if agents_md:
+            setup += ", team conventions in AGENTS.md"
         f.write(f"Configuration: {setup}. Working folder: `{os.path.relpath(cwd, base)}`. "
                 "Every agent message of a turn is shown under its answer.\n\n")
         for n, (prompt, tools, result) in enumerate(log, 1):
@@ -173,6 +187,8 @@ def main():
     parser.add_argument("--effort", default="max")
     parser.add_argument("--workers", type=int, default=4)
     parser.add_argument("--baseline", action="store_true", help="run without the skills")
+    parser.add_argument("--agents-md", action="store_true",
+                        help="also write the team conventions to AGENTS.md")
     args = parser.parse_intermixed_args()
     os.makedirs(args.out, exist_ok=True)
     ids = args.ids or sorted((s for s in SECS if s not in RETIRED), key=lambda s: (s[:2], int(s[3:])))
@@ -181,7 +197,7 @@ def main():
         parser.error(f"unknown scenario: {', '.join(unknown)}")
     rev = revision()
     with cf.ThreadPoolExecutor(max_workers=args.workers) as pool:
-        for msg in pool.map(lambda s: run(s, args.out, args.model, args.effort, rev, args.baseline), ids):
+        for msg in pool.map(lambda s: run(s, args.out, args.model, args.effort, rev, args.baseline, args.agents_md), ids):
             print(msg, flush=True)
 
 
