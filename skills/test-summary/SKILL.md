@@ -109,8 +109,9 @@ exists; do not combine them, and do not search anywhere else:
    folders, search, or walk up parent folders to find it. Read its *General* section and its *test-summary*
    section; ignore the sections for other skills and its *Example* section.
    If a heading is clearly meant as one of these two but spelled
-   differently (for example `## Test summary` or `## Allgemein`), read it as
-   that section and tell the user, in one sentence, to rename it to the
+   differently (for example with capitals, a space instead of the
+   hyphen, or translated, such as `## Allgemein`), read it as that
+   section and tell the user, in one sentence, to rename it to the
    exact name (`## General` or `## test-summary`) so every skill finds it.
    Never look in neighboring projects.
 2. **Conventions supplied to you:** team conventions the user pasted or

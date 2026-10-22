@@ -788,3 +788,16 @@ keeping the quote untranslated (RR-13), as with `AGENTS.md` in Codex. So
 on Claude, too, a well-written instructions file is enough for following
 a team's rules; what it does not add is the skills' rules above.
 
+## Heading wording made identical across skills (2026-10-22)
+
+`scripts/package_plugins.py` requires the conventions lookup to read the
+same in every workflow skill, and the misspelled-heading sentence named
+each skill's own heading (`## Bug report`, `## Test summary`). Its example
+now reads the same everywhere: "with capitals, a space instead of the
+hyphen, or translated, such as `## Allgemein`". Checked on GPT-6.1-Sol
+(medium): TM-19 twice (both name the rename to `## bug-report` and apply
+the section), and TM-09, TM-10, TM-11, TM-15, TM-16, BR-09, RR-05, TC-06,
+TD-11, and TS-06 once; all checkers pass, no rename notice outside TM-19,
+and the only flags are the usual template searches. Folder
+`observations/codex-sol61-medium-heading-wording-2026-10-22/`.
+
