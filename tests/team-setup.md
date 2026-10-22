@@ -693,3 +693,17 @@ Full suite, 2 runs per scenario, revision `d81051e`. Folder
 and TM-14, which follows from it: run 1 partial (conventions draft in
 turn 2 without the full path or a request for a yes), run 2 fail (saves
 the bug report as `bug-report-search.md`).
+
+## Claude Sonnet 5.5 on 0.3.2, recorded 2026-10-22
+
+One run within the full Sonnet run (see `README.md`), revision `ca64b8a`.
+Folder `observations/claude-sonnet55-032-2026-10-21/run1/`.
+
+| Test | Result | Notes |
+|------|--------|-------|
+| TM-12 | Pass | Offers to save SHOP and S1–S4 after the report, unlike GPT-6.1-Sol. |
+| TM-14 | Pass | Drafts and writes the conventions file. |
+| TM-16 | Pass | S2 proposed with the workaround question; 10/1/1 and 7/1 counted; both exit criteria not met; No-go proposed for the release manager. |
+| TM-17 | Pass | Asks where results and defects come from and which field holds severity (turn 1 has 4 questions). |
+| TM-18 | Pass | Suggests the line for `CLAUDE.md` with the reason; "yes, both" writes both files and keeps the `npm test` line. |
+| TM-19 | Partial | Applies the *Bug report* section (component, build number, S1–S4) but does not say the heading should be renamed. |

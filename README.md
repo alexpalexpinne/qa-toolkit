@@ -219,9 +219,10 @@ a team's ban on a kind of data, such as customer names. See
 [Sensitive data in bug reports](#sensitive-data-in-bug-reports) for the
 fix.
 
-Claude Sonnet 5.5 in Claude Code ran all scenarios once on an earlier build
-of this version, with no leak, nothing filed without a yes, and no invented
-test value; its misses were about judgment. Per-skill results, every known
+Claude Sonnet 5.5 in Claude Code ran all 183 scenarios once on 0.3.2, with
+no leak, nothing filed without a yes, and no invented test value. It kept
+the team's bans even when asked to break them, and its misses were about
+language and judgment. Per-skill results, every known
 miss, and all runs, runners, and checkers are in
 [`tests/README.md`](tests/README.md); they are not part of the plugin
 packages.
@@ -453,7 +454,8 @@ loads on its own, `AGENTS.md` for Codex or `CLAUDE.md` for Claude Code,
 for example "Bug reports never contain customer names or customer numbers,
 even if the reporter asks." `team-setup` suggests that line when you
 give it such a rule. With the same ban in `AGENTS.md` as well,
-Codex kept it in all 10 runs; `CLAUDE.md` has not been tested. If your
+Codex kept it in all 10 runs. Claude Sonnet 5.5 kept it in all 6 runs
+with the line in `CLAUDE.md`, and also in all 4 runs without it. If your
 team must never have certain data in its tracker, enforce that in the
 tracker too. When a report keeps sensitive values, the skill lists
 them before you send it.
