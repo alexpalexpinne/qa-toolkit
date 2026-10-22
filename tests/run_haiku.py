@@ -13,7 +13,12 @@ scenario shows what the model does without the skill. Use it only with
 scenarios whose input is in English.
 
 Usage: run_haiku.py <out-dir> [ID ...] [--model MODEL] [--workers N] [--baseline]
+                    [--claude-md]
 (no IDs = all scenarios)
+
+--claude-md also writes the scenario's team conventions to CLAUDE.md in the
+working folder, where Claude Code reads them on its own. With --baseline,
+CLAUDE.md replaces the conventions file.
 """
 import argparse
 import concurrent.futures as cf
@@ -39,7 +44,7 @@ BASELINE_REQUEST = {"bug-report": "Help me write a bug report.",
 # The skill a TM scenario exercises, where it is not team-setup itself.
 TM_SKILL = {"TM-09": "test-summary", "TM-10": "test-summary", "TM-11": "test-data",
             "TM-12": "bug-report", "TM-13": "test-data", "TM-14": "bug-report",
-            "TM-15": "test-cases", "TM-16": "bug-report"}
+            "TM-15": "test-cases", "TM-16": "bug-report", "TM-19": "bug-report"}
 
 # The skill's own references/team-conventions.md: filled with its example, or
 # with the block in the scenario's setup.
@@ -51,7 +56,7 @@ FILL_TEXT = {"TM-15": "Test cases are written in German."}
 PROJECT_FROM = {"BR-21": "BR-21", "BR-23": "BR-21", "BR-24": "BR-24", "BR-25": "BR-25", "BR-27": "BR-27",
                 "TM-09": "TM-09", "TM-10": "TM-09", "TM-11": "TM-11", "HO-13": "HO-13",
                 "HO-41": "HO-41", "HO-46": "HO-46", "HO-61": "HO-61", "HO-77": "HO-77", "HO-79": "HO-79",
-                "TM-16": "TM-16", "TS-18": "TS-18"}
+                "TM-16": "TM-16", "TS-18": "TS-18", "TM-19": "TM-19"}
 PROJECT_TEXT = {
     "TM-03": "## General\n- Reports are written in English.\n- Tracker: Jira, project SHOP.\n"
              "- Severity: S1, S2, S3, S4.\n\n## review-requirements\n\n## test-cases\n\n"
@@ -59,6 +64,9 @@ PROJECT_TEXT = {
              "## bug-report\n\n## test-summary\n",
     "TM-15": "## General\n- Test cases are written in English.\n",
 }
+# The instructions file the host loads on its own (AGENTS.md in Codex, CLAUDE.md
+# in Claude Code): the block in the scenario's setup.
+HOST_FILE = {"TM-18"}
 FIXTURES = {"TC-21": ["xray-tests-export.csv"],
             "TS-14": ["xray-test-plan-export.csv", "jira-open-bugs-export.csv"],
             "TS-15": ["xray-test-plan-export.csv", "jira-open-bugs-export.csv"]}
@@ -185,6 +193,10 @@ def prepare(sid, base, baseline=False, skills_dir=".claude/skills"):
         os.makedirs(f"{work}/.qa-toolkit", exist_ok=True)
         with open(f"{work}/.qa-toolkit/conventions.md", "w", encoding="utf-8") as f:
             f.write("# QA Toolkit team conventions\n\n" + project.strip() + "\n")
+    if sid in HOST_FILE:
+        name = "AGENTS.md" if skills_dir == ".agents/skills" else "CLAUDE.md"
+        with open(f"{work}/{name}", "w", encoding="utf-8") as f:
+            f.write(setup_block(sid).strip() + "\n")
     for name in FIXTURES.get(sid, []):
         shutil.copy(f"{REPO}/tests/fixtures/{name}", work)
     if sid in CODE_PROJECT:
@@ -232,7 +244,7 @@ def set_writable(top, writable):
         os.chmod(path, mode | 0o200 if writable else mode & ~0o222)
 
 
-def run(sid, out, model, rev, baseline=False):
+def run(sid, out, model, rev, baseline=False, claude_md=False):
     dest = f"{out}/{sid}"
     if os.path.exists(f"{dest}/transcript.md"):
         return f"{sid}: skipped (exists)"
@@ -240,6 +252,13 @@ def run(sid, out, model, rev, baseline=False):
     shutil.rmtree(dest, ignore_errors=True)
     base = tempfile.mkdtemp(prefix=f"qa-{sid}-")
     home, work, cwd = prepare(sid, base, baseline)
+    if claude_md:
+        if baseline:
+            shutil.rmtree(f"{work}/.qa-toolkit", ignore_errors=True)
+        rules = team_rules(sid)
+        if rules:
+            with open(f"{cwd}/CLAUDE.md", "w", encoding="utf-8") as f:
+                f.write("# Team conventions for testing work\n\n" + rules.strip() + "\n")
     internal = {f"{home}/.claude", f"{home}/.cache"}
     before = {"home": snapshot(home, internal), "work": snapshot(work, set())}
     env = {**os.environ, "HOME": home, "CLAUDE_CONFIG_DIR": f"{home}/.claude"}
@@ -306,6 +325,8 @@ def run(sid, out, model, rev, baseline=False):
     with open(f"{dest}/transcript.md", "w", encoding="utf-8") as f:
         f.write(f"# {sid} — Claude Code, {model}, {time.strftime('%Y-%m-%d')}\n\n")
         setup = "baseline, no skills installed" if baseline else f"skill revision {rev}"
+        if claude_md:
+            setup += ", team conventions in CLAUDE.md"
         f.write(f"Configuration: {setup}. Working folder: `{os.path.relpath(cwd, base)}`. "
                 "Every assistant message of a turn is shown under its answer.\n\n")
         for n, (prompt, tools, result) in enumerate(log, 1):
@@ -342,6 +363,8 @@ def main():
     parser.add_argument("--model", default="claude-haiku-5-5")
     parser.add_argument("--workers", type=int, default=4)
     parser.add_argument("--baseline", action="store_true", help="run without the skills")
+    parser.add_argument("--claude-md", action="store_true",
+                        help="also write the team conventions to CLAUDE.md")
     args = parser.parse_intermixed_args()
     os.makedirs(args.out, exist_ok=True)
     ids = args.ids or sorted((s for s in SECS if s not in RETIRED), key=lambda s: (s[:2], int(s[3:])))
@@ -350,7 +373,7 @@ def main():
         parser.error(f"unknown scenario: {', '.join(unknown)}")
     rev = revision()
     with cf.ThreadPoolExecutor(max_workers=args.workers) as pool:
-        for msg in pool.map(lambda s: run(s, args.out, args.model, rev, args.baseline), ids):
+        for msg in pool.map(lambda s: run(s, args.out, args.model, rev, args.baseline, args.claude_md), ids):
             print(msg, flush=True)
 
 
