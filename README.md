@@ -194,38 +194,37 @@ tool exports, and requests that push the skill to round up a number or
 guess a value. Every run starts in a fresh session and is checked against
 the scenario's requirements, by script where possible and by reading.
 
-Two models in Codex ran every scenario with the released 0.3.0 skills and
-again with no skill installed. On the 145 scenarios that need neither the
-team's conventions nor `team-setup`, counting wrong values, boundaries,
-behavior, and leaks, and ignoring the skills' own format:
+Two models in Codex and one in Claude Code ran every scenario with the
+skills and again with no skill installed. On the 145 scenarios that need
+neither the team's conventions nor `team-setup`, counting wrong values,
+boundaries, behavior, and leaks, and ignoring the skills' own format:
 
-| Model in Codex | Scenarios with a problem, with skills | Without skills | Sensitive values leaked, with / without |
-|----------------|---------------------------------------|----------------|------------------------------------------|
-| GPT-6.1-Sol, medium effort | 4 | 37 | 0 / 1 |
-| GPT-6-Luna, max effort | 12 | 43 | 0 / 4 |
+| Model | Scenarios with a problem, with skills | Without skills | Sensitive values leaked, with / without |
+|-------|---------------------------------------|----------------|------------------------------------------|
+| GPT-6.1-Sol (Codex), medium effort | 4 | 37 | 0 / 1 |
+| GPT-6-Luna (Codex), max effort | 12 | 43 | 0 / 4 |
+| Claude Sonnet 5.5 (Claude Code) | 6 | 34 | 0 / 6 |
 
-Without the skills, both models write well-structured reports and keep
-headline numbers in context. What they get wrong is test data that can
-reach real people, expected results and reports invented from nothing,
+Without the skills, all three models write well-structured reports and
+keep headline numbers in context. What they get wrong is test data that
+can reach real people, expected results and reports invented from nothing,
 and acting or deciding for the user. With the skills, no run leaked a
 sensitive value or filed anything without a yes.
 
-Team rules written by hand into `AGENTS.md` work almost as well as the
-conventions file: plain GPT-6.1-Sol applied them in 16 of 18 scenarios.
-What `AGENTS.md` does not give you is the skills' own rules, the same file
-for Claude Code and Codex, and `team-setup` asking what a team needs to
-decide. One known limit: in Codex, a user's explicit request can win over
+Team rules written by hand into `AGENTS.md` or `CLAUDE.md` work almost
+as well as the conventions file: plain GPT-6.1-Sol applied them in 16 of
+18 scenarios, and plain Claude Sonnet 5.5 in all 18. What they do not
+give you is the skills' own rules, the same file for Claude Code and
+Codex, and `team-setup` asking what a team needs to decide. One known limit: in Codex, a user's explicit request can win over
 a team's ban on a kind of data, such as customer names. See
 [Sensitive data in bug reports](#sensitive-data-in-bug-reports) for the
 fix.
 
-Claude Sonnet 5.5 in Claude Code ran all 183 scenarios once on 0.3.2, with
-no leak, nothing filed without a yes, and no invented test value. It kept
-the team's bans even when asked to break them, and its misses were about
-language and judgment. Per-skill results, every known
-miss, and all runs, runners, and checkers are in
-[`tests/README.md`](tests/README.md); they are not part of the plugin
-packages.
+With the skills, Claude Sonnet 5.5 also kept the team's bans even when
+asked to break them, and its remaining misses were about language and
+judgment. Per-skill results, every known miss, and all runs, runners,
+and checkers are in [`tests/README.md`](tests/README.md); they are not
+part of the plugin packages.
 
 **Status:** early release. Other assistants are untested. If a skill does
 something it shouldn't, please [report it](CONTRIBUTING.md).
