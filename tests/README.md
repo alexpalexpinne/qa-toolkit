@@ -754,8 +754,9 @@ scenarios. Rerun on the Codex folders, the script gives the published
 | Claude Sonnet 5.5, without | 34 | 6 (HO-07, HO-39, HO-69, RR-08, TD-07, TD-12) |
 
 With the skills, three of the six are checker patterns too narrow for
-Sonnet's wording (HO-10, HO-43, and HO-64; see the Sonnet run above); the
-others are BR-08 (dates), HO-05 (a testable requirement held back), and
+Sonnet's wording: HO-10 says "inte uppfyllt" in Swedish, HO-43's only
+match is the template label "Version or build", and HO-64 names an
+address it did not use. The others are BR-08 (dates), HO-05 (a testable requirement held back), and
 HO-35 ("today" as a date). The Codex rows were not cleaned of such false
 positives either.
 
