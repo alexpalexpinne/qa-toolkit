@@ -233,15 +233,7 @@ something it shouldn't, please [report it](CONTRIBUTING.md).
 
 ### Install the Claude Code plugin
 
-From a local checkout, run:
-
-```bash
-claude plugin marketplace add .
-claude plugin install qa-toolkit@qa-toolkit-marketplace
-```
-
-After this packaging revision is pushed to GitHub, install from a Claude
-Code session with:
+In a Claude Code session, run:
 
 ```text
 /plugin marketplace add alexpalexpinne/qa-toolkit
@@ -253,6 +245,16 @@ Claude Code 2.1.275 or later also supports the one-step install:
 ```text
 /plugin install qa-toolkit --marketplace alexpalexpinne/qa-toolkit
 ```
+
+To install from a local checkout instead, run this in the checkout:
+
+```bash
+claude plugin marketplace add .
+claude plugin install qa-toolkit@qa-toolkit-marketplace
+```
+
+The packaged plugin is also attached to each
+[release](https://github.com/alexpalexpinne/qa-toolkit/releases).
 
 Plugin skills use the package name as a prefix:
 
@@ -513,7 +515,8 @@ Claude archive uses `.claude-plugin/plugin.json` and preserves that line.
 The maintained sources under `skills/` are shared by both builds.
 
 Push the packaging revision to GitHub so the listing's documentation,
-support, and privacy links are available. Upload the OpenAI ZIP through the
+support, and privacy links are available, and attach both ZIPs and
+`SHA256SUMS` to a GitHub release tagged with the version. Upload the OpenAI ZIP through the
 [plugin submission portal](https://platform.openai.com/plugins).
 Resolve its metadata and skill scan findings, complete publisher
 verification and review, and publish when approved. Claude publication is
